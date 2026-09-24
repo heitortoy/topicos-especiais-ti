@@ -7,164 +7,278 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<script>
+  document.documentElement.classList.add("js");
+  try {
+    const t = localStorage.getItem("tema");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
 <style>
   :root {
-    --bg: #f3f5f8;
+    --bg: #f4f6fb;
     --surface: #ffffff;
-    --soft: #e7ebf1;
-    --ink: #15213a;
-    --muted: #566275;
-    --line: #d4dae3;
-    --p1: #2d5b9a;
-    --p2: #1d7466;
-    --p3: #b8432f;
+    --soft: #e9edf5;
+    --ink: #121a2e;
+    --muted: #5a6479;
+    --line: #d9dfea;
+    --p1: #3563d6;
+    --p2: #0f9b83;
+    --p3: #e0553d;
     --on-acc: #ffffff;
-    --low: #3c9a6a;
-    --mid: #d69a1c;
-    --high: #dd6a2c;
-    --crit: #b8322a;
-    --ok: #2f8a5b;
-    --erro: #b8322a;
-    --focus: #2d6cdf;
+    --low: #2fa36b;
+    --mid: #e0a21b;
+    --high: #ec6b2d;
+    --crit: #d4353b;
+    --focus: #3563d6;
+    --sombra: 0 1px 2px rgba(18, 26, 46, 0.05), 0 14px 34px -18px rgba(18, 26, 46, 0.28);
     --font: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     color-scheme: light;
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0e1524;
-      --surface: #172035;
-      --soft: #1f2a42;
-      --ink: #e7ecf3;
-      --muted: #9ba7b9;
-      --line: #2c3852;
-      --p1: #7ea6e2;
-      --p2: #4fb8a6;
-      --p3: #ea7a62;
-      --on-acc: #0e1524;
-      --low: #4caf7e;
-      --mid: #e3ab35;
-      --high: #ea7a3f;
-      --crit: #e0544a;
-      --ok: #4caf7e;
-      --erro: #e0544a;
-      --focus: #7ea6e2;
+      --bg: #0b1120;
+      --surface: #141d33;
+      --soft: #1c2742;
+      --ink: #e8edf7;
+      --muted: #9aa6bd;
+      --line: #26324d;
+      --p1: #6f9bff;
+      --p2: #3fd0b2;
+      --p3: #ff7a5f;
+      --on-acc: #0b1120;
+      --low: #45c285;
+      --mid: #f0b43a;
+      --high: #ff8a4c;
+      --crit: #ff5a5f;
+      --focus: #6f9bff;
+      --sombra: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 38px -20px rgba(0, 0, 0, 0.7);
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0e1524;
-    --surface: #172035;
-    --soft: #1f2a42;
-    --ink: #e7ecf3;
-    --muted: #9ba7b9;
-    --line: #2c3852;
-    --p1: #7ea6e2;
-    --p2: #4fb8a6;
-    --p3: #ea7a62;
-    --on-acc: #0e1524;
-    --low: #4caf7e;
-    --mid: #e3ab35;
-    --high: #ea7a3f;
-    --crit: #e0544a;
-    --ok: #4caf7e;
-    --erro: #e0544a;
-    --focus: #7ea6e2;
+    --bg: #0b1120;
+    --surface: #141d33;
+    --soft: #1c2742;
+    --ink: #e8edf7;
+    --muted: #9aa6bd;
+    --line: #26324d;
+    --p1: #6f9bff;
+    --p2: #3fd0b2;
+    --p3: #ff7a5f;
+    --on-acc: #0b1120;
+    --low: #45c285;
+    --mid: #f0b43a;
+    --high: #ff8a4c;
+    --crit: #ff5a5f;
+    --focus: #6f9bff;
+    --sombra: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 38px -20px rgba(0, 0, 0, 0.7);
     color-scheme: dark;
   }
 
   *, *::before, *::after { box-sizing: inherit; }
-
-  html {
-    scroll-padding-top: env(safe-area-inset-top, 0px);
-    scroll-behavior: smooth;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font);
-    font-size: clamp(1.05rem, 0.92rem + 0.45vw, 1.3rem);
+    font-size: clamp(1.02rem, 0.9rem + 0.42vw, 1.25rem);
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-
   a { color: var(--p1); }
   button { font: inherit; color: inherit; }
   :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
-  main {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 0 clamp(20px, 5vw, 64px);
-  }
-  @media (min-width: 1180px) {
-    main { max-width: 1340px; padding-right: 260px; }
+  .ic {
+    width: 1.3em;
+    height: 1.3em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
   }
 
   [data-parte="1"] { --acc: var(--p1); }
   [data-parte="2"] { --acc: var(--p2); }
   [data-parte="3"] { --acc: var(--p3); }
 
+  /* ---------- revelar ao rolar ---------- */
+  .js .rv {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--d, 0) * 90ms);
+  }
+  .js .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .js .rv { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---------- barra de progresso e botões fixos ---------- */
+  .progresso {
+    position: fixed;
+    top: env(safe-area-inset-top, 0px);
+    left: 0;
+    right: 0;
+    height: 4px;
+    z-index: 50;
+    pointer-events: none;
+  }
+  .progresso span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--p1), var(--p2), var(--p3));
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  .tema-btn {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 16px);
+    right: max(16px, env(safe-area-inset-right, 0px));
+    z-index: 40;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s;
+  }
+  .tema-btn:hover { transform: rotate(20deg); }
+
+  /* ---------- índice lateral ---------- */
+  .indice {
+    display: none;
+    position: fixed;
+    top: 50%;
+    right: max(18px, env(safe-area-inset-right, 0px));
+    transform: translateY(-50%);
+    width: 220px;
+    font-size: 0.78rem;
+    line-height: 1.3;
+    z-index: 30;
+    padding: 14px 10px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--sombra);
+  }
+  @media (min-width: 1200px) { .indice { display: block; } }
+  .indice .grupo { margin-bottom: 0.9rem; }
+  .indice .grupo:last-child { margin-bottom: 0; }
+  .indice .quem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 0.3rem 0.4rem;
+    color: var(--muted);
+  }
+  .indice .quem b { color: var(--ink); display: block; }
+  .indice a {
+    display: flex;
+    gap: 0.5em;
+    padding: 0.22rem 0.5rem;
+    border-radius: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .indice a:hover { color: var(--ink); }
+  .indice a .n { width: 1.4em; flex-shrink: 0; color: var(--acc); font-weight: 700; }
+  .indice a.ativo { background: var(--soft); color: var(--ink); font-weight: 600; }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    background: var(--acc);
+    color: var(--on-acc);
+    font-weight: 800;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+  }
+
+  /* ---------- estrutura ---------- */
+  main, .hero-in {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-left: clamp(20px, 5vw, 64px);
+    padding-right: clamp(20px, 5vw, 64px);
+  }
+  @media (min-width: 1200px) {
+    main, .hero-in { max-width: 1400px; padding-right: 290px; }
+  }
+
   .bloco {
+    position: relative;
     min-height: 100svh;
-    padding: clamp(56px, 10vh, 110px) 0;
-    border-bottom: 1px solid var(--line);
+    padding: clamp(70px, 11vh, 120px) 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
+  .bloco + .bloco { border-top: 1px solid var(--line); }
+
+  .num-bg {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: clamp(8rem, 22vw, 17rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--line);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    transform: translateY(var(--par, 0px));
+  }
+  main .bloco > *:not(.num-bg) { position: relative; z-index: 1; }
 
   .parte-tag {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.7em;
     margin: 0 0 1.4rem;
-    color: var(--acc);
+    padding: 6px 16px 6px 6px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line);
     font-weight: 600;
-    font-size: 0.95em;
-  }
-  .parte-tag::before {
-    content: "";
-    width: 30px;
-    height: 4px;
-    border-radius: 2px;
-    background: var(--acc);
+    font-size: 0.9em;
+    width: fit-content;
+    box-shadow: var(--sombra);
   }
 
-  .bloco-topo {
-    display: flex;
-    align-items: baseline;
-    gap: 0.45em;
-    margin-bottom: 1.6rem;
-  }
+  .topo { display: flex; align-items: baseline; gap: 0.45em; margin-bottom: 0.6rem; }
   .num {
     font-stretch: 125%;
     font-weight: 800;
     color: var(--acc);
     font-size: clamp(2rem, 4.2vw, 3.4rem);
     line-height: 1;
-    font-variant-numeric: tabular-nums;
   }
-
   h1, h2, h3 { margin: 0; }
-  h1 {
-    font-stretch: 125%;
-    font-weight: 800;
-    font-size: clamp(2.6rem, 7vw, 5.6rem);
-    line-height: 0.98;
-    letter-spacing: -0.02em;
-    max-width: 13ch;
-    text-wrap: balance;
-    margin-bottom: 1.2rem;
-  }
   h2 {
     font-stretch: 112%;
     font-weight: 780;
@@ -173,624 +287,976 @@
     letter-spacing: -0.01em;
     text-wrap: balance;
   }
-  h3 {
-    font-stretch: 108%;
-    font-weight: 700;
-    font-size: 1.2em;
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
+  h3 { font-stretch: 108%; font-weight: 700; font-size: 1.18em; line-height: 1.2; margin-bottom: 0.5rem; }
+  .traco {
+    display: block;
+    width: 80px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--acc);
+    margin: 0.4rem 0 1.8rem;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s;
   }
+  .in .traco, .in + .traco, .traco.in { transform: scaleX(1); }
+  html:not(.js) .traco { transform: none; }
 
   p { margin: 0 0 1rem; max-width: 66ch; }
-  .lead { font-size: 1.18em; max-width: 58ch; margin-bottom: 1.8rem; }
+  .lead { font-size: 1.15em; max-width: 60ch; margin-bottom: 2rem; color: var(--muted); }
   .suave { color: var(--muted); }
   .pequeno { font-size: 0.85em; }
 
-  ul.pontos { margin: 0.4rem 0 0; padding-left: 1.1em; }
-  ul.pontos li { margin-bottom: 0.45rem; }
-
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: clamp(18px, 2.4vw, 28px);
+    box-shadow: var(--sombra);
+  }
+  .card p:last-child, .card ul:last-child { margin-bottom: 0; }
   .duas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: clamp(16px, 2.6vw, 32px);
+    gap: clamp(16px, 2.6vw, 28px);
   }
-  .painel {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: clamp(18px, 2.4vw, 28px);
+  .tres {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
   }
-  .painel p:last-child, .painel ul:last-child { margin-bottom: 0; }
+  .icone-bola {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--acc) 16%, var(--surface));
+    color: var(--acc);
+    margin-bottom: 1rem;
+  }
+  ul.pontos { margin: 0.4rem 0 0; padding-left: 1.1em; }
+  ul.pontos li { margin-bottom: 0.45rem; }
+  ul.pontos li::marker { color: var(--acc); }
 
   .frase-ponte {
-    margin-top: 2rem;
-    font-size: 1.15em;
-    font-weight: 600;
-    max-width: 50ch;
+    margin-top: 2.4rem;
+    font-size: 1.2em;
+    font-weight: 650;
+    max-width: 48ch;
     padding-left: 0.9em;
-    border-left: 4px solid var(--acc);
+    border-left: 5px solid var(--acc);
   }
+  .aviso { font-size: 0.85em; color: var(--muted); margin-top: 1.6rem; max-width: 74ch; }
 
-  details.roteiro {
-    margin-top: 2.2rem;
-    padding-top: 0.9rem;
-    border-top: 1px dashed var(--line);
-    color: var(--muted);
-    font-size: 0.88em;
-    max-width: 72ch;
-  }
-  details.roteiro summary {
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--ink);
-    width: fit-content;
-  }
-  details.roteiro p { margin: 0.7rem 0 0; }
-
-  /* capa */
-  .subtitulo {
-    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-    color: var(--muted);
-    max-width: 40ch;
-    margin-bottom: 2.2rem;
-  }
-  .gancho {
-    font-size: clamp(1.3rem, 2.5vw, 2rem);
-    font-weight: 500;
-    line-height: 1.3;
-    max-width: 28ch;
-    padding-left: 0.8em;
-    border-left: 5px solid var(--p3);
-    margin: 0 0 2.6rem;
-  }
-  .ficha {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 18px;
-    color: var(--muted);
-    font-size: 0.95em;
-    max-width: 900px;
-  }
-  .ficha strong { display: block; color: var(--ink); font-weight: 600; }
-  .dica { margin-top: 2.6rem; color: var(--muted); font-size: 0.82em; }
-  kbd {
-    font-family: inherit;
-    font-size: 0.9em;
-    background: var(--soft);
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
     border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 0.05em 0.4em;
-  }
-
-  /* pilares CID */
-  .pilares {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 16px;
-    margin-bottom: 2rem;
-  }
-  .pilar {
-    text-align: left;
     background: var(--surface);
-    border: 1px solid var(--line);
     border-radius: 10px;
-    padding: 22px;
+    padding: 0.6em 1.1em;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    transition: border-color 0.2s;
+    font-weight: 650;
+    font-size: 0.9em;
+    transition: transform 0.15s, border-color 0.2s, background 0.2s;
   }
-  .pilar:hover { border-color: var(--p1); }
-  .pilar[aria-expanded="true"] { border-color: var(--p1); box-shadow: inset 0 4px 0 var(--p1); }
-  .pilar .letra {
+  .btn:hover { border-color: var(--acc, var(--p1)); transform: translateY(-1px); }
+  .btn:active { transform: translateY(1px); }
+  .btn.cheio { background: var(--acc, var(--p1)); color: var(--on-acc); border-color: transparent; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: #eef2fb;
+    background:
+      radial-gradient(1100px 600px at 85% 5%, rgba(53, 99, 214, 0.42), transparent 60%),
+      radial-gradient(900px 520px at 5% 95%, rgba(224, 85, 61, 0.3), transparent 60%),
+      radial-gradient(700px 400px at 50% 50%, rgba(15, 155, 131, 0.14), transparent 70%),
+      #0a1020;
+    --acc: #7aa2ff;
+    --on-acc: #0a1020;
+  }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-in { position: relative; z-index: 1; width: 100%; padding-top: 110px; padding-bottom: 90px; }
+  .hero .parte-tag { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.16); color: #eef2fb; box-shadow: none; }
+  .hero h1 {
     font-stretch: 125%;
     font-weight: 800;
-    font-size: 2.8rem;
-    line-height: 1;
-    color: var(--p1);
+    font-size: clamp(2.6rem, 7.4vw, 6rem);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    max-width: 12ch;
+    margin-bottom: 1.4rem;
   }
-  .pilar .nome { font-weight: 700; font-size: 1.1em; }
-  .pilar .abrir { color: var(--p1); font-size: 0.85em; font-weight: 600; margin-top: 0.3rem; }
-  .pilar .extra {
-    display: none;
-    border-top: 1px solid var(--line);
-    padding-top: 0.7rem;
-    font-size: 0.92em;
+  .hero h1 .w {
+    display: inline-block;
+    background: linear-gradient(100deg, #ffffff 30%, #b8c9ff 70%, #ffb3a3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  .pilar[aria-expanded="true"] .extra { display: block; }
+  .js .hero h1 .w {
+    opacity: 0;
+    transform: translateY(0.5em) rotate(3deg);
+    animation: sobe 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    animation-delay: calc(var(--i) * 90ms + 150ms);
+  }
+  @keyframes sobe { to { opacity: 1; transform: none; } }
+  .hero .subtitulo {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #b9c3da;
+    max-width: 40ch;
+    margin-bottom: 2.4rem;
+  }
+  .gancho {
+    font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 30ch;
+    min-height: 2.6em;
+    padding-left: 0.8em;
+    border-left: 5px solid #ff7a5f;
+    margin: 0;
+  }
+  .cursor {
+    display: inline-block;
+    width: 0.08em;
+    height: 1em;
+    background: #ff7a5f;
+    vertical-align: -0.12em;
+    margin-left: 2px;
+    animation: pisca 1s steps(1) infinite;
+  }
+  @keyframes pisca { 50% { opacity: 0; } }
+  .gancho-2 {
+    font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+    padding-left: 0.95em;
+    margin: 0.3rem 0 2.8rem;
+    color: #b9c3da;
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+  .gancho-2.mostra { opacity: 1; }
+  .gancho-2 .cont { color: #ff9a84; font-weight: 800; font-stretch: 125%; font-size: 1.5em; }
 
-  /* normas */
+  .ficha {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    max-width: 960px;
+  }
+  .ficha > div {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 0.92em;
+    color: #d6ddee;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .ficha .rot { display: block; color: #8f9bb6; font-size: 0.82em; margin-bottom: 0.2rem; }
+  .ficha .pessoa { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .ficha .pessoa .avatar { width: 26px; height: 26px; font-size: 0.65rem; }
+
+  .rolar {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%);
+    z-index: 1;
+    color: #b9c3da;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: quica 2s ease-in-out infinite;
+  }
+  @keyframes quica { 50% { transform: translate(-50%, 8px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .rolar, .cursor { animation: none; }
+  }
+
+  /* ---------- seção 2: jogo governança x compliance ---------- */
+  .jogo-gc { margin-top: 2.6rem; }
+  .jogo-gc .item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 20px;
+    align-items: center;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+  }
+  .jogo-gc .item:first-of-type { border-top: 0; }
+  .jogo-gc .opcoes-gc { display: flex; gap: 8px; }
+  .jogo-gc .gc {
+    border: 1px solid var(--line);
+    background: var(--bg);
+    border-radius: 999px;
+    padding: 0.4em 1em;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: all 0.25s;
+  }
+  .jogo-gc .gc:hover:not(:disabled) { border-color: var(--acc); }
+  .jogo-gc .gc.certa { background: var(--low); border-color: var(--low); color: #fff; }
+  .jogo-gc .gc.errada { background: var(--crit); border-color: var(--crit); color: #fff; animation: treme 0.4s; }
+  .jogo-gc .gc:disabled { cursor: default; }
+  .jogo-gc .porque { grid-column: 1 / -1; font-size: 0.85em; color: var(--muted); margin: 0; display: none; }
+  .jogo-gc .item.resp .porque { display: block; animation: aparece 0.4s ease; }
+  @media (max-width: 640px) { .jogo-gc .item { grid-template-columns: 1fr; } }
+  @keyframes treme { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+  @keyframes aparece { from { opacity: 0; transform: translateY(-4px); } }
+
+  /* ---------- seção 3: cartas que viram ---------- */
+  .pilares {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-bottom: 2.4rem;
+  }
+  .flip {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    perspective: 1200px;
+    min-height: 280px;
+    text-align: left;
+  }
+  .flip-in {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  .flip:hover .flip-in { transform: rotateY(-8deg); }
+  .flip[aria-pressed="true"] .flip-in { transform: rotateY(180deg); }
+  .face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .frente { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--sombra); }
+  .verso {
+    transform: rotateY(180deg);
+    background: linear-gradient(150deg, #1d3270, #0f1a3a);
+    color: #eef2fb;
+    box-shadow: var(--sombra);
+  }
+  .letra {
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 3.6rem;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--p1), var(--p2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .flip .nome { font-weight: 750; font-size: 1.15em; font-stretch: 110%; }
+  .flip .dica-flip { margin-top: auto; font-size: 0.8em; color: var(--muted); display: flex; align-items: center; gap: 0.4em; }
+  .verso .rotulo { font-size: 0.8em; color: #9fb0db; }
+  .verso b { font-size: 1.2em; font-stretch: 110%; }
+  .status {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 0.78em;
+    font-weight: 700;
+    padding: 0.3em 0.8em;
+    border-radius: 999px;
+  }
+  .status.forte { background: #ff5a5f; color: #fff; }
+  .status.medio { background: #f0b43a; color: #0a1020; }
+  .status.fraco { background: rgba(255, 255, 255, 0.16); color: #eef2fb; }
+
+  .porques .card { display: flex; gap: 14px; align-items: flex-start; }
+  .porques .icone-bola { margin: 0; width: 44px; height: 44px; }
+  .porques h3 { font-size: 1.05em; }
+  .porques p { font-size: 0.92em; }
+
+  /* ---------- seção 4: normas ---------- */
   .normas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 12px;
-    margin-bottom: 2.2rem;
+    margin-bottom: 14px;
   }
   .norma {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 14px 16px;
-    font-size: 0.92em;
-  }
-  .norma b { display: block; font-stretch: 115%; font-size: 1.15em; margin-bottom: 0.2rem; }
-  .norma.foco { box-shadow: inset 4px 0 0 var(--acc); }
-
-  .tabela-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    min-width: 560px;
-    background: var(--surface);
-    font-size: 0.95em;
-  }
-  th, td {
-    text-align: left;
-    vertical-align: top;
-    padding: 0.75em 1em;
-    border-bottom: 1px solid var(--line);
-  }
-  tr:last-child td { border-bottom: 0; }
-  thead th { background: var(--soft); font-stretch: 108%; }
-  tbody th { font-weight: 600; }
-
-  .analogia { margin-top: 1.6rem; }
-
-  /* cláusulas */
-  .clausulas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
-    gap: 8px;
-    margin: 0.6rem 0 2.2rem;
-  }
-  .cl {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-top: 4px solid var(--fase);
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 0.85em;
-    line-height: 1.3;
-  }
-  .cl b { display: block; font-stretch: 120%; font-size: 1.5em; color: var(--p2); }
-  .cl .fase { display: block; margin-top: 0.35rem; color: var(--muted); font-size: 0.9em; }
-  .cl[data-fase="p"] { --fase: var(--p1); }
-  .cl[data-fase="f"] { --fase: var(--p2); }
-  .cl[data-fase="c"] { --fase: var(--mid); }
-  .cl[data-fase="a"] { --fase: var(--p3); }
-
-  /* barra do anexo A */
-  .barra-temas {
-    display: flex;
-    gap: 3px;
-    height: 72px;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 0.8rem 0 1rem;
-  }
-  .tema {
-    flex: var(--n) 1 0;
-    min-width: 48px;
-    border: 0;
+    border-radius: 14px;
+    padding: 16px;
     cursor: pointer;
-    background: var(--p2);
-    color: var(--on-acc);
-    opacity: 0.45;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 0 12px;
-    overflow: hidden;
-    transition: opacity 0.2s;
     text-align: left;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
   }
-  .tema:hover { opacity: 0.75; }
-  .tema[aria-pressed="true"] { opacity: 1; }
-  .tema .q { font-stretch: 125%; font-weight: 800; font-size: 1.5em; line-height: 1; }
-  .tema .t { font-size: 0.75em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
-
-  /* matriz de risco */
-  .formula {
-    font-stretch: 115%;
+  .norma:hover { transform: translateY(-4px); box-shadow: var(--sombra); }
+  .norma b { display: block; font-stretch: 120%; font-size: 1.5em; font-weight: 800; color: var(--acc); line-height: 1.1; }
+  .norma span { font-size: 0.85em; color: var(--muted); }
+  .norma[aria-pressed="true"] { border-color: var(--acc); box-shadow: var(--sombra), inset 0 -4px 0 var(--acc); transform: translateY(-4px); }
+  .painel-norma { min-height: 6.5em; margin-bottom: 2.6rem; }
+  .painel-norma p { margin: 0; animation: aparece 0.35s ease; }
+  .painel-norma .selo-cert {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.78em;
     font-weight: 700;
-    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
-    margin-bottom: 1.4rem;
-  }
-  .etapas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 0;
-    margin: 0 0 1.8rem;
-    list-style: none;
-    counter-reset: etapa;
-  }
-  .etapas li {
-    counter-increment: etapa;
-    background: var(--surface);
-    border: 1px solid var(--line);
+    padding: 0.25em 0.8em;
     border-radius: 999px;
-    padding: 0.35em 1em 0.35em 0.5em;
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    font-size: 0.92em;
-  }
-  .etapas li::before {
-    content: counter(etapa);
-    width: 1.6em;
-    height: 1.6em;
-    border-radius: 50%;
     background: var(--acc);
     color: var(--on-acc);
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-    font-size: 0.85em;
   }
 
-  .tratamentos {
+  .tabela-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid var(--line); box-shadow: var(--sombra); }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; background: var(--surface); font-size: 0.95em; }
+  th, td { text-align: left; vertical-align: top; padding: 0.85em 1.1em; border-bottom: 1px solid var(--line); }
+  tr:last-child td, tr:last-child th { border-bottom: 0; }
+  thead th { background: var(--soft); font-stretch: 110%; }
+  tbody th { font-weight: 600; color: var(--muted); }
+
+  /* ---------- seção 5: PDCA e donut ---------- */
+  .par-vis {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin-bottom: 2.6rem;
+    grid-template-columns: minmax(260px, 340px) 1fr;
+    gap: clamp(20px, 4vw, 48px);
+    align-items: center;
+    margin-bottom: 3rem;
   }
-  .tratamentos div {
-    background: var(--surface);
+  @media (max-width: 760px) { .par-vis { grid-template-columns: 1fr; } }
+  .vis svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .arco { cursor: pointer; transition: stroke-width 0.3s, opacity 0.3s; }
+  .arco:focus-visible { outline: none; stroke-width: 44; }
+  .arco-rot { font-family: var(--font); font-weight: 800; font-size: 13px; fill: var(--ink); pointer-events: none; }
+  .centro-txt { font-family: var(--font); fill: var(--ink); text-anchor: middle; }
+  .fases { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; }
+  .fase-btn {
     border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 14px 16px;
-    font-size: 0.92em;
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 0.4em 1em 0.4em 0.5em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    cursor: pointer;
+    font-size: 0.88em;
+    font-weight: 600;
+    transition: all 0.2s;
   }
-  .tratamentos b { display: block; font-size: 1.1em; }
+  .fase-btn i { width: 14px; height: 14px; border-radius: 50%; background: var(--c); }
+  .fase-btn[aria-pressed="true"] { border-color: var(--c); background: color-mix(in srgb, var(--c) 14%, var(--surface)); }
+  .det-vis { min-height: 9em; }
+  .det-vis > * { animation: aparece 0.35s ease; }
+  .det-vis .clausula { display: flex; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 0.93em; }
+  .det-vis .clausula b { color: var(--p2); font-stretch: 120%; min-width: 1.8em; }
+  .fatia { cursor: pointer; transition: stroke-width 0.3s; }
+
+  /* ---------- seção 6: prazo ANPD ---------- */
+  .prazo { margin-top: 2.4rem; }
+  .dias-sel { display: flex; flex-wrap: wrap; gap: 6px; margin: 0.8rem 0 1.2rem; }
+  .dia-btn {
+    width: 58px;
+    padding: 0.5em 0;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 650;
+    font-size: 0.88em;
+    transition: all 0.2s;
+  }
+  .dia-btn[aria-pressed="true"] { background: var(--acc); color: var(--on-acc); border-color: transparent; }
+  .fita { display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px 8px; }
+  .fita .d {
+    flex: 0 0 auto;
+    width: 86px;
+    border-radius: 12px;
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    font-size: 0.8em;
+    animation: entra 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--k) * 70ms);
+  }
+  @keyframes entra { from { opacity: 0; transform: translateY(12px) scale(0.95); } }
+  .fita .d b { display: block; font-size: 1.2em; font-stretch: 115%; }
+  .fita .d.desc { border-color: var(--p3); }
+  .fita .d.util { background: color-mix(in srgb, var(--acc) 14%, var(--surface)); border-color: var(--acc); }
+  .fita .d.fds { opacity: 0.5; }
+  .fita .d.fim { background: var(--acc); color: var(--on-acc); border-color: transparent; }
+  .resultado-prazo { font-weight: 650; margin-top: 0.8rem; }
+
+  /* ---------- seção 7: riscos ---------- */
+  .calc-risco {
+    display: grid;
+    grid-template-columns: 1fr minmax(180px, 240px);
+    gap: 24px;
+    align-items: center;
+  }
+  @media (max-width: 640px) { .calc-risco { grid-template-columns: 1fr; } }
+  .deslizador { margin-bottom: 1rem; }
+  .deslizador label { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.92em; margin-bottom: 0.3rem; }
+  .deslizador output { color: var(--acc); font-stretch: 120%; font-weight: 800; }
+  input[type="range"] { width: 100%; accent-color: var(--acc); height: 28px; }
+  .medidor { text-align: center; }
+  .medidor .valor {
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--lvl);
+    transition: color 0.3s;
+  }
+  .medidor .nivel-chip {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.3em 1em;
+    border-radius: 999px;
+    background: var(--lvl);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.85em;
+    transition: background 0.3s;
+  }
+  .medidor .trilho { height: 8px; border-radius: 4px; background: var(--soft); margin-top: 0.9rem; overflow: hidden; }
+  .medidor .trilho span { display: block; height: 100%; background: var(--lvl); border-radius: 4px; transition: width 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s; }
+
+  .etapas { list-style: none; padding: 0; margin: 0; counter-reset: e; display: flex; flex-direction: column; gap: 10px; }
+  .etapas li { counter-increment: e; display: flex; align-items: center; gap: 12px; font-weight: 600; }
+  .etapas li::before {
+    content: counter(e);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--acc);
+    color: var(--on-acc);
+    font-weight: 800;
+    font-size: 0.85em;
+    flex-shrink: 0;
+  }
+  .etapas li span { color: var(--muted); font-weight: 400; font-size: 0.88em; }
+
+  .tratamentos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 2rem 0 3rem; }
+  .tratamentos .card { padding: 18px; }
+  .tratamentos .icone-bola { width: 40px; height: 40px; margin-bottom: 0.6rem; border-radius: 12px; }
+  .tratamentos b { display: block; font-size: 1.05em; }
+  .tratamentos span { font-size: 0.88em; color: var(--muted); }
 
   .risco-app {
     display: grid;
-    grid-template-columns: minmax(240px, 1fr) minmax(300px, 1.5fr);
+    grid-template-columns: minmax(250px, 1fr) minmax(300px, 1.5fr);
     gap: clamp(16px, 3vw, 36px);
     align-items: start;
   }
-  @media (max-width: 820px) {
-    .risco-app { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 860px) { .risco-app { grid-template-columns: 1fr; } }
   .ameacas { display: flex; flex-direction: column; gap: 8px; }
-  .ameaca {
+  .chip {
     display: flex;
     align-items: center;
     gap: 0.7em;
     text-align: left;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 10px 12px;
-    cursor: pointer;
-    font-size: 0.92em;
+    cursor: grab;
+    font-size: 0.9em;
     line-height: 1.3;
+    touch-action: none;
+    user-select: none;
+    transition: border-color 0.2s, box-shadow 0.2s, opacity 0.2s, transform 0.2s;
   }
-  .ameaca[aria-pressed="true"] { border-color: var(--acc); box-shadow: inset 4px 0 0 var(--acc); }
-  .ameaca .status {
-    margin-left: auto;
-    flex-shrink: 0;
-    font-size: 0.8em;
-    font-weight: 700;
-    color: var(--muted);
+  .chip:hover { transform: translateX(3px); }
+  .chip[aria-pressed="true"] { border-color: var(--acc); box-shadow: inset 4px 0 0 var(--acc), var(--sombra); }
+  .chip.arrastando { opacity: 0.35; }
+  .chip .nivel-tag { margin-left: auto; font-size: 0.75em; font-weight: 700; padding: 0.15em 0.6em; border-radius: 999px; color: #fff; background: var(--lvl, transparent); flex-shrink: 0; }
+  .fantasma {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.45);
+    transform-origin: 20px 20px;
+    rotate: -3deg;
+    opacity: 0.95;
   }
   .token {
     flex-shrink: 0;
-    width: 1.7em;
-    height: 1.7em;
+    width: 1.8em;
+    height: 1.8em;
     border-radius: 50%;
     display: inline-grid;
     place-items: center;
     background: var(--ink);
     color: var(--bg);
-    font-weight: 700;
-    font-size: 0.8em;
+    font-weight: 800;
+    font-size: 0.78em;
   }
+  .cel .token { animation: pousa 0.45s cubic-bezier(0.3, 1.6, 0.5, 1); }
+  @keyframes pousa { from { transform: scale(0); } }
 
   .matriz-wrap { display: grid; grid-template-columns: auto 1fr; gap: 8px; }
-  .eixo-y {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    text-align: center;
-    font-size: 0.8em;
-    color: var(--muted);
-    font-weight: 600;
-  }
-  .matriz {
-    display: grid;
-    grid-template-columns: 1.6em repeat(5, 1fr);
-    gap: 4px;
-  }
-  .matriz .rot {
-    font-size: 0.75em;
-    color: var(--muted);
-    display: grid;
-    place-items: center;
-  }
+  .eixo-y { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: 0.8em; color: var(--muted); font-weight: 600; }
+  .matriz { display: grid; grid-template-columns: 1.6em repeat(5, 1fr); gap: 5px; }
+  .matriz .rot { font-size: 0.75em; color: var(--muted); display: grid; place-items: center; }
   .cel {
-    aspect-ratio: 1.25;
-    min-height: 44px;
-    border: 1px solid transparent;
-    border-radius: 6px;
+    aspect-ratio: 1.2;
+    min-height: 46px;
+    border: 2px solid transparent;
+    border-radius: 10px;
     cursor: pointer;
     background: var(--soft);
-    background: color-mix(in srgb, var(--lvl) 26%, var(--surface));
+    background: color-mix(in srgb, var(--lvl) 32%, var(--surface));
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
     gap: 3px;
     padding: 3px;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
   }
-  .cel:hover { border-color: var(--lvl); }
-  .cel[data-n="baixo"] { --lvl: var(--low); }
-  .cel[data-n="medio"] { --lvl: var(--mid); }
-  .cel[data-n="alto"] { --lvl: var(--high); }
-  .cel[data-n="critico"] { --lvl: var(--crit); }
-  .eixo-x { text-align: center; font-size: 0.8em; color: var(--muted); font-weight: 600; margin-top: 4px; grid-column: 2; }
-
-  .legenda-risco {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    font-size: 0.8em;
-    color: var(--muted);
-    margin-top: 10px;
-  }
+  .cel:hover, .cel.sobre { border-color: var(--lvl); transform: scale(1.06); background: color-mix(in srgb, var(--lvl) 40%, var(--surface)); }
+  [data-n="baixo"] { --lvl: var(--low); }
+  [data-n="medio"] { --lvl: var(--mid); }
+  [data-n="alto"] { --lvl: var(--high); }
+  [data-n="critico"] { --lvl: var(--crit); }
+  .eixo-x { text-align: center; font-size: 0.8em; color: var(--muted); font-weight: 600; margin-top: 4px; }
+  .legenda-risco { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.8em; color: var(--muted); margin-top: 10px; }
   .legenda-risco span { display: inline-flex; align-items: center; gap: 0.4em; }
-  .legenda-risco i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; background: var(--c); }
-
-  .leitura {
-    margin-top: 1rem;
-    min-height: 4.5em;
-    font-size: 0.95em;
-  }
+  .legenda-risco i { width: 12px; height: 12px; border-radius: 3px; background: var(--c); }
+  .leitura { margin-top: 1rem; min-height: 5em; font-size: 0.93em; }
+  .leitura > * { animation: aparece 0.35s ease; }
   .leitura strong { display: block; }
 
-  .acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem; }
-  .btn {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    border-radius: 8px;
-    padding: 0.55em 1em;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.9em;
-  }
-  .btn:hover { border-color: var(--acc, var(--p1)); }
-  .btn.cheio { background: var(--acc, var(--p1)); color: var(--on-acc); border-color: transparent; }
-
-  /* ativos */
-  .ciclo {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 12px;
-    margin-bottom: 2.2rem;
-  }
-  .ciclo div {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 14px 16px;
-    font-size: 0.92em;
-  }
-  .ciclo b { display: block; font-size: 1.1em; }
-  .selo {
-    display: inline-block;
-    padding: 0.1em 0.6em;
-    border-radius: 999px;
-    font-size: 0.85em;
-    font-weight: 600;
-    white-space: nowrap;
-    background: color-mix(in srgb, var(--c) 20%, var(--surface));
-    color: var(--ink);
-    border: 1px solid var(--c);
-  }
-
-  /* linha do tempo */
-  .linha-wrap { overflow-x: auto; padding-bottom: 6px; margin: 0.6rem 0 1.2rem; }
-  .linha {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(6, minmax(120px, 1fr));
-    min-width: 760px;
-    position: relative;
-  }
-  .linha::before {
-    content: "";
+  /* ---------- seção 8: ativos ---------- */
+  .ciclo { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 3rem; counter-reset: c; }
+  .ciclo .card { position: relative; padding: 18px; counter-increment: c; }
+  .ciclo .card::before {
+    content: counter(c);
     position: absolute;
-    left: 9px;
-    right: 0;
-    top: 9px;
-    height: 3px;
-    background: var(--line);
+    top: 14px;
+    right: 16px;
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 1.6em;
+    color: var(--line);
   }
-  .marco {
-    position: relative;
-    background: none;
-    border: 0;
-    cursor: pointer;
+  .ciclo b { display: block; font-size: 1.05em; padding-right: 1.6em; }
+  .ciclo span { font-size: 0.88em; color: var(--muted); }
+
+  .jogo-ativos .banco { display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; padding: 10px; border: 2px dashed var(--line); border-radius: 14px; margin-bottom: 14px; }
+  .jogo-ativos .banco:empty::after { content: "Todos os ativos foram classificados."; color: var(--muted); font-size: 0.85em; align-self: center; }
+  .jogo-ativos .chip { font-size: 0.85em; padding: 8px 12px; }
+  .jogo-ativos .chip.certo { border-color: var(--low); box-shadow: inset 4px 0 0 var(--low); }
+  .jogo-ativos .chip.errado { border-color: var(--crit); box-shadow: inset 4px 0 0 var(--crit); animation: treme 0.4s; }
+  .baldes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .balde {
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    min-height: 130px;
+    background: var(--surface);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
-    padding: 0 10px 6px 0;
-    text-align: left;
+    gap: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+  .balde:hover, .balde.sobre { border-color: var(--lvl); background: color-mix(in srgb, var(--lvl) 10%, var(--surface)); }
+  .balde.sobre { transform: scale(1.02); }
+  .balde h4 { margin: 0; display: flex; align-items: center; gap: 0.5em; font-size: 0.95em; font-stretch: 110%; }
+  .balde h4 i { width: 12px; height: 12px; border-radius: 50%; background: var(--lvl); }
+  .balde .desc { font-size: 0.75em; color: var(--muted); margin: -4px 0 4px; }
+  .explicacoes { margin-top: 1rem; font-size: 0.88em; }
+  .explicacoes li { margin-bottom: 0.3rem; animation: aparece 0.35s ease both; }
+
+  /* ---------- seção 9: caso com celular ---------- */
+  .caso {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    gap: clamp(24px, 5vw, 60px);
+    align-items: start;
+  }
+  @media (max-width: 820px) { .caso { grid-template-columns: 1fr; } }
+  .celular {
+    width: 260px;
+    height: 530px;
+    margin: 0 auto;
+    border-radius: 40px;
+    background: #0d1220;
+    padding: 12px;
+    position: relative;
+    box-shadow: 0 40px 70px -30px rgba(0, 0, 0, 0.55), inset 0 0 0 2px #2d3656;
+  }
+  .celular::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 20px;
+    border-radius: 12px;
+    background: #0d1220;
+    z-index: 3;
+  }
+  .tela {
+    position: relative;
+    height: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #eef2f8;
+    color: #16213a;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.82rem;
+    line-height: 1.35;
+    transition: background 0.5s;
+  }
+  .tela .app-barra {
+    padding: 48px 16px 12px;
+    background: #1351b4;
+    color: #fff;
+    font-weight: 750;
+    font-stretch: 110%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tela .corpo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+    gap: 10px;
+    animation: aparece 0.45s ease;
+  }
+  .tela .corpo b { font-size: 1.1em; }
+  .tela .grande { width: 46px; height: 46px; }
+  .tela .contador-dia { font-size: 0.8em; padding: 0.3em 0.9em; border-radius: 999px; background: #16213a; color: #fff; font-weight: 700; }
+  .tela.ataque { background: #160404; color: #ffb4a8; }
+  .tela.ataque .corpo { animation: glitch 0.9s steps(2) infinite; }
+  .tela.ataque::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(255, 60, 60, 0.07) 0 2px, transparent 2px 4px);
+    pointer-events: none;
+  }
+  @keyframes glitch {
+    0%, 100% { transform: none; }
+    20% { transform: translate(-2px, 1px); }
+    40% { transform: translate(2px, -1px); filter: hue-rotate(20deg); }
+    60% { transform: translate(-1px, 0); }
+  }
+  .spinner { width: 34px; height: 34px; border-radius: 50%; border: 4px solid #c9d2e3; border-top-color: #1351b4; animation: gira 0.9s linear infinite; }
+  @keyframes gira { to { transform: rotate(360deg); } }
+  .notif {
+    position: absolute;
+    top: 44px;
+    left: 10px;
+    right: 10px;
+    background: #fff;
+    color: #16213a;
+    border-radius: 16px;
+    padding: 10px 12px;
+    box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+    font-size: 0.78rem;
+    z-index: 2;
+    animation: desce 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s both;
+  }
+  .notif .golpe { display: inline-block; margin-top: 6px; background: #d4353b; color: #fff; font-weight: 700; border-radius: 6px; padding: 1px 8px; font-size: 0.9em; }
+  @keyframes desce { from { transform: translateY(-120%); opacity: 0; } }
+  .ok-verde { color: #1f8a55; }
+  .instavel { font-size: 0.8em; background: #fff3cd; color: #7a5a00; padding: 0.3em 0.8em; border-radius: 8px; }
+  .selo-pf { font-size: 0.8em; background: #16213a; color: #fff; padding: 0.35em 0.9em; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) {
+    .tela.ataque .corpo, .spinner { animation: none; }
+  }
+
+  .marcos { list-style: none; padding: 0; margin: 0 0 1rem; position: relative; }
+  .marcos::before { content: ""; position: absolute; left: 11px; top: 12px; bottom: 12px; width: 3px; background: var(--line); border-radius: 2px; }
+  .marco {
+    position: relative;
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 12px;
     width: 100%;
+    background: none;
+    border: 0;
+    padding: 5px 0;
+    text-align: left;
+    cursor: pointer;
   }
   .marco .ponto {
-    width: 21px;
-    height: 21px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     background: var(--bg);
     border: 3px solid var(--p3);
+    transition: background 0.3s, transform 0.3s;
   }
-  .marco[aria-pressed="true"] .ponto { background: var(--p3); }
-  .marco .data { font-weight: 700; font-size: 0.9em; }
-  .marco .rot { font-size: 0.82em; color: var(--muted); }
+  .marco[aria-pressed="true"] .ponto { background: var(--p3); transform: scale(1.15); box-shadow: 0 0 0 6px color-mix(in srgb, var(--p3) 22%, transparent); }
+  .marco .data { font-weight: 750; font-size: 0.92em; display: block; }
+  .marco .rot { color: var(--muted); font-size: 0.85em; }
   .marco[aria-pressed="true"] .rot { color: var(--ink); }
+  .marco .barra-tempo { display: block; height: 3px; background: var(--soft); border-radius: 2px; margin-top: 6px; overflow: hidden; visibility: hidden; }
+  .marco .barra-tempo span { display: block; height: 100%; width: 0; background: var(--p3); }
+  .tocando .marco[aria-pressed="true"] .barra-tempo { visibility: visible; }
+  .tocando .marco[aria-pressed="true"] .barra-tempo span { animation: enche 6s linear forwards; }
+  @keyframes enche { to { width: 100%; } }
+  .det-marco { min-height: 9em; }
+  .det-marco > * { animation: aparece 0.4s ease; }
+  .fonte { color: var(--muted); font-size: 0.78em; margin: 0.8rem 0 0; }
 
-  .detalhe h3 { margin-bottom: 0.6rem; }
-  .fonte { color: var(--muted); font-size: 0.8em; margin: 0.8rem 0 0; }
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 2.6rem 0 1.6rem; }
+  .numeros .card { text-align: left; }
+  .numeros .grande-num { font-stretch: 125%; font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.4rem); line-height: 1; color: var(--acc); }
+  .numeros span { display: block; color: var(--muted); font-size: 0.88em; margin-top: 0.4rem; }
 
-  .aviso {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-top: 1.6rem;
-    max-width: 72ch;
-  }
-
-  /* falhas x controles */
-  .mapa {
-    display: grid;
-    grid-template-columns: minmax(240px, 1fr) minmax(300px, 1.6fr);
-    gap: clamp(16px, 3vw, 36px);
-    align-items: start;
-  }
-  @media (max-width: 820px) {
-    .mapa { grid-template-columns: 1fr; }
-  }
-  .falhas { display: flex; flex-direction: column; gap: 8px; }
-  .falha {
-    text-align: left;
+  /* ---------- seção 10: simulador ---------- */
+  .cadeia { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 1.4rem 0 1.8rem; }
+  @media (max-width: 760px) { .cadeia { grid-template-columns: 1fr; } }
+  .no {
+    position: relative;
     background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 8px;
+    border: 2px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    transition: border-color 0.3s, background 0.3s, transform 0.3s, opacity 0.3s;
+  }
+  .no .icone-bola { margin: 0 auto 0.6rem; width: 44px; height: 44px; --acc: var(--muted); transition: all 0.3s; }
+  .no b { display: block; font-size: 0.9em; line-height: 1.25; }
+  .no small { display: block; margin-top: 0.4rem; font-size: 0.75em; color: var(--muted); min-height: 1.3em; }
+  @media (min-width: 761px) {
+    .no:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      width: 16px;
+      height: 3px;
+      background: var(--line);
+    }
+  }
+  .no.atingido { border-color: var(--crit); background: color-mix(in srgb, var(--crit) 12%, var(--surface)); transform: translateY(-4px); }
+  .no.atingido .icone-bola { --acc: var(--crit); }
+  .no.barrado { border-color: var(--low); background: color-mix(in srgb, var(--low) 14%, var(--surface)); transform: translateY(-4px); }
+  .no.barrado .icone-bola { --acc: var(--low); }
+  .no.parcial { border-color: var(--mid); background: color-mix(in srgb, var(--mid) 14%, var(--surface)); }
+  .no.parcial .icone-bola { --acc: var(--mid); }
+  .no.nao { opacity: 0.35; }
+  .no.pulso { animation: pulso 0.5s ease; }
+  @keyframes pulso { 50% { transform: scale(1.08); } }
+
+  .sim-grid { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(280px, 1.2fr); gap: clamp(16px, 3vw, 36px); align-items: start; }
+  @media (max-width: 860px) { .sim-grid { grid-template-columns: 1fr; } }
+  .controles-sim { display: flex; flex-direction: column; gap: 8px; }
+  .interruptor {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 14px;
+    align-items: center;
     padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.95em;
-    line-height: 1.3;
+    transition: border-color 0.2s;
   }
-  .falha[aria-pressed="true"] { border-color: var(--p3); box-shadow: inset 4px 0 0 var(--p3); }
-  .controles { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-direction: column; gap: 10px; }
-  .controles li {
-    display: grid;
-    grid-template-columns: 6.2em 1fr;
-    gap: 12px;
-    padding: 12px 0;
-    border-top: 1px solid var(--line);
-    font-size: 0.93em;
+  .interruptor:has(input:checked) { border-color: var(--p2); }
+  .interruptor b { font-size: 0.95em; }
+  .interruptor small { grid-column: 1; color: var(--muted); font-size: 0.78em; }
+  .interruptor input {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 46px;
+    height: 26px;
+    border-radius: 999px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.25s;
+    margin: 0;
   }
-  .controles .cod { font-stretch: 112%; font-weight: 800; color: var(--p2); }
-  .controles b { display: block; }
+  .interruptor input::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.25s cubic-bezier(0.3, 1.4, 0.5, 1);
+  }
+  .interruptor input:checked { background: var(--p2); border-color: var(--p2); }
+  .interruptor input:checked::after { transform: translateX(20px); }
+  .resultado-sim h3 { font-size: 1.25em; }
+  .resultado-sim > * { animation: aparece 0.4s ease; }
+  .barras { margin-top: 1rem; display: flex; flex-direction: column; gap: 10px; }
+  .barra-lin { display: grid; grid-template-columns: 8.5em 1fr auto; gap: 10px; align-items: center; font-size: 0.85em; }
+  .barra-lin .trilho { height: 14px; border-radius: 7px; background: var(--soft); overflow: hidden; }
+  .barra-lin .trilho span { display: block; height: 100%; border-radius: 7px; background: var(--c); width: 0; transition: width 1s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .barra-lin b { font-stretch: 115%; min-width: 4.5em; text-align: right; }
 
-  /* aprendizados */
-  .achados {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-  }
-  .achados .painel h3 { font-size: 1.15em; }
+  /* ---------- seção 11 ---------- */
+  .achados { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .achados .card { transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid var(--acc); }
+  .achados .card:hover { transform: translateY(-6px) rotate(-0.4deg); }
+  .achados .grande-num { font-stretch: 125%; font-weight: 800; font-size: 2.6rem; line-height: 1; color: var(--acc); margin-bottom: 0.6rem; }
 
-  /* conclusão e quiz */
-  .fechamento {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    margin-bottom: 3rem;
-  }
-  .fechamento p { font-size: 1.05em; font-weight: 600; margin: 0; }
+  /* ---------- seção 12 ---------- */
+  .fechamento { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 3.4rem; }
+  .fechamento .card { display: flex; gap: 14px; align-items: flex-start; }
+  .fechamento .icone-bola { margin: 0; width: 44px; height: 44px; }
+  .fechamento p { font-size: 1.05em; font-weight: 650; margin: 0; }
 
-  .quiz { max-width: 760px; }
+  .quiz { max-width: 780px; }
+  .quiz .progresso-quiz { height: 6px; background: var(--soft); border-radius: 3px; overflow: hidden; margin-bottom: 1rem; }
+  .quiz .progresso-quiz span { display: block; height: 100%; background: linear-gradient(90deg, var(--p1), var(--p3)); transition: width 0.5s ease; }
   .quiz .contagem { color: var(--muted); font-size: 0.85em; margin-bottom: 0.4rem; }
   .quiz h3 { font-size: 1.3em; margin-bottom: 1rem; }
+  .quiz .corpo-q { animation: aparece 0.4s ease; }
   .opcoes { display: grid; gap: 8px; }
   .opcao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     text-align: left;
     background: var(--bg);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 12px 14px;
     cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s, background 0.2s;
   }
-  .opcao:hover:not(:disabled) { border-color: var(--p3); }
+  .opcao .letra-op { width: 28px; height: 28px; border-radius: 8px; background: var(--soft); display: grid; place-items: center; font-weight: 800; font-size: 0.85em; flex-shrink: 0; }
+  .opcao:hover:not(:disabled) { border-color: var(--p3); transform: translateX(4px); }
   .opcao:disabled { cursor: default; }
-  .opcao.certa { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 16%, var(--surface)); }
-  .opcao.errada { border-color: var(--erro); background: color-mix(in srgb, var(--erro) 14%, var(--surface)); }
-  .explica { margin-top: 1rem; min-height: 1.5em; }
+  .opcao.certa { border-color: var(--low); background: color-mix(in srgb, var(--low) 16%, var(--surface)); }
+  .opcao.certa .letra-op { background: var(--low); color: #fff; }
+  .opcao.errada { border-color: var(--crit); background: color-mix(in srgb, var(--crit) 14%, var(--surface)); animation: treme 0.4s; }
+  .opcao.errada .letra-op { background: var(--crit); color: #fff; }
+  .explica { margin-top: 1rem; }
+  .explica > * { animation: aparece 0.35s ease; }
   .explica strong { margin-right: 0.3em; }
-  .placar { font-stretch: 125%; font-weight: 800; font-size: 3rem; line-height: 1; margin-bottom: 0.6rem; }
+  .placar { font-stretch: 125%; font-weight: 800; font-size: 4rem; line-height: 1; margin-bottom: 0.4rem; background: linear-gradient(135deg, var(--p1), var(--p3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-  .refs { margin-top: 3rem; }
-  .refs ol { padding-left: 1.2em; font-size: 0.85em; color: var(--muted); }
-  .refs li { margin-bottom: 0.45rem; }
+  details.refs { margin-top: 3.4rem; }
+  details.refs summary { cursor: pointer; font-weight: 700; font-stretch: 110%; font-size: 1.15em; width: fit-content; }
+  details.refs ol { padding-left: 1.2em; font-size: 0.85em; color: var(--muted); margin-top: 1rem; }
+  details.refs li { margin-bottom: 0.45rem; }
 
-  footer {
-    padding: 2.4rem 0 3rem;
-    color: var(--muted);
-    font-size: 0.8em;
-  }
+  footer { padding: 2.4rem 0 3rem; color: var(--muted); font-size: 0.8em; border-top: 1px solid var(--line); }
 
-  /* índice lateral */
-  .indice {
-    display: none;
-    position: fixed;
-    top: 50%;
-    right: max(18px, env(safe-area-inset-right, 0px));
-    transform: translateY(-50%);
-    width: 215px;
-    font-size: 0.78rem;
-    line-height: 1.3;
-  }
-  @media (min-width: 1180px) {
-    .indice { display: block; }
-  }
-  .indice .grupo { margin-bottom: 1rem; }
-  .indice .quem {
-    border-left: 3px solid var(--acc);
-    padding-left: 8px;
-    margin-bottom: 0.3rem;
-    color: var(--muted);
-  }
-  .indice .quem b { color: var(--ink); display: block; }
-  .indice a {
-    display: flex;
-    gap: 0.5em;
-    padding: 0.2rem 0.5rem;
-    border-radius: 6px;
-    color: var(--muted);
-    text-decoration: none;
-  }
-  .indice a:hover { color: var(--ink); }
-  .indice a .n { width: 1.3em; flex-shrink: 0; color: var(--acc); font-weight: 700; }
-  .indice a.ativo { background: var(--soft); color: var(--ink); font-weight: 600; }
+  canvas.confete { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 60; }
 </style>
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-chave" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></symbol>
+  <symbol id="i-nuvem" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+  <symbol id="i-lixo" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-olho" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-alerta" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-pessoas" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-balanca" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol>
+  <symbol id="i-email" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-alvo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+  <symbol id="i-queda" viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></symbol>
+  <symbol id="i-coracao" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+  <symbol id="i-servidor" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01"/><path d="M6 18h.01"/></symbol>
+  <symbol id="i-ciclo" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+  <symbol id="i-banco" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+  <symbol id="i-baixo" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-lua" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="i-mao" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+  <symbol id="i-seguro" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-desvio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol>
+  <symbol id="i-raio" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+</svg>
+
+<div class="progresso"><span></span></div>
+<button class="tema-btn" type="button" aria-label="Alternar tema claro ou escuro"><svg class="ic"><use href="#i-lua"/></svg></button>
 <nav class="indice" aria-label="Seções da apresentação"></nav>
+
+<!-- ================= 1. CAPA ================= -->
+<header class="hero bloco" id="s1" data-parte="1" data-titulo="Capa">
+  <canvas class="rede" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <p class="parte-tag"><span class="avatar">HM</span>Parte 1 com Heitor</p>
+    <h1 class="titulo-anim">Governança de TI e segurança da informação</h1>
+    <p class="subtitulo">Normas ISO/IEC 27000, LGPD e o que o ataque ao ConecteSUS ensina sobre tudo isso</p>
+    <p class="gancho"><span class="digita" data-texto="Em 10 de dezembro de 2021, o ConecteSUS saiu do ar."></span><span class="cursor"></span></p>
+    <p class="gancho-2">Só voltou <span class="cont" data-ate="13" data-manual>0</span> dias depois.</p>
+    <div class="ficha">
+      <div>
+        <span class="rot">Integrantes</span>
+        <span class="pessoa" data-parte="1"><span class="avatar">HM</span>Heitor Saravy de Menezes</span>
+        <span class="pessoa" data-parte="2"><span class="avatar">PC</span>Pedro Henrique de Paula Cruz</span>
+        <span class="pessoa" data-parte="3"><span class="avatar">LI</span>Lucas Farias Izidoro</span>
+      </div>
+      <div>
+        <span class="rot">Disciplina</span>
+        Tópicos Especiais em Tecnologia da Informação
+        <span class="rot" style="margin-top:0.9rem">Professor</span>
+        Wiliam Ricardo Correia Dias
+      </div>
+    </div>
+  </div>
+  <a class="rolar" href="#s2" aria-label="Ir para a próxima seção"><svg class="ic"><use href="#i-baixo"/></svg></a>
+</header>
 
 <main>
 
-  <!-- ============ PARTE 1 ============ -->
-
-  <section class="bloco" id="s1" data-parte="1" data-titulo="Capa">
-    <p class="parte-tag">Parte 1, com Integrante 1</p>
-    <h1>Governança de TI e segurança da informação</h1>
-    <p class="subtitulo">Normas ISO/IEC 27000, LGPD e o que o ataque ao ConecteSUS ensina sobre tudo isso</p>
-    <p class="gancho">Em 10 de dezembro de 2021, o ConecteSUS saiu do ar. Só voltou 13 dias depois.</p>
-    <div class="ficha">
-      <div><strong>Integrantes</strong>Integrante 1, Integrante 2 e Integrante 3</div>
-      <div><strong>Disciplina</strong>Nome da disciplina</div>
-      <div><strong>Professor(a)</strong>Nome do professor(a)</div>
-    </div>
-    <p class="dica">Role a página ou use <kbd>Page Down</kbd> e <kbd>Page Up</kbd> para ir de uma seção a outra.</p>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Apresentar o grupo e o tema. Ler a frase do ConecteSUS e avisar que a gente volta nesse caso no final: primeiro vem a teoria (governança, normas, LGPD, riscos) e depois a gente mostra como ela se aplica num incidente real que aconteceu no Brasil.</p>
-    </details>
-  </section>
-
+  <!-- ================= 2 ================= -->
   <section class="bloco" id="s2" data-parte="1" data-titulo="Governança e compliance">
-    <div class="bloco-topo"><span class="num">2</span><h2>Governança de TI e compliance</h2></div>
+    <span class="num-bg" aria-hidden="true">02</span>
+    <div class="topo rv"><span class="num">2</span><h2>Governança de TI e compliance</h2></div>
+    <span class="traco"></span>
     <div class="duas">
-      <div class="painel">
+      <article class="card rv" style="--d:1">
+        <div class="icone-bola"><svg class="ic"><use href="#i-alvo"/></svg></div>
         <h3>Governança de TI</h3>
         <p>É a forma como a organização decide, controla e acompanha o uso da tecnologia, para que a TI trabalhe a favor dos objetivos do negócio.</p>
         <ul class="pontos">
@@ -799,8 +1265,9 @@
           <li>Acompanha resultados e riscos com indicadores</li>
         </ul>
         <p class="suave pequeno" style="margin-top:1rem">Referências conhecidas: COBIT e ISO/IEC 38500.</p>
-      </div>
-      <div class="painel">
+      </article>
+      <article class="card rv" style="--d:2">
+        <div class="icone-bola"><svg class="ic"><use href="#i-check"/></svg></div>
         <h3>Compliance</h3>
         <p>É estar em conformidade com leis, normas, contratos e políticas internas, e conseguir provar isso quando alguém pedir.</p>
         <ul class="pontos">
@@ -808,64 +1275,93 @@
           <li>Normas técnicas, como a ISO/IEC 27001</li>
           <li>Contratos com clientes e políticas da própria empresa</li>
         </ul>
-      </div>
+      </article>
     </div>
-    <p class="frase-ponte">A governança define o rumo. O compliance confere se o caminho respeita as regras.</p>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Explicar que governança não é “o chefe da TI mandando”, é um sistema de decisão e acompanhamento. Compliance é a parte de cumprir regras e ter evidência disso. Dá pra dar o exemplo: uma empresa pode ter uma TI ótima e mesmo assim tomar multa se não cumprir a LGPD.</p>
-    </details>
+
+    <div class="card jogo-gc rv">
+      <h3>É governança ou compliance?</h3>
+      <p class="suave pequeno">Vote com a turma e clique na resposta.</p>
+      <div class="lista-gc"></div>
+      <p class="pequeno placar-gc" style="margin:0.8rem 0 0"></p>
+    </div>
+
+    <p class="frase-ponte rv">A governança define o rumo. O compliance confere se o caminho respeita as regras.</p>
   </section>
 
+  <!-- ================= 3 ================= -->
   <section class="bloco" id="s3" data-parte="1" data-titulo="Por que é estratégica">
-    <div class="bloco-topo"><span class="num">3</span><h2>Por que segurança da informação é estratégica?</h2></div>
-    <p class="lead">Informação é um ativo. Se ela vaza, some ou fica errada, o negócio para, perde dinheiro e perde a confiança das pessoas. A segurança se apoia em três pilares.</p>
+    <span class="num-bg" aria-hidden="true">03</span>
+    <div class="topo rv"><span class="num">3</span><h2>Por que segurança da informação é estratégica?</h2></div>
+    <span class="traco"></span>
+    <p class="lead rv">Informação é um ativo. Se ela vaza, some ou fica errada, o negócio para, perde dinheiro e perde a confiança das pessoas. A segurança se apoia em três pilares. Clique nas cartas.</p>
     <div class="pilares">
-      <button class="pilar" aria-expanded="false">
-        <span class="letra">C</span>
-        <span class="nome">Confidencialidade</span>
-        <span>Só quem tem permissão acessa a informação.</span>
-        <span class="extra"><b>No ConecteSUS:</b> o grupo disse ter copiado 50 TB de dados. Essa parte nunca foi confirmada.</span>
-        <span class="abrir">Ver no caso ConecteSUS</span>
+      <button class="flip rv" style="--d:1" aria-pressed="false" type="button">
+        <span class="flip-in">
+          <span class="face frente">
+            <span class="letra">C</span>
+            <span class="nome">Confidencialidade</span>
+            <span>Só quem tem permissão acessa a informação.</span>
+            <span class="dica-flip"><svg class="ic"><use href="#i-mao"/></svg>Virar para ver o caso</span>
+          </span>
+          <span class="face verso">
+            <span class="rotulo">No ConecteSUS</span>
+            <b>50 TB alegados</b>
+            <span>O grupo disse ter copiado os dados. Isso nunca foi confirmado.</span>
+            <span class="status fraco">Impacto incerto</span>
+          </span>
+        </span>
       </button>
-      <button class="pilar" aria-expanded="false">
-        <span class="letra">I</span>
-        <span class="nome">Integridade</span>
-        <span>A informação está correta e não foi alterada ou apagada sem autorização.</span>
-        <span class="extra"><b>No ConecteSUS:</b> depois que o app voltou, usuários relataram vacinas que tinham sumido do histórico.</span>
-        <span class="abrir">Ver no caso ConecteSUS</span>
+      <button class="flip rv" style="--d:2" aria-pressed="false" type="button">
+        <span class="flip-in">
+          <span class="face frente">
+            <span class="letra">I</span>
+            <span class="nome">Integridade</span>
+            <span>A informação está correta e não foi alterada ou apagada sem autorização.</span>
+            <span class="dica-flip"><svg class="ic"><use href="#i-mao"/></svg>Virar para ver o caso</span>
+          </span>
+          <span class="face verso">
+            <span class="rotulo">No ConecteSUS</span>
+            <b>Vacinas sumidas</b>
+            <span>Depois que o app voltou, usuários relataram doses que tinham desaparecido do histórico.</span>
+            <span class="status medio">Impacto médio</span>
+          </span>
+        </span>
       </button>
-      <button class="pilar" aria-expanded="false">
-        <span class="letra">D</span>
-        <span class="nome">Disponibilidade</span>
-        <span>A informação está acessível quando alguém precisa dela.</span>
-        <span class="extra"><b>No ConecteSUS:</b> 13 dias sem conseguir emitir o certificado de vacinação.</span>
-        <span class="abrir">Ver no caso ConecteSUS</span>
+      <button class="flip rv" style="--d:3" aria-pressed="false" type="button">
+        <span class="flip-in">
+          <span class="face frente">
+            <span class="letra">D</span>
+            <span class="nome">Disponibilidade</span>
+            <span>A informação está acessível quando alguém precisa dela.</span>
+            <span class="dica-flip"><svg class="ic"><use href="#i-mao"/></svg>Virar para ver o caso</span>
+          </span>
+          <span class="face verso">
+            <span class="rotulo">No ConecteSUS</span>
+            <b>13 dias fora do ar</b>
+            <span>Ninguém conseguia emitir o certificado de vacinação.</span>
+            <span class="status forte">Pilar mais atingido</span>
+          </span>
+        </span>
       </button>
     </div>
-    <div class="duas">
-      <div class="painel"><h3>Custo de parar</h3><p>Sistema fora do ar é venda perdida, atendimento parado e equipe sem trabalhar.</p></div>
-      <div class="painel"><h3>Confiança</h3><p>Clientes e cidadãos lembram de quem expôs os dados deles.</p></div>
-      <div class="painel"><h3>Obrigação legal</h3><p>A LGPD exige medidas de segurança e prevê sanções para quem não adota.</p></div>
+    <div class="tres porques">
+      <div class="card rv" style="--d:1"><div class="icone-bola"><svg class="ic"><use href="#i-queda"/></svg></div><div><h3>Custo de parar</h3><p>Sistema fora do ar é venda perdida, atendimento parado e equipe sem trabalhar.</p></div></div>
+      <div class="card rv" style="--d:2"><div class="icone-bola"><svg class="ic"><use href="#i-coracao"/></svg></div><div><h3>Confiança</h3><p>Clientes e cidadãos lembram de quem expôs os dados deles.</p></div></div>
+      <div class="card rv" style="--d:3"><div class="icone-bola"><svg class="ic"><use href="#i-balanca"/></svg></div><div><h3>Obrigação legal</h3><p>A LGPD exige medidas de segurança e prevê sanções para quem não adota.</p></div></div>
     </div>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Clicar em cada letra enquanto explica. A ideia é já plantar o caso: cada pilar tem um exemplo do ConecteSUS. Fechar dizendo que por isso segurança é assunto da diretoria, não só do pessoal de TI.</p>
-    </details>
   </section>
 
+  <!-- ================= 4 ================= -->
   <section class="bloco" id="s4" data-parte="1" data-titulo="Família ISO/IEC 27000">
-    <div class="bloco-topo"><span class="num">4</span><h2>Família ISO/IEC 27000</h2></div>
-    <p class="lead">É um conjunto de normas internacionais sobre segurança da informação. Cada uma cuida de uma parte.</p>
-    <div class="normas">
-      <div class="norma"><b>27000</b>Visão geral e vocabulário da família</div>
-      <div class="norma foco"><b>27001</b>Requisitos do sistema de gestão (SGSI). É a que certifica</div>
-      <div class="norma foco"><b>27002</b>Guia prático de como aplicar os controles</div>
-      <div class="norma"><b>27005</b>Gestão de riscos de segurança da informação</div>
-      <div class="norma"><b>27701</b>Extensão para privacidade e dados pessoais</div>
-    </div>
-    <h3>27001 × 27002</h3>
-    <div class="tabela-wrap">
+    <span class="num-bg" aria-hidden="true">04</span>
+    <div class="topo rv"><span class="num">4</span><h2>Família ISO/IEC 27000</h2></div>
+    <span class="traco"></span>
+    <p class="lead rv">É um conjunto de normas internacionais sobre segurança da informação. Cada uma cuida de uma parte. Clique em cada norma.</p>
+    <div class="normas rv"></div>
+    <div class="card painel-norma rv" aria-live="polite"></div>
+
+    <h3 class="rv">27001 × 27002</h3>
+    <div class="tabela-wrap rv">
       <table>
         <thead>
           <tr><th></th><th>ISO/IEC 27001</th><th>ISO/IEC 27002</th></tr>
@@ -878,104 +1374,138 @@
         </tbody>
       </table>
     </div>
-    <p class="frase-ponte analogia">A 27001 é a lista do que vai cair na prova. A 27002 é o material de estudo.</p>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Não precisa decorar todos os números, só mostrar que existe uma família e que a 27001 é a principal. Usar a analogia da prova pra deixar clara a diferença entre as duas. Terminar passando a palavra: “agora o Integrante 2 mostra como isso funciona na prática aqui no Brasil”.</p>
-    </details>
+    <p class="frase-ponte rv">A 27001 é a lista do que vai cair na prova. A 27002 é o material de estudo.</p>
   </section>
 
-  <!-- ============ PARTE 2 ============ -->
-
+  <!-- ================= 5 ================= -->
   <section class="bloco" id="s5" data-parte="2" data-titulo="ABNT NBR ISO/IEC 27001">
-    <p class="parte-tag">Parte 2, com Integrante 2</p>
-    <div class="bloco-topo"><span class="num">5</span><h2>ABNT NBR ISO/IEC 27001</h2></div>
-    <p class="lead">A ABNT publica no Brasil a versão em português da norma, com o mesmo conteúdo da internacional. É ela que aparece em editais, contratos e auditorias no país.</p>
+    <span class="num-bg" aria-hidden="true">05</span>
+    <p class="parte-tag rv"><span class="avatar">PC</span>Parte 2 com Pedro Henrique</p>
+    <div class="topo rv"><span class="num">5</span><h2>ABNT NBR ISO/IEC 27001</h2></div>
+    <span class="traco"></span>
+    <p class="lead rv">A ABNT publica no Brasil a versão em português da norma, com o mesmo conteúdo da internacional. É ela que aparece em editais, contratos e auditorias no país.</p>
 
-    <h3>As cláusulas obrigatórias seguem o ciclo PDCA</h3>
-    <div class="clausulas">
-      <div class="cl" data-fase="p"><b>4</b>Contexto da organização<span class="fase">Planejar</span></div>
-      <div class="cl" data-fase="p"><b>5</b>Liderança<span class="fase">Planejar</span></div>
-      <div class="cl" data-fase="p"><b>6</b>Planejamento<span class="fase">Planejar</span></div>
-      <div class="cl" data-fase="p"><b>7</b>Apoio<span class="fase">Planejar</span></div>
-      <div class="cl" data-fase="f"><b>8</b>Operação<span class="fase">Fazer</span></div>
-      <div class="cl" data-fase="c"><b>9</b>Avaliação de desempenho<span class="fase">Checar</span></div>
-      <div class="cl" data-fase="a"><b>10</b>Melhoria<span class="fase">Agir</span></div>
+    <h3 class="rv">As cláusulas 4 a 10 seguem o ciclo PDCA</h3>
+    <div class="par-vis rv">
+      <div class="vis vis-pdca"></div>
+      <div>
+        <div class="fases fases-pdca"></div>
+        <div class="card det-vis det-pdca" aria-live="polite"></div>
+      </div>
     </div>
 
-    <h3>Anexo A: 93 controles em 4 temas</h3>
-    <p class="suave pequeno">Clique em cada tema.</p>
-    <div class="barra-temas" role="group" aria-label="Temas do Anexo A"></div>
-    <div class="painel detalhe-tema" aria-live="polite"></div>
-
-    <p class="aviso">Não é obrigatório aplicar os 93. A organização escolhe os controles a partir da análise de riscos e justifica cada escolha num documento chamado Declaração de Aplicabilidade. A versão de 2022 trocou os antigos 114 controles em 14 domínios por essa estrutura mais enxuta.</p>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Explicar que a norma tem duas partes: as cláusulas 4 a 10, que são o “sistema de gestão” (e seguem o ciclo planejar, fazer, checar, agir), e o Anexo A, que é o cardápio de controles. Clicar nos temas e ler um ou dois exemplos de cada. Destacar que a empresa não precisa aplicar tudo, e sim o que faz sentido pros riscos dela.</p>
-    </details>
+    <h3 class="rv">Anexo A: 93 controles em 4 temas</h3>
+    <div class="par-vis rv">
+      <div class="vis vis-donut"></div>
+      <div>
+        <div class="fases fases-donut"></div>
+        <div class="card det-vis det-donut" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="aviso rv">Não é obrigatório aplicar os 93. A organização escolhe os controles a partir da análise de riscos e justifica cada escolha na Declaração de Aplicabilidade. A versão de 2022 trocou os antigos 114 controles em 14 domínios por essa estrutura mais enxuta.</p>
   </section>
 
+  <!-- ================= 6 ================= -->
   <section class="bloco" id="s6" data-parte="2" data-titulo="ISO e LGPD">
-    <div class="bloco-topo"><span class="num">6</span><h2>ISO e LGPD no Brasil</h2></div>
-    <p class="lead">A LGPD (Lei nº 13.709/2018) vale para empresas e também para órgãos públicos. Ela e a ISO se completam.</p>
+    <span class="num-bg" aria-hidden="true">06</span>
+    <div class="topo rv"><span class="num">6</span><h2>ISO e LGPD no Brasil</h2></div>
+    <span class="traco"></span>
+    <p class="lead rv">A LGPD (Lei nº 13.709/2018) vale para empresas e também para órgãos públicos. Ela e a ISO se completam.</p>
     <div class="duas">
-      <div class="painel">
+      <article class="card rv" style="--d:1">
+        <div class="icone-bola"><svg class="ic"><use href="#i-balanca"/></svg></div>
         <h3>A LGPD diz o que é obrigatório</h3>
         <ul class="pontos">
           <li><b>Art. 46:</b> adotar medidas de segurança técnicas e administrativas para proteger dados pessoais</li>
           <li><b>Art. 48:</b> comunicar à ANPD e aos titulares incidentes que possam causar risco ou dano relevante</li>
           <li><b>Art. 5º, II:</b> dados de saúde são dados pessoais sensíveis e pedem cuidado maior</li>
-          <li><b>Resolução CD/ANPD nº 15/2024:</b> comunicação em até 3 dias úteis e registro de todo incidente por pelo menos 5 anos</li>
+          <li><b>Resolução CD/ANPD nº 15/2024:</b> registro de todo incidente por pelo menos 5 anos</li>
         </ul>
-      </div>
-      <div class="painel">
+      </article>
+      <article class="card rv" style="--d:2">
+        <div class="icone-bola"><svg class="ic"><use href="#i-escudo"/></svg></div>
         <h3>A ISO mostra como organizar</h3>
         <ul class="pontos">
           <li>Os controles da 27001 viram evidência concreta de que as “medidas de segurança” do art. 46 existem</li>
           <li>A gestão de incidentes da norma já prepara a organização para cumprir o prazo da ANPD</li>
           <li>A ISO/IEC 27701 estende o sistema de gestão para privacidade</li>
         </ul>
-      </div>
+      </article>
     </div>
-    <p class="frase-ponte">Ter ISO 27001 não deixa ninguém automaticamente adequado à LGPD, mas ajuda muito a provar que a organização fez a parte dela.</p>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Frisar que a lei fala “adote medidas de segurança”, mas não diz quais. A ISO preenche esse espaço. Comentar que dados de vacinação são dados de saúde, ou seja, sensíveis, o que liga direto com o caso que vem depois. Obs.: a resolução dos 3 dias úteis é de 2024, depois do ataque ao ConecteSUS.</p>
-    </details>
+
+    <div class="card prazo rv">
+      <h3>Quanto tempo a organização tem para avisar a ANPD?</h3>
+      <p class="suave pequeno" style="margin:0">São 3 dias úteis a partir do momento em que ela sabe que o incidente afetou dados pessoais. Escolha o dia da descoberta.</p>
+      <div class="dias-sel" role="group" aria-label="Dia da descoberta"></div>
+      <div class="fita" aria-live="polite"></div>
+      <p class="resultado-prazo"></p>
+      <p class="suave pequeno" style="margin:0">Sem contar feriados. Agentes de pequeno porte têm o prazo em dobro.</p>
+    </div>
+
+    <p class="frase-ponte rv">Ter ISO 27001 não deixa ninguém automaticamente adequado à LGPD, mas ajuda muito a provar que a organização fez a parte dela.</p>
   </section>
 
+  <!-- ================= 7 ================= -->
   <section class="bloco" id="s7" data-parte="2" data-titulo="Gestão de riscos">
-    <div class="bloco-topo"><span class="num">7</span><h2>Gestão de riscos</h2></div>
-    <p class="formula">Risco = probabilidade × impacto</p>
-    <ol class="etapas">
-      <li>Identificar</li>
-      <li>Analisar</li>
-      <li>Avaliar</li>
-      <li>Tratar</li>
-      <li>Monitorar</li>
-    </ol>
-    <div class="tratamentos">
-      <div><b>Mitigar</b>Reduzir o risco com controles, como MFA ou backup</div>
-      <div><b>Transferir</b>Passar parte do prejuízo para outro, como um seguro</div>
-      <div><b>Evitar</b>Deixar de fazer a atividade que gera o risco</div>
-      <div><b>Aceitar</b>Conviver com o risco, de forma consciente e registrada</div>
+    <span class="num-bg" aria-hidden="true">07</span>
+    <div class="topo rv"><span class="num">7</span><h2>Gestão de riscos</h2></div>
+    <span class="traco"></span>
+
+    <div class="duas">
+      <div class="card rv" style="--d:1">
+        <h3>Risco = probabilidade × impacto</h3>
+        <div class="calc-risco">
+          <div>
+            <div class="deslizador">
+              <label for="r-p">Probabilidade <output id="o-p">3</output></label>
+              <input type="range" id="r-p" min="1" max="5" value="3">
+            </div>
+            <div class="deslizador">
+              <label for="r-i">Impacto <output id="o-i">4</output></label>
+              <input type="range" id="r-i" min="1" max="5" value="4">
+            </div>
+          </div>
+          <div class="medidor" data-n="alto">
+            <div class="valor">12</div>
+            <span class="nivel-chip">Alto</span>
+            <div class="trilho"><span style="width:48%"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card rv" style="--d:2">
+        <h3>Etapas</h3>
+        <ol class="etapas">
+          <li>Identificar <span>o que pode dar errado</span></li>
+          <li>Analisar <span>chance e estrago</span></li>
+          <li>Avaliar <span>o que é prioridade</span></li>
+          <li>Tratar <span>escolher o que fazer</span></li>
+          <li>Monitorar <span>e revisar sempre</span></li>
+        </ol>
+      </div>
     </div>
 
-    <h3>Agora é com a turma</h3>
-    <p class="suave pequeno">Escolha uma ameaça e clique na célula da matriz onde a turma acha que ela fica.</p>
-    <div class="risco-app">
+    <div class="tratamentos">
+      <div class="card rv" style="--d:1"><div class="icone-bola"><svg class="ic"><use href="#i-escudo"/></svg></div><b>Mitigar</b><span>Reduzir o risco com controles, como MFA ou backup</span></div>
+      <div class="card rv" style="--d:2"><div class="icone-bola"><svg class="ic"><use href="#i-seguro"/></svg></div><b>Transferir</b><span>Passar parte do prejuízo para outro, como um seguro</span></div>
+      <div class="card rv" style="--d:3"><div class="icone-bola"><svg class="ic"><use href="#i-desvio"/></svg></div><b>Evitar</b><span>Deixar de fazer a atividade que gera o risco</span></div>
+      <div class="card rv" style="--d:4"><div class="icone-bola"><svg class="ic"><use href="#i-check"/></svg></div><b>Aceitar</b><span>Conviver com o risco, de forma consciente e registrada</span></div>
+    </div>
+
+    <h3 class="rv">Agora é com a turma</h3>
+    <p class="suave pequeno rv">Arraste cada ameaça para a célula da matriz onde a turma acha que ela fica. Também dá pra clicar na ameaça e depois na célula.</p>
+    <div class="risco-app rv">
       <div>
-        <div class="ameacas" role="group" aria-label="Ameaças"></div>
+        <div class="ameacas"></div>
         <div class="acoes">
-          <button class="btn cheio" id="risco-grupo">Mostrar a análise do grupo</button>
-          <button class="btn" id="risco-limpar">Limpar</button>
+          <button class="btn cheio" id="risco-grupo" type="button">Mostrar a análise do grupo</button>
+          <button class="btn" id="risco-limpar" type="button">Limpar</button>
         </div>
       </div>
       <div>
         <div class="matriz-wrap">
           <div class="eixo-y">Probabilidade</div>
           <div>
-            <div class="matriz" role="grid" aria-label="Matriz de risco"></div>
+            <div class="matriz" aria-label="Matriz de risco"></div>
             <div class="eixo-x">Impacto</div>
           </div>
         </div>
@@ -988,56 +1518,64 @@
         <div class="leitura" aria-live="polite"></div>
       </div>
     </div>
-    <p class="aviso">Base: ISO/IEC 27005 (riscos de segurança da informação) e ISO 31000 (gestão de riscos em geral).</p>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Explicar a fórmula e as cinco etapas rapidinho. Depois chamar a turma: ler uma ameaça, perguntar “qual a chance disso acontecer?” e “se acontecer, o estrago é grande?”, e clicar onde a maioria disser. No fim, mostrar a análise do grupo e comparar. A senha roubada da nuvem é justamente o que aconteceu no caso da parte 3.</p>
-    </details>
+    <p class="aviso rv">Base: ISO/IEC 27005 (riscos de segurança da informação) e ISO 31000 (gestão de riscos em geral).</p>
   </section>
 
+  <!-- ================= 8 ================= -->
   <section class="bloco" id="s8" data-parte="2" data-titulo="Gestão de ativos">
-    <div class="bloco-topo"><span class="num">8</span><h2>Gestão de ativos</h2></div>
-    <p class="lead">Não dá pra proteger o que você nem sabe que tem. Ativo é tudo que tem valor: dados, sistemas, equipamentos, contas de acesso e até pessoas.</p>
+    <span class="num-bg" aria-hidden="true">08</span>
+    <div class="topo rv"><span class="num">8</span><h2>Gestão de ativos</h2></div>
+    <span class="traco"></span>
+    <p class="lead rv">Não dá pra proteger o que você nem sabe que tem. Ativo é tudo que tem valor: dados, sistemas, equipamentos, contas de acesso e até pessoas.</p>
     <div class="ciclo">
-      <div><b>Inventariar</b>Listar o que existe (controle 5.9)</div>
-      <div><b>Definir um dono</b>Alguém responde por cada ativo</div>
-      <div><b>Classificar</b>Pelo nível de sigilo e importância (5.12 e 5.13)</div>
-      <div><b>Regras de uso</b>Quem pode usar e como (5.10), até o descarte</div>
+      <div class="card rv" style="--d:1"><b>Inventariar</b><span>Listar o que existe (controle 5.9)</span></div>
+      <div class="card rv" style="--d:2"><b>Definir um dono</b><span>Alguém responde por cada ativo</span></div>
+      <div class="card rv" style="--d:3"><b>Classificar</b><span>Pelo nível de sigilo e importância (5.12 e 5.13)</span></div>
+      <div class="card rv" style="--d:4"><b>Regras de uso</b><span>Quem pode usar e como (5.10), até o descarte</span></div>
     </div>
-    <h3>Exemplo: ativos de um sistema como o ConecteSUS</h3>
-    <div class="tabela-wrap">
-      <table>
-        <thead>
-          <tr><th>Ativo</th><th>Classificação</th><th>Por quê</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Credenciais de administrador da nuvem</td><td><span class="selo" style="--c:var(--crit)">Confidencial</span></td><td>Quem tem, controla o ambiente inteiro</td></tr>
-          <tr><td>Base de registros de vacinação</td><td><span class="selo" style="--c:var(--crit)">Confidencial</span></td><td>Dado de saúde, sensível pela LGPD</td></tr>
-          <tr><td>Logs de acesso aos sistemas</td><td><span class="selo" style="--c:var(--high)">Restrita</span></td><td>Mostram quem fez o quê, úteis para investigar</td></tr>
-          <tr><td>Código-fonte do aplicativo</td><td><span class="selo" style="--c:var(--mid)">Interna</span></td><td>Não é público, mas não tem dado de cidadão</td></tr>
-          <tr><td>Página de perguntas frequentes</td><td><span class="selo" style="--c:var(--low)">Pública</span></td><td>Feita para todo mundo ler</td></tr>
-        </tbody>
-      </table>
+
+    <div class="card jogo-ativos rv">
+      <h3>Classifique os ativos de um sistema como o ConecteSUS</h3>
+      <p class="suave pequeno">Arraste cada ativo para o nível de classificação certo, ou clique no ativo e depois no nível.</p>
+      <div class="banco"></div>
+      <div class="baldes"></div>
+      <div class="acoes">
+        <button class="btn cheio" id="ativos-conferir" type="button">Conferir</button>
+        <button class="btn" id="ativos-resposta" type="button">Mostrar resposta</button>
+        <button class="btn" id="ativos-reiniciar" type="button">Recomeçar</button>
+      </div>
+      <ul class="explicacoes pontos" aria-live="polite"></ul>
     </div>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Deixar claro que a tabela é um exemplo montado pelo grupo, não um documento oficial do ministério. O ponto principal: a credencial de administrador é tão valiosa quanto os próprios dados, porque dá acesso a tudo. Fechar passando para o Integrante 3: “e foi justamente uma credencial que abriu a porta no caso que a gente vai mostrar agora”.</p>
-    </details>
+    <p class="aviso rv">Exemplo montado pelo grupo para fins didáticos, não um documento oficial do ministério.</p>
   </section>
 
-  <!-- ============ PARTE 3 ============ -->
-
+  <!-- ================= 9 ================= -->
   <section class="bloco" id="s9" data-parte="3" data-titulo="Caso ConecteSUS">
-    <p class="parte-tag">Parte 3, com Integrante 3</p>
-    <div class="bloco-topo"><span class="num">9</span><h2>O ataque ao ConecteSUS</h2></div>
-    <p class="lead">Em dezembro de 2021, sistemas do Ministério da Saúde, incluindo o app que emitia o certificado de vacinação contra a Covid-19, foram atacados e ficaram fora do ar. Clique nas datas.</p>
-    <div class="linha-wrap">
-      <ol class="linha" aria-label="Linha do tempo do incidente"></ol>
-    </div>
-    <div class="painel detalhe" aria-live="polite"></div>
+    <span class="num-bg" aria-hidden="true">09</span>
+    <p class="parte-tag rv"><span class="avatar">LI</span>Parte 3 com Lucas</p>
+    <div class="topo rv"><span class="num">9</span><h2>O ataque ao ConecteSUS</h2></div>
+    <span class="traco"></span>
+    <p class="lead rv">Em dezembro de 2021, sistemas do Ministério da Saúde, incluindo o app que emitia o certificado de vacinação contra a Covid-19, foram atacados e ficaram fora do ar. Aperte o play ou clique nas datas.</p>
 
-    <div class="duas" style="margin-top:1.6rem">
-      <div class="painel">
+    <div class="caso rv">
+      <div class="celular"><div class="tela"></div></div>
+      <div>
+        <div class="acoes" style="margin:0 0 1rem">
+          <button class="btn cheio" id="caso-play" type="button"><svg class="ic"><use href="#i-play"/></svg><span>Reproduzir a história</span></button>
+        </div>
+        <ol class="marcos" aria-label="Linha do tempo do incidente"></ol>
+        <div class="card det-marco" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="numeros">
+      <div class="card rv" style="--d:1"><div class="grande-num"><span class="cont" data-ate="13">0</span></div><span>dias com o ConecteSUS fora do ar</span></div>
+      <div class="card rv" style="--d:2"><div class="grande-num"><span class="cont" data-ate="1">0</span></div><span>credencial válida usada como porta de entrada</span></div>
+      <div class="card rv" style="--d:3"><div class="grande-num"><span class="cont" data-ate="50">0</span> TB</div><span>de dados que o grupo disse ter copiado, sem confirmação</span></div>
+    </div>
+
+    <div class="duas">
+      <div class="card rv" style="--d:1">
         <h3>Onde falhou</h3>
         <ul class="pontos">
           <li>Acesso à nuvem com uma credencial válida, sem barreira extra aparente</li>
@@ -1045,7 +1583,7 @@
           <li>Recuperação lenta, mesmo com backup</li>
         </ul>
       </div>
-      <div class="painel">
+      <div class="card rv" style="--d:2">
         <h3>Impacto</h3>
         <ul class="pontos">
           <li>Certificado de vacinação indisponível justo quando era exigido em viagens</li>
@@ -1055,65 +1593,77 @@
         </ul>
       </div>
     </div>
-    <p class="aviso">O relatório completo da investigação não foi divulgado. Tudo aqui vem de comunicados oficiais e reportagens da época. A cópia de 50 TB foi uma alegação dos criminosos e não foi confirmada.</p>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Contar a história seguindo as datas: o que aconteceu, como descobriram a porta de entrada e quanto tempo levou pra voltar. Depois ler “onde falhou” e “impacto”. Tomar cuidado pra não afirmar o que não foi confirmado, como o vazamento dos 50 TB.</p>
-    </details>
+    <p class="aviso rv">O relatório completo da investigação não foi divulgado. Tudo aqui vem de comunicados oficiais e reportagens da época.</p>
   </section>
 
+  <!-- ================= 10 ================= -->
   <section class="bloco" id="s10" data-parte="3" data-titulo="Como as normas ajudariam">
-    <div class="bloco-topo"><span class="num">10</span><h2>Como as normas poderiam ter ajudado</h2></div>
-    <p class="lead">Para cada falha, os controles do Anexo A da ISO/IEC 27001:2022 que reduziriam o risco. Clique em uma falha.</p>
-    <div class="mapa">
-      <div class="falhas" role="group" aria-label="Falhas"></div>
-      <div class="painel detalhe-falha" aria-live="polite"></div>
+    <span class="num-bg" aria-hidden="true">10</span>
+    <div class="topo rv"><span class="num">10</span><h2>Como as normas poderiam ter ajudado</h2></div>
+    <span class="traco"></span>
+    <p class="lead rv">Ligue controles do Anexo A da ISO/IEC 27001:2022 e simule o ataque de novo para ver até onde o invasor chegaria.</p>
+
+    <div class="cadeia rv"></div>
+
+    <div class="sim-grid rv">
+      <div>
+        <div class="controles-sim"></div>
+        <div class="acoes">
+          <button class="btn cheio" id="sim-rodar" type="button"><svg class="ic"><use href="#i-raio"/></svg>Simular ataque</button>
+          <button class="btn" id="sim-todos" type="button">Ligar todos</button>
+          <button class="btn" id="sim-nenhum" type="button">Como foi de verdade</button>
+        </div>
+      </div>
+      <div class="card resultado-sim" aria-live="polite"></div>
     </div>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Passar pelas falhas uma a uma. O ponto que mais chama atenção é o primeiro: com autenticação multifator, a senha sozinha não bastaria. Lembrar que nenhum controle garante 100%, mas juntos eles diminuem muito a chance e o tamanho do estrago.</p>
-    </details>
+    <p class="aviso rv">Os tempos com controles são uma estimativa ilustrativa do grupo, só para comparar. Nenhum controle garante 100%, mas juntos eles diminuem muito a chance e o tamanho do estrago.</p>
   </section>
 
+  <!-- ================= 11 ================= -->
   <section class="bloco" id="s11" data-parte="3" data-titulo="O que chamou atenção">
-    <div class="bloco-topo"><span class="num">11</span><h2>O que mais chamou a atenção do grupo</h2></div>
+    <span class="num-bg" aria-hidden="true">11</span>
+    <div class="topo rv"><span class="num">11</span><h2>O que mais chamou a atenção do grupo</h2></div>
+    <span class="traco"></span>
     <div class="achados">
-      <div class="painel">
+      <div class="card rv" style="--d:1">
+        <div class="grande-num">1 senha</div>
         <h3>Não precisou de ataque sofisticado</h3>
         <p>Pelo que foi divulgado, a entrada foi com uma credencial válida. Um controle simples, como MFA, poderia ter mudado a história.</p>
       </div>
-      <div class="painel">
+      <div class="card rv" style="--d:2">
+        <div class="grande-num">13 dias</div>
         <h3>Ter backup não é o mesmo que voltar rápido</h3>
-        <p>O ministério tinha cópias dos dados, mas o serviço ficou 13 dias fora. Recuperação também precisa ser planejada e testada.</p>
+        <p>O ministério tinha cópias dos dados, mas o serviço ficou quase duas semanas fora. Recuperação também precisa ser planejada e testada.</p>
       </div>
-      <div class="painel">
-        <h3>Dado de saúde é dado sensível</h3>
+      <div class="card rv" style="--d:3">
+        <div class="grande-num">Dado sensível</div>
+        <h3>Saúde pede cuidado maior</h3>
         <p>A LGPD dá proteção maior justamente a esse tipo de informação, e o setor público também precisa cumprir a lei.</p>
       </div>
-      <div class="painel">
-        <h3>O problema saiu da TI</h3>
-        <p>Viagens, notificação de casos de Covid e até golpes por e-mail: um incidente técnico virou problema para a população.</p>
+      <div class="card rv" style="--d:4">
+        <div class="grande-num">Além da TI</div>
+        <h3>O problema chegou na população</h3>
+        <p>Viagens, notificação de casos de Covid e até golpes por e-mail: um incidente técnico virou problema para muita gente.</p>
       </div>
     </div>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Esses quatro pontos são sugestões. Vale cada um do grupo trocar ou comentar com a própria opinião, porque o professor pediu o que chamou a atenção de vocês.</p>
-    </details>
   </section>
 
+  <!-- ================= 12 ================= -->
   <section class="bloco" id="s12" data-parte="3" data-titulo="Conclusão e referências">
-    <div class="bloco-topo"><span class="num">12</span><h2>Conclusão</h2></div>
+    <span class="num-bg" aria-hidden="true">12</span>
+    <div class="topo rv"><span class="num">12</span><h2>Conclusão</h2></div>
+    <span class="traco"></span>
     <div class="fechamento">
-      <div class="painel"><p>Segurança é gestão contínua, não um produto que se compra uma vez.</p></div>
-      <div class="painel"><p>A lei cria a obrigação. As normas dão o método para cumprir.</p></div>
-      <div class="painel"><p>Poucos controles bem aplicados mudam o tamanho de um incidente.</p></div>
+      <div class="card rv" style="--d:1"><div class="icone-bola"><svg class="ic"><use href="#i-ciclo"/></svg></div><p>Segurança é gestão contínua, não um produto que se compra uma vez.</p></div>
+      <div class="card rv" style="--d:2"><div class="icone-bola"><svg class="ic"><use href="#i-balanca"/></svg></div><p>A lei cria a obrigação. As normas dão o método para cumprir.</p></div>
+      <div class="card rv" style="--d:3"><div class="icone-bola"><svg class="ic"><use href="#i-escudo"/></svg></div><p>Poucos controles bem aplicados mudam o tamanho de um incidente.</p></div>
     </div>
 
-    <h3>Quiz rápido</h3>
-    <div class="painel quiz" aria-live="polite"></div>
+    <h3 class="rv">Quiz com a turma</h3>
+    <div class="card quiz rv" aria-live="polite"></div>
 
-    <div class="refs">
-      <h3>Referências</h3>
+    <details class="refs rv" open>
+      <summary>Referências</summary>
       <ol>
         <li>ABNT. <i>ABNT NBR ISO/IEC 27001:2022: Segurança da informação, segurança cibernética e proteção à privacidade. Sistemas de gestão da segurança da informação. Requisitos</i>. Rio de Janeiro: ABNT, 2022.</li>
         <li>ABNT. <i>ABNT NBR ISO/IEC 27002:2022: Segurança da informação, segurança cibernética e proteção à privacidade. Controles de segurança da informação</i>. Rio de Janeiro: ABNT, 2022.</li>
@@ -1123,40 +1673,61 @@
         <li>POLÍCIA FEDERAL. Atuação da PF no ataque hacker ao Ministério da Saúde. 10 dez. 2021. Disponível em: <a href="https://www.gov.br/pf/pt-br/assuntos/noticias/2021/12/atuacao-da-pf-no-ataque-hacker-ao-ministerio-da-saude">gov.br/pf</a>.</li>
         <li>AGÊNCIA BRASIL. Sites e aplicativo do Ministério da Saúde sofrem ataque cibernético. 10 dez. 2021. Disponível em: <a href="https://agenciabrasil.ebc.com.br/saude/noticia/2021-12/sites-e-aplicativo-do-ministerio-da-saude-sofrem-ataque-cibernetico">agenciabrasil.ebc.com.br</a>.</li>
         <li>PODER360. Sites do Ministério da Saúde sofrem ataque hacker e estão fora do ar. 10 dez. 2021. Disponível em: <a href="https://www.poder360.com.br/governo/sites-do-ministerio-da-saude-sofrem-ataque-hacker-e-estao-fora-do-ar/">poder360.com.br</a>.</li>
+        <li>TECHTUDO. Sites do ConecteSUS e do Ministério da Saúde saem do ar após ataque hacker. 10 dez. 2021. Disponível em: <a href="https://www.techtudo.com.br/noticias/2021/12/sites-do-conectesus-e-do-ministerio-da-saude-saem-do-ar-apos-ataque-hacker.ghtml">techtudo.com.br</a>.</li>
         <li>ISTOÉ DINHEIRO. Entenda por que tantos sites do governo sofreram ataques cibernéticos. 16 dez. 2021. Disponível em: <a href="https://istoedinheiro.com.br/entenda-por-que-tantos-sites-do-governo-sofreram-ataques-ciberneticos">istoedinheiro.com.br</a>.</li>
+        <li>AGÊNCIA LUPA. Lente #37: O perigo de um país governado em meio a apagões de dados. 17 dez. 2021. Disponível em: <a href="https://agencialupa.substack.com/p/825358_lente-37-17-12-21">agencialupa.substack.com</a>.</li>
         <li>ESCOLA POLITÉCNICA DA USP. Hackers acessaram nuvem do Ministério da Saúde com senha; entenda o ataque. Disponível em: <a href="https://www.poli.usp.br/noticias/polinamidia/hackers-acessaram-nuvem-do-ministerio-da-saude-com-senha-entenda-o-ataque/">poli.usp.br</a>.</li>
         <li>NSC TOTAL. ConecteSUS volta a funcionar 13 dias após ataque, diz Ministério da Saúde. 23 dez. 2021. Disponível em: <a href="https://www.nsctotal.com.br/noticias/conectesus-volta-a-funcionar-13-dias-apos-ataque-diz-ministerio-da-saude">nsctotal.com.br</a>.</li>
-        <li>TECNOBLOG. ConecteSUS: ainda há dados faltando e pouca explicação sobre ataques. 30 dez. 2021. Disponível em: <a href="https://tecnoblog.net/noticias/2021/12/30/conectesus-ainda-ha-dados-faltando-e-pouca-explicacao-sobre-ataques/">tecnoblog.net</a>.</li>
         <li>MUNDO CONECTADO. Certificado de vacinação: ConecteSUS volta a funcionar depois de 13 dias. 25 dez. 2021. Disponível em: <a href="https://mundoconectado.com.br/noticias/v/22310/certificado-de-vacinacao-conectesus-volta-a-funcionar-depois-de-13-dias">mundoconectado.com.br</a>.</li>
+        <li>TECNOBLOG. ConecteSUS: ainda há dados faltando e pouca explicação sobre ataques. 30 dez. 2021. Disponível em: <a href="https://tecnoblog.net/noticias/2021/12/30/conectesus-ainda-ha-dados-faltando-e-pouca-explicacao-sobre-ataques/">tecnoblog.net</a>.</li>
         <li>CNN BRASIL. PF faz operação contra suspeitos de ataque hacker no Ministério da Saúde em 2021. 16 ago. 2022. Disponível em: <a href="https://www.cnnbrasil.com.br/nacional/pf-faz-operacao-contra-suspeitos-de-ataque-hacker-no-ministerio-da-saude-em-2021/">cnnbrasil.com.br</a>.</li>
       </ol>
       <p class="suave pequeno">Acessos em: 24 set. 2026.</p>
-    </div>
-    <details class="roteiro">
-      <summary>Roteiro de fala</summary>
-      <p>Ler as três frases da conclusão e chamar a turma para o quiz: ler a pergunta, deixar alguém responder e clicar. As referências ficam na tela no final, se o professor quiser conferir.</p>
     </details>
   </section>
 
-  <footer>Trabalho acadêmico. As informações sobre o caso vêm de comunicados oficiais e reportagens públicas.</footer>
+  <footer>Tópicos Especiais em Tecnologia da Informação. Heitor Saravy de Menezes, Pedro Henrique de Paula Cruz e Lucas Farias Izidoro.</footer>
 </main>
 
 <script>
+(function () {
   const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const secoes = Array.from(document.querySelectorAll(".bloco"));
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const ic = nome => `<svg class="ic"><use href="#i-${nome}"/></svg>`;
+  const secoes = $$(".bloco");
 
-  // ---------- índice lateral ----------
+  // ---------- tema ----------
+  const btnTema = $(".tema-btn");
+  function temaAtual() {
+    const t = document.documentElement.dataset.theme;
+    if (t) return t;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function iconeTema() {
+    btnTema.innerHTML = ic(temaAtual() === "dark" ? "sol" : "lua");
+  }
+  btnTema.addEventListener("click", () => {
+    const novo = temaAtual() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = novo;
+    try { localStorage.setItem("tema", novo); } catch (e) {}
+    iconeTema();
+    desenharPDCA();
+  });
+  iconeTema();
+
+  // ---------- índice ----------
   const partes = [
-    { n: "1", quem: "Integrante 1", tema: "Governança e ISO" },
-    { n: "2", quem: "Integrante 2", tema: "ABNT e riscos" },
-    { n: "3", quem: "Integrante 3", tema: "Caso e conclusão" }
+    { n: "1", ini: "HM", quem: "Heitor", tema: "Governança e ISO" },
+    { n: "2", ini: "PC", quem: "Pedro Henrique", tema: "ABNT e riscos" },
+    { n: "3", ini: "LI", quem: "Lucas", tema: "Caso e conclusão" }
   ];
-  const indice = document.querySelector(".indice");
+  const indice = $(".indice");
   partes.forEach(p => {
     const g = document.createElement("div");
     g.className = "grupo";
     g.dataset.parte = p.n;
-    g.innerHTML = `<div class="quem"><b>${p.quem}</b>${p.tema}</div>`;
+    g.innerHTML = `<div class="quem"><span class="avatar">${p.ini}</span><span><b>${p.quem}</b>${p.tema}</span></div>`;
     secoes.filter(s => s.dataset.parte === p.n).forEach(s => {
       const a = document.createElement("a");
       a.href = "#" + s.id;
@@ -1165,29 +1736,38 @@
     });
     indice.appendChild(g);
   });
-  const linksIndice = indice.querySelectorAll("a");
+  const links = $$("a", indice);
 
   function secaoAtual() {
     let idx = 0;
-    secoes.forEach((s, i) => {
-      if (s.getBoundingClientRect().top <= window.innerHeight * 0.35) idx = i;
-    });
+    secoes.forEach((s, i) => { if (s.getBoundingClientRect().top <= window.innerHeight * 0.35) idx = i; });
     return idx;
   }
 
+  // ---------- rolagem: progresso, índice, parallax ----------
+  const barraProg = $(".progresso span");
+  const numsBg = $$(".num-bg");
   let agendado = false;
+  function aoRolar() {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    barraProg.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+    const i = secaoAtual();
+    links.forEach((a, j) => a.classList.toggle("ativo", i === j));
+    if (!reduzir) {
+      numsBg.forEach(n => {
+        const r = n.parentElement.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) n.style.setProperty("--par", `${Math.max(0, r.top) * 0.12}px`);
+      });
+    }
+    agendado = false;
+  }
   window.addEventListener("scroll", () => {
-    if (agendado) return;
-    agendado = true;
-    requestAnimationFrame(() => {
-      const i = secaoAtual();
-      linksIndice.forEach((a, j) => a.classList.toggle("ativo", i === j));
-      agendado = false;
-    });
+    if (!agendado) { agendado = true; requestAnimationFrame(aoRolar); }
   }, { passive: true });
-  linksIndice[0].classList.add("ativo");
+  aoRolar();
 
-  // Page Up / Page Down (e setas laterais) pulam de seção em seção
+  // Page Up / Page Down pulam de seção
   document.addEventListener("keydown", e => {
     if (e.target.closest("input, textarea, select, [contenteditable]")) return;
     const prox = ["PageDown", "ArrowRight"].includes(e.key);
@@ -1196,50 +1776,394 @@
     e.preventDefault();
     const i = secaoAtual();
     let alvo;
-    if (prox) {
-      alvo = secoes[Math.min(i + 1, secoes.length - 1)];
-    } else {
-      const topo = secoes[i].getBoundingClientRect().top;
-      alvo = topo < -10 ? secoes[i] : secoes[Math.max(i - 1, 0)];
-    }
+    if (prox) alvo = secoes[Math.min(i + 1, secoes.length - 1)];
+    else alvo = secoes[i].getBoundingClientRect().top < -10 ? secoes[i] : secoes[Math.max(i - 1, 0)];
     alvo.scrollIntoView({ behavior: reduzir ? "auto" : "smooth" });
   });
 
-  // ---------- pilares CID ----------
-  document.querySelectorAll(".pilar").forEach(b => {
-    b.addEventListener("click", () => {
-      const aberto = b.getAttribute("aria-expanded") === "true";
-      b.setAttribute("aria-expanded", String(!aberto));
-      b.querySelector(".abrir").textContent = aberto ? "Ver no caso ConecteSUS" : "Esconder";
+  // ---------- contadores ----------
+  function contar(el) {
+    const ate = Number(el.dataset.ate);
+    if (reduzir) { el.textContent = ate; return; }
+    const dur = 1400;
+    const t0 = performance.now();
+    function passo(t) {
+      const k = Math.min(1, (t - t0) / dur);
+      const e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(ate * e);
+      if (k < 1) requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+  }
+
+  // ---------- revelar ao rolar ----------
+  const obs = new IntersectionObserver(entradas => {
+    entradas.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("in");
+      $$(".cont:not([data-manual])", en.target).forEach(c => { if (!c.dataset.feito) { c.dataset.feito = "1"; contar(c); } });
+      if (en.target.classList.contains("vis-donut-wrap")) animarDonut();
+      obs.unobserve(en.target);
     });
+  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+  $$(".rv").forEach(el => obs.observe(el));
+
+  // ---------- capa: título, digitação, rede ----------
+  const h1 = $(".titulo-anim");
+  const palavras = h1.textContent.trim().split(/\s+/);
+  h1.setAttribute("aria-label", h1.textContent.trim());
+  h1.innerHTML = palavras.map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}">${w}</span>`).join(" ");
+
+  const digita = $(".digita");
+  const textoDigita = digita.dataset.texto;
+  const gancho2 = $(".gancho-2");
+  const contCapa = $(".gancho-2 .cont");
+  function fimDigitacao() {
+    gancho2.classList.add("mostra");
+    setTimeout(() => contar(contCapa), reduzir ? 0 : 300);
+  }
+  if (reduzir) {
+    digita.textContent = textoDigita;
+    fimDigitacao();
+  } else {
+    let k = 0;
+    setTimeout(function tecla() {
+      digita.textContent = textoDigita.slice(0, ++k);
+      if (k < textoDigita.length) setTimeout(tecla, 38 + Math.random() * 40);
+      else setTimeout(fimDigitacao, 350);
+    }, 1300);
+  }
+
+  (function rede() {
+    const cv = $(".hero canvas");
+    const ctx = cv.getContext("2d");
+    let w, h, nos = [], rodando = true, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function tamanho() {
+      const r = cv.getBoundingClientRect();
+      w = r.width; h = r.height;
+      cv.width = w * dpr; cv.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const qtd = Math.round(Math.min(90, (w * h) / 16000));
+      nos = Array.from({ length: qtd }, (_, i) => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.8 + 1,
+        mau: i % 13 === 0,
+        fase: Math.random() * Math.PI * 2
+      }));
+    }
+    function quadro(t) {
+      ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < nos.length; i++) {
+        const a = nos[i];
+        for (let j = i + 1; j < nos.length; j++) {
+          const b = nos[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 140) {
+            const alfa = (1 - d / 140) * 0.35;
+            ctx.strokeStyle = a.mau || b.mau ? `rgba(255,122,95,${alfa})` : `rgba(140,170,255,${alfa})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      nos.forEach(n => {
+        const pulso = n.mau ? 1 + Math.sin(t / 400 + n.fase) * 0.6 : 1;
+        ctx.fillStyle = n.mau ? "rgba(255,122,95,0.95)" : "rgba(200,215,255,0.8)";
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r * pulso, 0, Math.PI * 2); ctx.fill();
+        if (!reduzir) {
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+        }
+      });
+      if (rodando && !reduzir) requestAnimationFrame(quadro);
+    }
+    tamanho();
+    window.addEventListener("resize", () => { tamanho(); if (reduzir) quadro(0); });
+    new IntersectionObserver(([en]) => {
+      const antes = rodando;
+      rodando = en.isIntersecting;
+      if (rodando && !antes && !reduzir) requestAnimationFrame(quadro);
+    }).observe(cv);
+    requestAnimationFrame(quadro);
+  })();
+
+  // ---------- arrastar e soltar (genérico) ----------
+  function arrastavel(el, seletorAlvo, aoSoltar, aoClicar) {
+    el.addEventListener("pointerdown", e => {
+      if (e.button !== 0) return;
+      const x0 = e.clientX, y0 = e.clientY;
+      let fantasma = null, alvoAtual = null;
+      const mover = ev => {
+        if (!fantasma && Math.hypot(ev.clientX - x0, ev.clientY - y0) > 6) {
+          fantasma = el.cloneNode(true);
+          fantasma.classList.add("fantasma");
+          fantasma.style.width = el.getBoundingClientRect().width + "px";
+          document.body.appendChild(fantasma);
+          el.classList.add("arrastando");
+        }
+        if (!fantasma) return;
+        ev.preventDefault();
+        fantasma.style.transform = `translate(${ev.clientX - 20}px, ${ev.clientY - 20}px)`;
+        const sob = document.elementFromPoint(ev.clientX, ev.clientY);
+        const alvo = sob ? sob.closest(seletorAlvo) : null;
+        if (alvo !== alvoAtual) {
+          if (alvoAtual) alvoAtual.classList.remove("sobre");
+          if (alvo) alvo.classList.add("sobre");
+          alvoAtual = alvo;
+        }
+      };
+      const soltar = () => {
+        window.removeEventListener("pointermove", mover);
+        window.removeEventListener("pointerup", soltar);
+        window.removeEventListener("pointercancel", soltar);
+        if (fantasma) {
+          fantasma.remove();
+          el.classList.remove("arrastando");
+          if (alvoAtual) { alvoAtual.classList.remove("sobre"); aoSoltar(alvoAtual); }
+        } else {
+          aoClicar();
+        }
+      };
+      window.addEventListener("pointermove", mover, { passive: false });
+      window.addEventListener("pointerup", soltar);
+      window.addEventListener("pointercancel", soltar);
+    });
+    // teclado (Enter/Espaço)
+    el.addEventListener("click", e => { if (e.detail === 0) aoClicar(); });
+  }
+
+  // ---------- 2: governança ou compliance ----------
+  const situacoes = [
+    { t: "Decidir se a empresa vai migrar os sistemas para a nuvem", c: "g", pq: "É uma decisão estratégica sobre o rumo da TI." },
+    { t: "Provar para a ANPD que os dados dos clientes estão protegidos", c: "c", pq: "É demonstrar que a organização cumpre a lei." },
+    { t: "Definir quem aprova a compra de um novo sistema", c: "g", pq: "Define papéis e quem decide o quê." },
+    { t: "Cumprir a cláusula de sigilo de um contrato com um cliente", c: "c", pq: "É seguir uma obrigação contratual." }
+  ];
+  const listaGC = $(".lista-gc");
+  const placarGC = $(".placar-gc");
+  let respGC = 0, acertosGC = 0;
+  situacoes.forEach(s => {
+    const item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML = `<span>${s.t}</span><span class="opcoes-gc"><button class="gc" type="button" data-v="g">Governança</button><button class="gc" type="button" data-v="c">Compliance</button></span><p class="porque">${s.pq}</p>`;
+    $$(".gc", item).forEach(b => b.addEventListener("click", () => {
+      const botoes = $$(".gc", item);
+      botoes.forEach(x => (x.disabled = true));
+      const certo = b.dataset.v === s.c;
+      botoes.find(x => x.dataset.v === s.c).classList.add("certa");
+      if (!certo) b.classList.add("errada");
+      item.classList.add("resp");
+      respGC++;
+      if (certo) acertosGC++;
+      if (respGC === situacoes.length) placarGC.textContent = `A turma acertou ${acertosGC} de ${situacoes.length}.`;
+    }));
+    listaGC.appendChild(item);
   });
 
-  // ---------- temas do Anexo A ----------
-  const temas = [
-    { nome: "Organizacionais", qtd: 37, ex: "Políticas de segurança, papéis e responsabilidades, relação com fornecedores, uso de serviços em nuvem, gestão de incidentes e continuidade do negócio." },
-    { nome: "Pessoas", qtd: 8, ex: "Checagem de antecedentes na contratação, termos de confidencialidade, conscientização e treinamento, regras para trabalho remoto." },
-    { nome: "Físicos", qtd: 14, ex: "Perímetro e controle de entrada em salas, proteção de equipamentos, mesa limpa e tela limpa, descarte seguro de mídias." },
-    { nome: "Tecnológicos", qtd: 34, ex: "Autenticação segura, controle de acesso privilegiado, backup, registros de log, proteção contra malware, criptografia." }
+  // ---------- 3: cartas ----------
+  $$(".flip").forEach(b => b.addEventListener("click", () => {
+    b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+  }));
+
+  // ---------- 4: normas ----------
+  const normas = [
+    { n: "27000", c: "Vocabulário", t: "Define os termos usados em toda a família, como ativo, ameaça, vulnerabilidade e risco. É o dicionário das outras normas." },
+    { n: "27001", c: "Requisitos do SGSI", t: "Diz quais requisitos um Sistema de Gestão de Segurança da Informação (SGSI) precisa cumprir. É a única desta lista que certifica a organização, por meio de auditoria externa.", cert: true },
+    { n: "27002", c: "Guia de controles", t: "Detalha cada controle do Anexo A da 27001: para que serve e como implementar na prática." },
+    { n: "27005", c: "Gestão de riscos", t: "Orienta como identificar, analisar, avaliar e tratar os riscos de segurança da informação." },
+    { n: "27701", c: "Privacidade", t: "Amplia o SGSI para cuidar também da privacidade e dos dados pessoais. Conversa diretamente com a LGPD." }
   ];
-  const barra = document.querySelector(".barra-temas");
-  const detTema = document.querySelector(".detalhe-tema");
+  const gradeNormas = $(".normas");
+  const painelNorma = $(".painel-norma");
+  normas.forEach((nm, i) => {
+    const b = document.createElement("button");
+    b.className = "norma";
+    b.type = "button";
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = `<b>${nm.n}</b><span>${nm.c}</span>`;
+    b.addEventListener("click", () => mostrarNorma(i));
+    gradeNormas.appendChild(b);
+  });
+  function mostrarNorma(i) {
+    $$(".norma", gradeNormas).forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+    const nm = normas[i];
+    painelNorma.innerHTML = `<h3>ISO/IEC ${nm.n}</h3><p>${nm.t}</p>${nm.cert ? '<span class="selo-cert">Certificável</span>' : ""}`;
+  }
+  mostrarNorma(1);
+
+  // ---------- 5: PDCA ----------
+  const fasesPDCA = [
+    { id: "p", nome: "Planejar", cor: "--p1", cl: [["4", "Contexto da organização", "entender o negócio, as partes interessadas e o escopo"], ["5", "Liderança", "apoio da direção e política de segurança"], ["6", "Planejamento", "avaliar e tratar riscos, definir objetivos"], ["7", "Apoio", "recursos, competência, conscientização e documentos"]] },
+    { id: "d", nome: "Fazer", cor: "--p2", cl: [["8", "Operação", "colocar em prática o tratamento de riscos e os controles"]] },
+    { id: "c", nome: "Checar", cor: "--mid", cl: [["9", "Avaliação de desempenho", "medir, auditoria interna e análise pela direção"]] },
+    { id: "a", nome: "Agir", cor: "--p3", cl: [["10", "Melhoria", "corrigir não conformidades e melhorar sempre"]] }
+  ];
+  let fasePDCA = 0;
+  const visPDCA = $(".vis-pdca");
+  const botoesPDCA = $(".fases-pdca");
+  const detPDCA = $(".det-pdca");
+  function arcoPath(cx, cy, r, a0, a1) {
+    const p = a => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    const [x0, y0] = p(a0), [x1, y1] = p(a1);
+    return `M ${x0} ${y0} A ${r} ${r} 0 0 1 ${x1} ${y1}`;
+  }
+  function cor(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function desenharPDCA() {
+    const cx = 150, cy = 150, r = 100, gap = 0.035;
+    let svg = `<svg viewBox="-12 -12 324 324" role="img" aria-label="Ciclo PDCA">`;
+    svg += `<path id="trilha-pdca" d="M ${cx} ${cy - r} a ${r} ${r} 0 1 1 -0.01 0" fill="none" stroke="none"/>`;
+    fasesPDCA.forEach((f, i) => {
+      const a0 = -Math.PI / 2 + i * Math.PI / 2 + gap;
+      const a1 = a0 + Math.PI / 2 - gap * 2;
+      const meio = (a0 + a1) / 2;
+      const lx = cx + (r + 42) * Math.cos(meio), ly = cy + (r + 42) * Math.sin(meio);
+      const ativo = i === fasePDCA;
+      svg += `<path class="arco" data-i="${i}" tabindex="0" role="button" aria-label="${f.nome}" d="${arcoPath(cx, cy, r, a0, a1)}" fill="none" stroke="${cor(f.cor)}" stroke-width="${ativo ? 44 : 34}" stroke-linecap="butt" opacity="${ativo ? 1 : 0.55}"/>`;
+      svg += `<text class="arco-rot" x="${lx}" y="${ly + 4}" text-anchor="middle">${f.nome}</text>`;
+    });
+    svg += `<text class="centro-txt" x="150" y="148" font-size="34" font-weight="800" style="font-stretch:125%">PDCA</text>`;
+    svg += `<text class="centro-txt" x="150" y="172" font-size="12" fill-opacity="0.7">melhoria contínua</text>`;
+    if (!reduzir) svg += `<circle r="7" fill="${cor("--ink")}"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#trilha-pdca"/></animateMotion></circle>`;
+    svg += `</svg>`;
+    visPDCA.innerHTML = svg;
+    $$(".arco", visPDCA).forEach(a => {
+      a.addEventListener("click", () => selecionarPDCA(Number(a.dataset.i)));
+      a.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selecionarPDCA(Number(a.dataset.i)); } });
+    });
+  }
+  fasesPDCA.forEach((f, i) => {
+    const b = document.createElement("button");
+    b.className = "fase-btn";
+    b.type = "button";
+    b.style.setProperty("--c", `var(${f.cor})`);
+    b.innerHTML = `<i></i>${f.nome}`;
+    b.addEventListener("click", () => selecionarPDCA(i));
+    botoesPDCA.appendChild(b);
+  });
+  function selecionarPDCA(i) {
+    fasePDCA = i;
+    desenharPDCA();
+    $$(".fase-btn", botoesPDCA).forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+    const f = fasesPDCA[i];
+    detPDCA.innerHTML = `<h3>${f.nome}</h3>` + f.cl.map(c => `<div class="clausula"><b>${c[0]}</b><span><strong>${c[1]}</strong>: ${c[2]}</span></div>`).join("");
+  }
+  selecionarPDCA(0);
+
+  // ---------- 5: donut do Anexo A ----------
+  const temas = [
+    { nome: "Organizacionais", qtd: 37, cor: "--p1", ex: "Políticas de segurança, papéis e responsabilidades, fornecedores, uso de serviços em nuvem, gestão de incidentes e continuidade do negócio." },
+    { nome: "Pessoas", qtd: 8, cor: "--p2", ex: "Checagem na contratação, termos de confidencialidade, conscientização e treinamento, regras para trabalho remoto." },
+    { nome: "Físicos", qtd: 14, cor: "--mid", ex: "Controle de entrada em salas, proteção de equipamentos, mesa limpa e tela limpa, descarte seguro de mídias." },
+    { nome: "Tecnológicos", qtd: 34, cor: "--p3", ex: "Autenticação segura, acesso privilegiado, backup, registros de log, proteção contra malware e criptografia." }
+  ];
+  const visDonut = $(".vis-donut");
+  visDonut.parentElement.classList.add("vis-donut-wrap");
+  obs.observe(visDonut.parentElement);
+  const R = 90, C = 2 * Math.PI * R;
+  let svgD = `<svg viewBox="0 0 240 240" role="img" aria-label="Distribuição dos 93 controles"><g transform="rotate(-90 120 120)">`;
+  let acum = 0;
+  temas.forEach((t, i) => {
+    const comp = (t.qtd / 93) * C;
+    svgD += `<circle class="fatia" data-i="${i}" cx="120" cy="120" r="${R}" fill="none" style="stroke:var(${t.cor});stroke-width:32px;stroke-dasharray:0 ${C};stroke-dashoffset:${-acum}" data-comp="${comp - 2}"/>`;
+    acum += comp;
+  });
+  svgD += `</g><text class="centro-txt" x="120" y="122" font-size="46" font-weight="800" style="font-stretch:125%"><tspan class="cont-donut">0</tspan></text><text class="centro-txt" x="120" y="146" font-size="13" fill-opacity="0.7">controles</text></svg>`;
+  visDonut.innerHTML = svgD;
+  const fatias = $$(".fatia", visDonut);
+  fatias.forEach(f => {
+    f.style.transition = reduzir ? "none" : "stroke-dasharray 1.2s cubic-bezier(0.2,0.7,0.2,1), stroke-width 0.3s";
+    f.addEventListener("click", () => selecionarTema(Number(f.dataset.i)));
+  });
+  let donutFeito = false;
+  function animarDonut() {
+    if (donutFeito) return;
+    donutFeito = true;
+    fatias.forEach((f, i) => setTimeout(() => {
+      f.style.strokeDasharray = `${f.dataset.comp} ${C}`;
+    }, reduzir ? 0 : i * 180));
+    const el = $(".cont-donut", visDonut);
+    el.dataset.ate = 93;
+    contar(el);
+  }
+  const botoesDonut = $(".fases-donut");
+  const detDonut = $(".det-donut");
   temas.forEach((t, i) => {
     const b = document.createElement("button");
-    b.className = "tema";
-    b.style.setProperty("--n", t.qtd);
-    b.setAttribute("aria-pressed", "false");
-    b.innerHTML = `<span class="q">${t.qtd}</span><span class="t">${t.nome}</span>`;
-    b.addEventListener("click", () => mostrarTema(i));
-    barra.appendChild(b);
+    b.className = "fase-btn";
+    b.type = "button";
+    b.style.setProperty("--c", `var(${t.cor})`);
+    b.innerHTML = `<i></i>${t.nome} (${t.qtd})`;
+    b.addEventListener("click", () => selecionarTema(i));
+    botoesDonut.appendChild(b);
   });
-  function mostrarTema(i) {
-    barra.querySelectorAll(".tema").forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+  function selecionarTema(i) {
+    fatias.forEach((f, j) => (f.style.strokeWidth = (i === j ? 40 : 32) + "px"));
+    $$(".fase-btn", botoesDonut).forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
     const t = temas[i];
-    detTema.innerHTML = `<h3>${t.nome}: ${t.qtd} controles</h3><p>${t.ex}</p>`;
+    detDonut.innerHTML = `<h3>${t.nome}: ${t.qtd} controles</h3><p>${t.ex}</p>`;
   }
-  mostrarTema(0);
+  selecionarTema(0);
 
-  // ---------- matriz de risco ----------
+  // ---------- 6: prazo ANPD ----------
+  const dias = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+  const diasLongos = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"];
+  const selDias = $(".dias-sel");
+  const fita = $(".fita");
+  const resPrazo = $(".resultado-prazo");
+  dias.forEach((d, i) => {
+    const b = document.createElement("button");
+    b.className = "dia-btn";
+    b.type = "button";
+    b.textContent = d;
+    b.addEventListener("click", () => calcularPrazo(i));
+    selDias.appendChild(b);
+  });
+  function calcularPrazo(ini) {
+    $$(".dia-btn", selDias).forEach((b, j) => b.setAttribute("aria-pressed", String(ini === j)));
+    let html = `<div class="d desc" style="--k:0"><b>${dias[ini]}</b>Descoberta</div>`;
+    let uteis = 0, k = 0, fim = ini;
+    while (uteis < 3) {
+      k++;
+      const d = (ini + k) % 7;
+      const fds = d >= 5;
+      if (!fds) uteis++;
+      const ultimo = uteis === 3 && !fds;
+      if (ultimo) fim = d;
+      html += `<div class="d ${fds ? "fds" : ultimo ? "fim" : "util"}" style="--k:${k}"><b>${dias[d]}</b>${fds ? "Não conta" : ultimo ? "Prazo final" : uteis + "º dia útil"}</div>`;
+    }
+    fita.innerHTML = html;
+    const semana = ini + k >= 7 ? " da semana seguinte" : "";
+    resPrazo.textContent = `Descobriu na ${diasLongos[ini]}? Tem até ${diasLongos[fim]}${semana} para comunicar a ANPD.`;
+  }
+  calcularPrazo(4);
+
+  // ---------- 7: calculadora de risco ----------
+  function nivel(s) {
+    if (s <= 4) return { id: "baixo", nome: "Baixo" };
+    if (s <= 9) return { id: "medio", nome: "Médio" };
+    if (s <= 16) return { id: "alto", nome: "Alto" };
+    return { id: "critico", nome: "Crítico" };
+  }
+  const rP = $("#r-p"), rI = $("#r-i"), med = $(".medidor");
+  function atualizaMedidor() {
+    const p = Number(rP.value), i = Number(rI.value), s = p * i, n = nivel(s);
+    $("#o-p").textContent = p;
+    $("#o-i").textContent = i;
+    med.dataset.n = n.id;
+    $(".valor", med).textContent = s;
+    $(".nivel-chip", med).textContent = n.nome;
+    $(".trilho span", med).style.width = (s / 25) * 100 + "%";
+  }
+  rP.addEventListener("input", atualizaMedidor);
+  rI.addEventListener("input", atualizaMedidor);
+  atualizaMedidor();
+
+  // ---------- 7: matriz de risco ----------
   const ameacas = [
     { nome: "Senha de administrador da nuvem é roubada", p: 4, i: 5, trat: "Mitigar: autenticação multifator, poucas contas com poder total e alerta para login estranho." },
     { nome: "Ransomware apaga ou trava os servidores", p: 3, i: 5, trat: "Mitigar: backup isolado e testado, plano de recuperação ensaiado." },
@@ -1249,26 +2173,20 @@
     { nome: "Página de notícias fica lenta no horário de pico", p: 3, i: 1, trat: "Aceitar: impacto baixo. Só monitorar e rever se piorar." }
   ];
   const posicoes = ameacas.map(() => null);
-  let selecionada = 0;
+  let selAmeaca = 0;
+  const listaAm = $(".ameacas");
+  const matriz = $(".matriz");
+  const leitura = $(".leitura");
+  const celulas = {};
 
-  function nivel(s) {
-    if (s <= 4) return { id: "baixo", nome: "baixo" };
-    if (s <= 9) return { id: "medio", nome: "médio" };
-    if (s <= 16) return { id: "alto", nome: "alto" };
-    return { id: "critico", nome: "crítico" };
-  }
-
-  const listaAmeacas = document.querySelector(".ameacas");
   ameacas.forEach((a, k) => {
     const b = document.createElement("button");
-    b.className = "ameaca";
-    b.innerHTML = `<span class="token">${k + 1}</span><span>${a.nome}</span><span class="status"></span>`;
-    b.addEventListener("click", () => { selecionada = k; atualizarRisco(); });
-    listaAmeacas.appendChild(b);
+    b.className = "chip";
+    b.type = "button";
+    b.innerHTML = `<span class="token">${k + 1}</span><span>${a.nome}</span><span class="nivel-tag"></span>`;
+    arrastavel(b, ".cel", cel => { selAmeaca = k; posicionar(cel); }, () => { selAmeaca = k; atualizarMatriz(); });
+    listaAm.appendChild(b);
   });
-
-  const matriz = document.querySelector(".matriz");
-  const celulas = {};
   for (let p = 5; p >= 1; p--) {
     const r = document.createElement("div");
     r.className = "rot";
@@ -1277,12 +2195,12 @@
     for (let i = 1; i <= 5; i++) {
       const c = document.createElement("button");
       c.className = "cel";
+      c.type = "button";
       c.dataset.n = nivel(p * i).id;
+      c.dataset.p = p;
+      c.dataset.i = i;
       c.setAttribute("aria-label", `Probabilidade ${p}, impacto ${i}`);
-      c.addEventListener("click", () => {
-        posicoes[selecionada] = { p, i };
-        atualizarRisco(true);
-      });
+      c.addEventListener("click", () => posicionar(c));
       celulas[p + "-" + i] = c;
       matriz.appendChild(c);
     }
@@ -1294,9 +2212,17 @@
     r.textContent = i;
     matriz.appendChild(r);
   }
-
-  const leitura = document.querySelector(".leitura");
-  function atualizarRisco(acabouDeMarcar) {
+  function posicionar(cel) {
+    posicoes[selAmeaca] = { p: Number(cel.dataset.p), i: Number(cel.dataset.i) };
+    const recem = selAmeaca;
+    atualizarMatriz(recem);
+    const prox = posicoes.findIndex(x => x === null);
+    if (prox !== -1) {
+      selAmeaca = prox;
+      $$(".chip", listaAm).forEach((b, k) => b.setAttribute("aria-pressed", String(k === selAmeaca)));
+    }
+  }
+  function atualizarMatriz(recem) {
     Object.values(celulas).forEach(c => (c.innerHTML = ""));
     posicoes.forEach((pos, k) => {
       if (!pos) return;
@@ -1305,238 +2231,391 @@
       t.textContent = k + 1;
       celulas[pos.p + "-" + pos.i].appendChild(t);
     });
-    listaAmeacas.querySelectorAll(".ameaca").forEach((b, k) => {
-      b.setAttribute("aria-pressed", String(k === selecionada));
+    $$(".chip", listaAm).forEach((b, k) => {
+      b.setAttribute("aria-pressed", String(k === selAmeaca));
       const pos = posicoes[k];
-      b.querySelector(".status").textContent = pos ? nivel(pos.p * pos.i).nome : "";
+      const tag = $(".nivel-tag", b);
+      if (pos) { const n = nivel(pos.p * pos.i); tag.textContent = n.nome; b.dataset.n = n.id; }
+      else { tag.textContent = ""; delete b.dataset.n; }
     });
-
-    const a = ameacas[selecionada];
-    const pos = posicoes[selecionada];
+    const mostrar = recem !== undefined ? recem : selAmeaca;
+    const a = ameacas[mostrar];
+    const pos = posicoes[mostrar];
     if (!pos) {
-      leitura.innerHTML = `<strong>${selecionada + 1}. ${a.nome}</strong>Clique numa célula da matriz para posicionar.`;
+      leitura.innerHTML = `<div><strong>${mostrar + 1}. ${a.nome}</strong>Arraste para a matriz ou clique numa célula.</div>`;
       return;
     }
     const s = pos.p * pos.i;
-    leitura.innerHTML = `<strong>${selecionada + 1}. ${a.nome}</strong>Probabilidade ${pos.p} × impacto ${pos.i} = ${s}, risco ${nivel(s).nome}.<br><span class="suave">${a.trat}</span>`;
-
-    // depois de marcar, pula pra próxima ameaça que ainda não foi posicionada
-    if (acabouDeMarcar) {
-      const prox = posicoes.findIndex(x => x === null);
-      if (prox !== -1) {
-        setTimeout(() => {
-          selecionada = prox;
-          listaAmeacas.querySelectorAll(".ameaca").forEach((b, k) => b.setAttribute("aria-pressed", String(k === selecionada)));
-        }, 0);
-      }
-    }
+    leitura.innerHTML = `<div><strong>${mostrar + 1}. ${a.nome}</strong>Probabilidade ${pos.p} × impacto ${pos.i} = ${s}, risco ${nivel(s).nome.toLowerCase()}.<br><span class="suave">${a.trat}</span></div>`;
   }
-
-  document.getElementById("risco-grupo").addEventListener("click", () => {
-    ameacas.forEach((a, k) => (posicoes[k] = { p: a.p, i: a.i }));
-    selecionada = 0;
-    atualizarRisco();
+  $("#risco-grupo").addEventListener("click", () => {
+    ameacas.forEach((a, k) => setTimeout(() => {
+      posicoes[k] = { p: a.p, i: a.i };
+      atualizarMatriz(k);
+    }, reduzir ? 0 : k * 220));
   });
-  document.getElementById("risco-limpar").addEventListener("click", () => {
-    posicoes.fill(null);
-    selecionada = 0;
-    atualizarRisco();
-  });
-  atualizarRisco();
+  $("#risco-limpar").addEventListener("click", () => { posicoes.fill(null); selAmeaca = 0; atualizarMatriz(); });
+  atualizarMatriz();
 
-  // ---------- linha do tempo ----------
+  // ---------- 8: classificar ativos ----------
+  const niveisAtivo = [
+    { id: "publica", nome: "Pública", n: "baixo", desc: "Pode ser vista por qualquer pessoa" },
+    { id: "interna", nome: "Interna", n: "medio", desc: "Só para quem trabalha na organização" },
+    { id: "restrita", nome: "Restrita", n: "alto", desc: "Só para equipes específicas" },
+    { id: "confidencial", nome: "Confidencial", n: "critico", desc: "Acesso mínimo, dano grave se vazar" }
+  ];
+  const ativos = [
+    { nome: "Credenciais de administrador da nuvem", certo: "confidencial", pq: "quem tem, controla o ambiente inteiro" },
+    { nome: "Base de registros de vacinação", certo: "confidencial", pq: "dado de saúde, sensível pela LGPD" },
+    { nome: "Logs de acesso aos sistemas", certo: "restrita", pq: "mostram quem fez o quê e ajudam a investigar" },
+    { nome: "Código-fonte do aplicativo", certo: "interna", pq: "não é público, mas não traz dado de cidadão" },
+    { nome: "Manual de atendimento da equipe", certo: "interna", pq: "uso interno, sem dado sensível" },
+    { nome: "Página de perguntas frequentes", certo: "publica", pq: "é feita para todo mundo ler" }
+  ];
+  const banco = $(".jogo-ativos .banco");
+  const baldesEl = $(".jogo-ativos .baldes");
+  const explic = $(".jogo-ativos .explicacoes");
+  let selAtivo = null;
+  const chipsAtivo = [];
+  banco.addEventListener("click", e => {
+    if (e.target.closest(".chip")) return;
+    if (selAtivo !== null) moverAtivo(selAtivo, banco);
+  });
+  niveisAtivo.forEach(nv => {
+    const d = document.createElement("div");
+    d.className = "balde";
+    d.dataset.id = nv.id;
+    d.dataset.n = nv.n;
+    d.innerHTML = `<h4><i></i>${nv.nome}</h4><p class="desc">${nv.desc}</p>`;
+    d.addEventListener("click", e => {
+      if (e.target.closest(".chip")) return;
+      if (selAtivo !== null) moverAtivo(selAtivo, d);
+    });
+    baldesEl.appendChild(d);
+  });
+  ativos.forEach((a, k) => {
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.type = "button";
+    b.dataset.k = k;
+    b.textContent = a.nome;
+    arrastavel(b, ".balde, .jogo-ativos .banco", alvo => moverAtivo(k, alvo), () => selecionarAtivo(k));
+    chipsAtivo.push(b);
+  });
+  function embaralhar(arr) { return arr.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(v => v[1]); }
+  function reiniciarAtivos() {
+    explic.innerHTML = "";
+    selAtivo = null;
+    embaralhar(chipsAtivo).forEach(c => { c.classList.remove("certo", "errado"); c.setAttribute("aria-pressed", "false"); banco.appendChild(c); });
+  }
+  function selecionarAtivo(k) {
+    selAtivo = selAtivo === k ? null : k;
+    chipsAtivo.forEach((c, j) => c.setAttribute("aria-pressed", String(j === selAtivo)));
+  }
+  function moverAtivo(k, alvo) {
+    const c = chipsAtivo[k];
+    c.classList.remove("certo", "errado");
+    alvo.appendChild(c);
+    selAtivo = null;
+    chipsAtivo.forEach(x => x.setAttribute("aria-pressed", "false"));
+  }
+  $("#ativos-conferir").addEventListener("click", () => {
+    let acertos = 0, colocados = 0;
+    const linhas = [];
+    chipsAtivo.forEach((c, k) => {
+      const balde = c.closest(".balde");
+      c.classList.remove("certo", "errado");
+      if (!balde) return;
+      colocados++;
+      void c.offsetWidth;
+      const ok = balde.dataset.id === ativos[k].certo;
+      c.classList.add(ok ? "certo" : "errado");
+      if (ok) acertos++;
+      const nomeCerto = niveisAtivo.find(n => n.id === ativos[k].certo).nome;
+      linhas.push(`<li style="animation-delay:${linhas.length * 60}ms"><b>${ativos[k].nome}:</b> ${nomeCerto.toLowerCase()}, porque ${ativos[k].pq}.</li>`);
+    });
+    explic.innerHTML = colocados === 0
+      ? "<li>Coloque pelo menos um ativo em algum nível.</li>"
+      : `<li><b>${acertos} de ${colocados} certos.</b></li>` + linhas.join("");
+  });
+  $("#ativos-resposta").addEventListener("click", () => {
+    chipsAtivo.forEach((c, k) => {
+      const balde = $(`.balde[data-id="${ativos[k].certo}"]`, baldesEl);
+      setTimeout(() => { balde.appendChild(c); c.classList.remove("errado"); c.classList.add("certo"); }, reduzir ? 0 : k * 150);
+    });
+    explic.innerHTML = ativos.map((a, k) => `<li style="animation-delay:${k * 60}ms"><b>${a.nome}:</b> ${niveisAtivo.find(n => n.id === a.certo).nome.toLowerCase()}, porque ${a.pq}.</li>`).join("");
+  });
+  $("#ativos-reiniciar").addEventListener("click", reiniciarAtivos);
+  reiniciarAtivos();
+
+  // ---------- 9: caso com celular ----------
   const marcos = [
-    {
-      data: "10 dez 2021", rot: "Invasão",
-      titulo: "Madrugada: sites fora do ar e pedido de resgate",
-      texto: "As páginas do Ministério da Saúde passam a mostrar uma mensagem do grupo Lapsus$. O texto diz que os dados internos foram copiados e excluídos, fala em 50 TB e pede contato para devolvê-los. Saem do ar o portal saude.gov.br, o ConecteSUS, o e-SUS Notifica e o SI-PNI, do Programa Nacional de Imunizações.",
-      fonte: "Poder360; Agência Brasil"
-    },
-    {
-      data: "10 dez", rot: "Investigação",
+    { data: "10 dez 2021, madrugada", rot: "Invasão", estado: "ataque", dia: 0,
+      titulo: "Sites fora do ar e pedido de resgate",
+      texto: "As páginas do Ministério da Saúde passam a mostrar uma mensagem do grupo Lapsus$, dizendo que os dados internos foram copiados e excluídos e pedindo contato para devolvê-los. Saem do ar o portal saude.gov.br, o ConecteSUS, o e-SUS Notifica e o SI-PNI, do Programa Nacional de Imunizações.",
+      fonte: "Poder360; Agência Brasil" },
+    { data: "10 dez, manhã", rot: "Investigação", estado: "fora", dia: 0,
       titulo: "Polícia Federal e GSI entram no caso",
       texto: "A PF é acionada e registra um incidente no ambiente de nuvem pública (AWS) usado pelo ministério. Na perícia inicial, constata que os bancos de dados não foram criptografados pelos invasores. O ministro da Saúde afirma que existe backup e que os dados não serão perdidos.",
-      fonte: "Polícia Federal; TechTudo"
-    },
-    {
-      data: "Dias seguintes", rot: "Novas tentativas",
+      fonte: "Polícia Federal; TechTudo" },
+    { data: "Dias seguintes", rot: "Novas tentativas e golpes", estado: "golpe", dia: 3,
       titulo: "Novos ataques e golpes aproveitando a confusão",
       texto: "O ministério relata novas tentativas de invasão. Ao mesmo tempo, golpistas passam a mandar e-mails se passando pelo Ministério da Saúde, com links maliciosos disfarçados de certificado de vacinação.",
-      fonte: "Agência Lupa; Mundo Conectado"
-    },
-    {
-      data: "14 dez", rot: "Porta de entrada",
+      fonte: "Agência Lupa; Mundo Conectado" },
+    { data: "14 dez", rot: "Porta de entrada", estado: "chave", dia: 4,
       titulo: "Indício: credencial de um funcionário",
-      texto: "O Gabinete de Segurança Institucional informa que há indícios de que a invasão usou as credenciais de um funcionário do governo, o que daria acesso ao ambiente de nuvem onde ficavam os sites. Depois, o ministério confirmou que os invasores entraram usando uma credencial, ou seja, uma senha.",
-      fonte: "IstoÉ Dinheiro (a partir de O Globo); Escola Politécnica da USP"
-    },
-    {
-      data: "23 dez", rot: "Retorno",
+      texto: "O Gabinete de Segurança Institucional informa que há indícios de que a invasão usou as credenciais de um funcionário do governo, dando acesso ao ambiente de nuvem onde ficavam os sites. Depois, o ministério confirmou que os invasores entraram usando uma credencial, ou seja, uma senha.",
+      fonte: "IstoÉ Dinheiro (a partir de O Globo); Escola Politécnica da USP" },
+    { data: "23 dez", rot: "Retorno", estado: "volta", dia: 13,
       titulo: "ConecteSUS volta depois de 13 dias",
       texto: "O aplicativo volta a funcionar na véspera do Natal, ainda instável. Uma semana depois, usuários seguem relatando vacinas que sumiram do histórico, e outras bases, como o Open DataSUS, continuam fora do ar.",
-      fonte: "CNN Brasil; Tecnoblog"
-    },
-    {
-      data: "Ago 2022", rot: "Desdobramento",
+      fonte: "NSC Total; Tecnoblog" },
+    { data: "Ago 2022", rot: "Desdobramento", estado: "pf", dia: 13,
       titulo: "Operação da PF contra suspeitos",
       texto: "A Polícia Federal faz uma operação contra suspeitos do ataque. Segundo a PF, os invasores apagaram arquivos, dados e instâncias do ministério.",
-      fonte: "CNN Brasil"
-    }
+      fonte: "CNN Brasil" }
   ];
-  const linha = document.querySelector(".linha");
-  const detalhe = document.querySelector(".detalhe");
+  const tela = $(".tela");
+  const listaMarcos = $(".marcos");
+  const detMarco = $(".det-marco");
+  let marcoAtual = 0, timerCaso = null;
+  const barraApp = `<div class="app-barra">${ic("escudo")}ConecteSUS</div>`;
+  function telaHTML(m) {
+    switch (m.estado) {
+      case "ataque":
+        return `<div class="corpo">${ic("alerta").replace('class="ic"', 'class="ic grande"')}<b>Sistema invadido</b><span>Dados copiados e excluídos.<br>Entre em contato para recuperá-los.</span></div>`;
+      case "fora":
+        return barraApp + `<div class="corpo"><div class="spinner"></div><b>Serviço indisponível</b><span>Tente novamente mais tarde.</span></div>`;
+      case "golpe":
+        return barraApp + `<div class="notif"><b>${ic("email")} Novo e-mail</b><br>Seu certificado de vacinação está disponível. Clique aqui para baixar.<br><span class="golpe">Golpe</span></div><div class="corpo"><div class="spinner"></div><b>Serviço indisponível</b><span class="contador-dia">Dia ${m.dia} sem o certificado</span></div>`;
+      case "chave":
+        return barraApp + `<div class="corpo">${ic("chave").replace('class="ic"', 'class="ic grande"')}<b>Acesso com credencial válida</b><span>Para o sistema, parecia um funcionário entrando normalmente.</span><span class="contador-dia">Dia ${m.dia} sem o certificado</span></div>`;
+      case "volta":
+        return barraApp + `<div class="corpo ok-verde">${ic("check").replace('class="ic"', 'class="ic grande"')}<b>Certificado de vacinação disponível</b><span class="instavel">Sistema instável nas primeiras horas</span><span class="contador-dia">${m.dia} dias depois</span></div>`;
+      default:
+        return barraApp + `<div class="corpo ok-verde">${ic("check").replace('class="ic"', 'class="ic grande"')}<b>Certificado de vacinação disponível</b><span class="selo-pf">PF: operação contra suspeitos</span></div>`;
+    }
+  }
   marcos.forEach((m, k) => {
     const li = document.createElement("li");
     const b = document.createElement("button");
     b.className = "marco";
+    b.type = "button";
     b.setAttribute("aria-pressed", "false");
-    b.innerHTML = `<span class="ponto"></span><span class="data">${m.data}</span><span class="rot">${m.rot}</span>`;
-    b.addEventListener("click", () => mostrarMarco(k));
+    b.innerHTML = `<span class="ponto"></span><span><span class="data">${m.data}</span><span class="rot">${m.rot}</span><span class="barra-tempo"><span></span></span></span>`;
+    b.addEventListener("click", () => { pararCaso(); mostrarMarco(k); });
     li.appendChild(b);
-    linha.appendChild(li);
+    listaMarcos.appendChild(li);
   });
   function mostrarMarco(k) {
-    linha.querySelectorAll(".marco").forEach((b, j) => b.setAttribute("aria-pressed", String(j === k)));
+    marcoAtual = k;
+    $$(".marco", listaMarcos).forEach((b, j) => b.setAttribute("aria-pressed", String(j === k)));
     const m = marcos[k];
-    detalhe.innerHTML = `<h3>${m.titulo}</h3><p>${m.texto}</p><p class="fonte">Fonte: ${m.fonte}</p>`;
+    tela.className = "tela" + (m.estado === "ataque" ? " ataque" : "");
+    tela.innerHTML = telaHTML(m);
+    detMarco.innerHTML = `<div><h3>${m.titulo}</h3><p>${m.texto}</p><p class="fonte">Fonte: ${m.fonte}</p></div>`;
   }
+  const btnPlay = $("#caso-play");
+  function pararCaso() {
+    clearInterval(timerCaso);
+    timerCaso = null;
+    listaMarcos.classList.remove("tocando");
+    btnPlay.innerHTML = `${ic("play")}<span>Reproduzir a história</span>`;
+  }
+  btnPlay.addEventListener("click", () => {
+    if (timerCaso) { pararCaso(); return; }
+    btnPlay.innerHTML = `${ic("pause")}<span>Pausar</span>`;
+    listaMarcos.classList.add("tocando");
+    mostrarMarco(marcoAtual >= marcos.length - 1 ? 0 : marcoAtual);
+    timerCaso = setInterval(() => {
+      if (marcoAtual >= marcos.length - 1) { pararCaso(); return; }
+      mostrarMarco(marcoAtual + 1);
+    }, 6000);
+  });
   mostrarMarco(0);
 
-  // ---------- falhas x controles ----------
-  const falhas = [
-    {
-      titulo: "Uma senha abriu a porta da nuvem",
-      resumo: "Os invasores entraram com uma credencial válida e, com ela, tinham poder sobre boa parte do ambiente.",
-      controles: [
-        ["8.5", "Autenticação segura", "Com autenticação multifator, só a senha não bastaria para entrar."],
-        ["8.2", "Direitos de acesso privilegiado", "Contas de administrador restritas, monitoradas e usadas só quando necessário."],
-        ["5.15 e 5.18", "Controle e revisão de acessos", "Cada pessoa recebe só o acesso de que precisa, e isso é revisto de tempos em tempos."],
-        ["5.23", "Segurança no uso de nuvem", "Configuração e responsabilidades da nuvem definidas e verificadas pela própria organização."]
-      ]
-    },
-    {
-      titulo: "Sistemas e dados puderam ser apagados",
-      resumo: "Com o acesso obtido, foi possível excluir instâncias e dados hospedados na nuvem.",
-      controles: [
-        ["8.13", "Backup das informações", "Cópias guardadas fora do alcance da mesma conta, que ela não consegue apagar, e com restauração testada."],
-        ["8.2", "Direitos de acesso privilegiado", "Separar quem pode apagar recursos de quem só opera o dia a dia."]
-      ]
-    },
-    {
-      titulo: "13 dias para voltar",
-      resumo: "Mesmo com backup, o principal serviço ficou quase duas semanas fora do ar.",
-      controles: [
-        ["5.30", "Prontidão de TIC para continuidade", "Plano com tempo máximo de recuperação definido e ensaiado antes da crise."],
-        ["5.29", "Segurança durante uma disrupção", "Manter o essencial funcionando, como a emissão do certificado, enquanto o resto é restaurado."]
-      ]
-    },
-    {
-      titulo: "Invasão não percebida a tempo",
-      resumo: "O grupo afirmou ter copiado dados durante semanas antes do ataque. A alegação não foi confirmada, mas se for verdade, a movimentação passou despercebida.",
-      controles: [
-        ["8.15 e 8.16", "Registros e monitoramento", "Logs e alertas para ações fora do comum, como exclusão em massa ou login de lugar estranho."],
-        ["5.24 a 5.26", "Gestão de incidentes", "Plano de resposta com papéis definidos, para agir rápido e de forma coordenada."]
-      ]
-    },
-    {
-      titulo: "Golpes em cima da confusão",
-      resumo: "Criminosos mandaram e-mails falsos de certificado de vacinação enquanto o app estava fora.",
-      controles: [
-        ["6.3", "Conscientização e treinamento", "Servidores preparados para reconhecer phishing e orientar o público."],
-        ["LGPD art. 48", "Comunicação aos titulares", "Avisar a população com clareza e rapidez tira espaço dos golpistas."]
-      ]
-    }
+  // ---------- 10: simulador ----------
+  const passos = [
+    { t: "Senha obtida", i: "chave" },
+    { t: "Login na nuvem", i: "nuvem" },
+    { t: "Poder de administrador", i: "servidor" },
+    { t: "Sistemas e dados apagados", i: "lixo" },
+    { t: "Serviço fora do ar", i: "relogio" }
   ];
-  const listaFalhas = document.querySelector(".falhas");
-  const detFalha = document.querySelector(".detalhe-falha");
-  falhas.forEach((f, k) => {
-    const b = document.createElement("button");
-    b.className = "falha";
-    b.setAttribute("aria-pressed", "false");
-    b.textContent = f.titulo;
-    b.addEventListener("click", () => mostrarFalha(k));
-    listaFalhas.appendChild(b);
+  const ctrls = [
+    { id: "mfa", nome: "Autenticação multifator", cod: "8.5 Autenticação segura" },
+    { id: "priv", nome: "Menor privilégio", cod: "8.2, 5.15 e 5.18 Controle de acessos" },
+    { id: "mon", nome: "Monitoramento e alertas", cod: "8.15 e 8.16 Registros e monitoramento" },
+    { id: "bkp", nome: "Backup isolado e testado", cod: "8.13 Backup das informações" },
+    { id: "cont", nome: "Plano de continuidade", cod: "5.29 e 5.30 Continuidade de TIC" }
+  ];
+  const cadeia = $(".cadeia");
+  passos.forEach(p => {
+    const d = document.createElement("div");
+    d.className = "no";
+    d.innerHTML = `<div class="icone-bola">${ic(p.i)}</div><b>${p.t}</b><small></small>`;
+    cadeia.appendChild(d);
   });
-  function mostrarFalha(k) {
-    listaFalhas.querySelectorAll(".falha").forEach((b, j) => b.setAttribute("aria-pressed", String(j === k)));
-    const f = falhas[k];
-    const itens = f.controles.map(c =>
-      `<li><span class="cod">${c[0]}</span><span><b>${c[1]}</b>${c[2]}</span></li>`
-    ).join("");
-    detFalha.innerHTML = `<h3>${f.titulo}</h3><p class="suave">${f.resumo}</p><ul class="controles">${itens}</ul>`;
+  const nos = $$(".no", cadeia);
+  const painelCtrl = $(".controles-sim");
+  ctrls.forEach(c => {
+    const l = document.createElement("label");
+    l.className = "interruptor";
+    l.innerHTML = `<b>${c.nome}</b><input type="checkbox" data-id="${c.id}"><small>${c.cod}</small>`;
+    painelCtrl.appendChild(l);
+  });
+  const resSim = $(".resultado-sim");
+  function lerCtrls() {
+    const o = {};
+    $$("input", painelCtrl).forEach(i => (o[i.dataset.id] = i.checked));
+    return o;
   }
-  mostrarFalha(0);
+  function calcularSim(c) {
+    if (c.mfa) return { para: 1, tipo: "barrado", dias: 0, titulo: "Ataque barrado no login", texto: "A senha sozinha não bastou. Sem o segundo fator, o invasor nem entra na nuvem." };
+    if (c.priv) return { para: 2, tipo: "barrado", dias: 0, titulo: "O invasor entrou, mas não tinha poder", texto: "A conta usada só acessava o necessário para o dia a dia. Não dava para apagar instâncias nem bancos de dados." };
+    let d = 13;
+    const partes = [];
+    if (c.bkp) { d = 4; partes.push("o backup fora do alcance da conta invadida permite restaurar os dados"); }
+    if (c.cont) { d = c.bkp ? 1 : 10; partes.push("o plano de continuidade já diz o que religar primeiro"); }
+    if (c.mon) { d = Math.max(1, Math.round(d * 0.6)); partes.push("um alerta dispara durante a exclusão em massa e a equipe corta o acesso"); }
+    const texto = partes.length
+      ? "O invasor ainda chega aos dados, mas " + partes.join(", e ") + "."
+      : "Foi o que aconteceu: uma senha abriu a porta, a conta tinha poder para apagar tudo e a recuperação levou quase duas semanas.";
+    return { para: 4, tipo: partes.length ? "parcial" : "atingido", dias: d, titulo: partes.length ? "Estrago menor" : "Sem os controles", texto };
+  }
+  let simTimers = [];
+  function rodarSim() {
+    simTimers.forEach(clearTimeout);
+    simTimers = [];
+    const r = calcularSim(lerCtrls());
+    nos.forEach(n => { n.className = "no"; $("small", n).textContent = ""; });
+    resSim.innerHTML = `<p class="suave">Simulando…</p>`;
+    const passo = reduzir ? 0 : 450;
+    nos.forEach((n, k) => {
+      simTimers.push(setTimeout(() => {
+        if (k < r.para) { n.classList.add("atingido", "pulso"); $("small", n).textContent = "invasor passou"; }
+        else if (k === r.para) {
+          if (r.tipo === "barrado") { n.classList.add("barrado", "pulso"); $("small", n).textContent = "barrado aqui"; }
+          else if (r.tipo === "parcial") { n.classList.add("parcial", "pulso"); $("small", n).textContent = `${r.dias} dia${r.dias > 1 ? "s" : ""} fora`; }
+          else { n.classList.add("atingido", "pulso"); $("small", n).textContent = "13 dias fora"; }
+        } else if (k > r.para) {
+          n.classList.add("nao");
+          $("small", n).textContent = "não chegou";
+        }
+        if (k === nos.length - 1) mostrarResultado(r);
+      }, k * passo));
+    });
+  }
+  function mostrarResultado(r) {
+    const cor = r.dias === 0 ? "var(--low)" : r.dias < 13 ? "var(--mid)" : "var(--crit)";
+    const txtDias = r.dias === 0 ? "0 dias" : `${r.dias} dia${r.dias > 1 ? "s" : ""}`;
+    resSim.innerHTML = `
+      <div>
+        <h3>${r.titulo}</h3>
+        <p>${r.texto}</p>
+        <div class="barras">
+          <div class="barra-lin"><span>Caso real</span><span class="trilho"><span style="--c:var(--crit)"></span></span><b>13 dias</b></div>
+          <div class="barra-lin"><span>Com os controles</span><span class="trilho"><span style="--c:${cor}"></span></span><b>${txtDias}</b></div>
+        </div>
+      </div>`;
+    const barras = $$(".trilho span", resSim);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      barras[0].style.width = "100%";
+      barras[1].style.width = Math.max(2, (r.dias / 13) * 100) + "%";
+    }));
+  }
+  $("#sim-rodar").addEventListener("click", rodarSim);
+  $("#sim-todos").addEventListener("click", () => { $$("input", painelCtrl).forEach(i => (i.checked = true)); rodarSim(); });
+  $("#sim-nenhum").addEventListener("click", () => { $$("input", painelCtrl).forEach(i => (i.checked = false)); rodarSim(); });
+  $$("input", painelCtrl).forEach(i => i.addEventListener("change", rodarSim));
+  const obsSim = new IntersectionObserver(([en]) => {
+    if (en.isIntersecting) { rodarSim(); obsSim.disconnect(); }
+  }, { threshold: 0.4 });
+  obsSim.observe(cadeia);
 
-  // ---------- quiz ----------
+  // ---------- 12: quiz + confete ----------
   const perguntas = [
-    {
-      q: "Qual destas normas é usada para certificar uma organização?",
-      ops: ["ISO/IEC 27002", "ISO/IEC 27001", "ISO/IEC 27005", "ISO/IEC 27000"], c: 1,
-      exp: "A 27001 traz os requisitos do sistema de gestão e é a base da certificação. A 27002 é um guia de como aplicar os controles."
-    },
-    {
-      q: "No ataque ao ConecteSUS, qual pilar da segurança foi o mais atingido?",
-      ops: ["Confidencialidade", "Integridade", "Disponibilidade", "Nenhum deles"], c: 2,
-      exp: "O serviço ficou 13 dias fora do ar. O vazamento de dados foi alegado pelo grupo, mas não foi confirmado."
-    },
-    {
-      q: "Quantos controles tem o Anexo A da ISO/IEC 27001:2022?",
-      ops: ["14", "37", "93", "114"], c: 2,
-      exp: "São 93 controles em 4 temas. Os 114 controles em 14 domínios eram da versão de 2013."
-    },
-    {
-      q: "Pela Resolução 15/2024 da ANPD, qual o prazo para comunicar um incidente relevante com dados pessoais?",
-      ops: ["24 horas", "3 dias úteis", "30 dias", "Não existe prazo"], c: 1,
-      exp: "São 3 dias úteis a partir do momento em que a organização sabe que o incidente afetou dados pessoais."
-    },
-    {
-      q: "Contratar um seguro contra ataques cibernéticos é um exemplo de qual tratamento de risco?",
-      ops: ["Evitar", "Aceitar", "Mitigar", "Transferir"], c: 3,
-      exp: "O risco continua existindo, mas parte do prejuízo financeiro passa para a seguradora."
-    }
+    { q: "Qual destas normas é usada para certificar uma organização?", ops: ["ISO/IEC 27002", "ISO/IEC 27001", "ISO/IEC 27005", "ISO/IEC 27000"], c: 1,
+      exp: "A 27001 traz os requisitos do sistema de gestão e é a base da certificação. A 27002 é um guia de como aplicar os controles." },
+    { q: "No ataque ao ConecteSUS, qual pilar da segurança foi o mais atingido?", ops: ["Confidencialidade", "Integridade", "Disponibilidade", "Nenhum deles"], c: 2,
+      exp: "O serviço ficou 13 dias fora do ar. O vazamento de dados foi alegado pelo grupo, mas não foi confirmado." },
+    { q: "Quantos controles tem o Anexo A da ISO/IEC 27001:2022?", ops: ["14", "37", "93", "114"], c: 2,
+      exp: "São 93 controles em 4 temas. Os 114 controles em 14 domínios eram da versão de 2013." },
+    { q: "Pela Resolução 15/2024 da ANPD, qual o prazo para comunicar um incidente relevante com dados pessoais?", ops: ["24 horas", "3 dias úteis", "30 dias", "Não existe prazo"], c: 1,
+      exp: "São 3 dias úteis a partir do momento em que a organização sabe que o incidente afetou dados pessoais." },
+    { q: "Qual controle teria dificultado mais a entrada com uma senha roubada?", ops: ["Backup isolado", "Autenticação multifator", "Plano de continuidade", "Mesa limpa"], c: 1,
+      exp: "Com MFA, a senha sozinha não basta: o invasor ainda precisaria do segundo fator, como um código no celular." },
+    { q: "Contratar um seguro contra ataques cibernéticos é um exemplo de qual tratamento de risco?", ops: ["Evitar", "Aceitar", "Mitigar", "Transferir"], c: 3,
+      exp: "O risco continua existindo, mas parte do prejuízo financeiro passa para a seguradora." }
   ];
-  const quiz = document.querySelector(".quiz");
-  let atualQ = 0;
-  let acertos = 0;
-
+  const quiz = $(".quiz");
+  let qAtual = 0, qAcertos = 0;
   function renderPergunta() {
-    const p = perguntas[atualQ];
+    const p = perguntas[qAtual];
     quiz.innerHTML = `
-      <p class="contagem">Pergunta ${atualQ + 1} de ${perguntas.length}</p>
-      <h3>${p.q}</h3>
-      <div class="opcoes">${p.ops.map((o, k) => `<button class="opcao" data-k="${k}">${o}</button>`).join("")}</div>
-      <div class="explica"></div>`;
-    quiz.querySelectorAll(".opcao").forEach(b => b.addEventListener("click", () => responder(Number(b.dataset.k))));
+      <div class="progresso-quiz"><span style="width:${(qAtual / perguntas.length) * 100}%"></span></div>
+      <div class="corpo-q">
+        <p class="contagem">Pergunta ${qAtual + 1} de ${perguntas.length}</p>
+        <h3>${p.q}</h3>
+        <div class="opcoes">${p.ops.map((o, k) => `<button class="opcao" type="button" data-k="${k}"><span class="letra-op">${"ABCD"[k]}</span>${o}</button>`).join("")}</div>
+        <div class="explica"></div>
+      </div>`;
+    $$(".opcao", quiz).forEach(b => b.addEventListener("click", () => responder(Number(b.dataset.k))));
   }
-
   function responder(k) {
-    const p = perguntas[atualQ];
-    const botoes = quiz.querySelectorAll(".opcao");
+    const p = perguntas[qAtual];
+    const botoes = $$(".opcao", quiz);
     botoes.forEach(b => (b.disabled = true));
     botoes[p.c].classList.add("certa");
-    const acertou = k === p.c;
-    if (acertou) acertos++;
-    else botoes[k].classList.add("errada");
-    const ultima = atualQ === perguntas.length - 1;
-    quiz.querySelector(".explica").innerHTML = `
-      <p><strong>${acertou ? "Isso aí." : "Não foi dessa vez."}</strong>${p.exp}</p>
-      <button class="btn cheio" id="quiz-prox">${ultima ? "Ver resultado" : "Próxima pergunta"}</button>`;
-    document.getElementById("quiz-prox").addEventListener("click", () => {
-      if (ultima) renderFim();
-      else { atualQ++; renderPergunta(); }
-    });
+    const ok = k === p.c;
+    if (ok) qAcertos++; else botoes[k].classList.add("errada");
+    $(".progresso-quiz span", quiz).style.width = `${((qAtual + 1) / perguntas.length) * 100}%`;
+    const ultima = qAtual === perguntas.length - 1;
+    $(".explica", quiz).innerHTML = `<div><p><strong>${ok ? "Isso aí." : "Não foi dessa vez."}</strong>${p.exp}</p><button class="btn cheio" type="button" id="quiz-prox">${ultima ? "Ver resultado" : "Próxima pergunta"}</button></div>`;
+    $("#quiz-prox").addEventListener("click", () => { if (ultima) renderFim(); else { qAtual++; renderPergunta(); } });
   }
-
   function renderFim() {
-    quiz.innerHTML = `
-      <p class="placar">${acertos}/${perguntas.length}</p>
-      <p>${acertos === perguntas.length ? "A turma acertou todas." : "Acertos da turma."}</p>
-      <button class="btn" id="quiz-refazer">Refazer o quiz</button>`;
-    document.getElementById("quiz-refazer").addEventListener("click", () => {
-      atualQ = 0; acertos = 0; renderPergunta();
-    });
+    const frase = qAcertos === perguntas.length ? "A turma gabaritou." : qAcertos >= perguntas.length - 2 ? "Mandou bem, turma." : "Dá pra melhorar na próxima.";
+    quiz.innerHTML = `<div class="corpo-q"><p class="placar">${qAcertos}/${perguntas.length}</p><p>${frase}</p><button class="btn" type="button" id="quiz-refazer">Refazer o quiz</button></div>`;
+    $("#quiz-refazer").addEventListener("click", () => { qAtual = 0; qAcertos = 0; renderPergunta(); });
+    if (qAcertos >= perguntas.length - 2) confete();
   }
   renderPergunta();
+
+  function confete() {
+    if (reduzir) return;
+    const cv = document.createElement("canvas");
+    cv.className = "confete";
+    document.body.appendChild(cv);
+    const ctx = cv.getContext("2d");
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = window.innerWidth, h = window.innerHeight;
+    cv.width = w * dpr; cv.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const cores = [cor("--p1"), cor("--p2"), cor("--p3"), cor("--mid")];
+    const ps = Array.from({ length: 160 }, () => ({
+      x: w / 2 + (Math.random() - 0.5) * 200,
+      y: h * 0.45,
+      vx: (Math.random() - 0.5) * 16,
+      vy: -Math.random() * 16 - 4,
+      r: Math.random() * Math.PI,
+      vr: (Math.random() - 0.5) * 0.3,
+      s: Math.random() * 6 + 5,
+      c: cores[Math.floor(Math.random() * cores.length)]
+    }));
+    const t0 = performance.now();
+    (function q(t) {
+      ctx.clearRect(0, 0, w, h);
+      ps.forEach(p => {
+        p.vy += 0.35; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
+        ctx.restore();
+      });
+      if (t - t0 < 3500) requestAnimationFrame(q); else cv.remove();
+    })(t0);
+  }
+})();
 </script>
 </body>
 </html>
