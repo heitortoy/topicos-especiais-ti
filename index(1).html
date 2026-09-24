@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tópicos Especiais de Tecnologia da Informação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f3f5f8;
+    --surface: #ffffff;
+    --soft: #e7ebf1;
+    --ink: #15213a;
+    --muted: #566275;
+    --line: #d4dae3;
+    --p1: #2d5b9a;
+    --p2: #1d7466;
+    --p3: #b8432f;
+    --on-acc: #ffffff;
+    --low: #3c9a6a;
+    --mid: #d69a1c;
+    --high: #dd6a2c;
+    --crit: #b8322a;
+    --ok: #2f8a5b;
+    --erro: #b8322a;
+    --focus: #2d6cdf;
+    --font: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1524;
+      --surface: #172035;
+      --soft: #1f2a42;
+      --ink: #e7ecf3;
+      --muted: #9ba7b9;
+      --line: #2c3852;
+      --p1: #7ea6e2;
+      --p2: #4fb8a6;
+      --p3: #ea7a62;
+      --on-acc: #0e1524;
+      --low: #4caf7e;
+      --mid: #e3ab35;
+      --high: #ea7a3f;
+      --crit: #e0544a;
+      --ok: #4caf7e;
+      --erro: #e0544a;
+      --focus: #7ea6e2;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1524;
+    --surface: #172035;
+    --soft: #1f2a42;
+    --ink: #e7ecf3;
+    --muted: #9ba7b9;
+    --line: #2c3852;
+    --p1: #7ea6e2;
+    --p2: #4fb8a6;
+    --p3: #ea7a62;
+    --on-acc: #0e1524;
+    --low: #4caf7e;
+    --mid: #e3ab35;
+    --high: #ea7a3f;
+    --crit: #e0544a;
+    --ok: #4caf7e;
+    --erro: #e0544a;
+    --focus: #7ea6e2;
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: inherit; }
+
+  html {
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: clamp(1.05rem, 0.92rem + 0.45vw, 1.3rem);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--p1); }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+  main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 64px);
+  }
+  @media (min-width: 1180px) {
+    main { max-width: 1340px; padding-right: 260px; }
+  }
+
+  [data-parte="1"] { --acc: var(--p1); }
+  [data-parte="2"] { --acc: var(--p2); }
+  [data-parte="3"] { --acc: var(--p3); }
+
+  .bloco {
+    min-height: 100svh;
+    padding: clamp(56px, 10vh, 110px) 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .parte-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    margin: 0 0 1.4rem;
+    color: var(--acc);
+    font-weight: 600;
+    font-size: 0.95em;
+  }
+  .parte-tag::before {
+    content: "";
+    width: 30px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--acc);
+  }
+
+  .bloco-topo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45em;
+    margin-bottom: 1.6rem;
+  }
+  .num {
+    font-stretch: 125%;
+    font-weight: 800;
+    color: var(--acc);
+    font-size: clamp(2rem, 4.2vw, 3.4rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1, h2, h3 { margin: 0; }
+  h1 {
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 7vw, 5.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    max-width: 13ch;
+    text-wrap: balance;
+    margin-bottom: 1.2rem;
+  }
+  h2 {
+    font-stretch: 112%;
+    font-weight: 780;
+    font-size: clamp(2rem, 4.2vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h3 {
+    font-stretch: 108%;
+    font-weight: 700;
+    font-size: 1.2em;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  p { margin: 0 0 1rem; max-width: 66ch; }
+  .lead { font-size: 1.18em; max-width: 58ch; margin-bottom: 1.8rem; }
+  .suave { color: var(--muted); }
+  .pequeno { font-size: 0.85em; }
+
+  ul.pontos { margin: 0.4rem 0 0; padding-left: 1.1em; }
+  ul.pontos li { margin-bottom: 0.45rem; }
+
+  .duas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(16px, 2.6vw, 32px);
+  }
+  .painel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: clamp(18px, 2.4vw, 28px);
+  }
+  .painel p:last-child, .painel ul:last-child { margin-bottom: 0; }
+
+  .frase-ponte {
+    margin-top: 2rem;
+    font-size: 1.15em;
+    font-weight: 600;
+    max-width: 50ch;
+    padding-left: 0.9em;
+    border-left: 4px solid var(--acc);
+  }
+
+  details.roteiro {
+    margin-top: 2.2rem;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--line);
+    color: var(--muted);
+    font-size: 0.88em;
+    max-width: 72ch;
+  }
+  details.roteiro summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ink);
+    width: fit-content;
+  }
+  details.roteiro p { margin: 0.7rem 0 0; }
+
+  /* capa */
+  .subtitulo {
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    color: var(--muted);
+    max-width: 40ch;
+    margin-bottom: 2.2rem;
+  }
+  .gancho {
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 28ch;
+    padding-left: 0.8em;
+    border-left: 5px solid var(--p3);
+    margin: 0 0 2.6rem;
+  }
+  .ficha {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 18px;
+    color: var(--muted);
+    font-size: 0.95em;
+    max-width: 900px;
+  }
+  .ficha strong { display: block; color: var(--ink); font-weight: 600; }
+  .dica { margin-top: 2.6rem; color: var(--muted); font-size: 0.82em; }
+  kbd {
+    font-family: inherit;
+    font-size: 0.9em;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.05em 0.4em;
+  }
+
+  /* pilares CID */
+  .pilares {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    margin-bottom: 2rem;
+  }
+  .pilar {
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    transition: border-color 0.2s;
+  }
+  .pilar:hover { border-color: var(--p1); }
+  .pilar[aria-expanded="true"] { border-color: var(--p1); box-shadow: inset 0 4px 0 var(--p1); }
+  .pilar .letra {
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--p1);
+  }
+  .pilar .nome { font-weight: 700; font-size: 1.1em; }
+  .pilar .abrir { color: var(--p1); font-size: 0.85em; font-weight: 600; margin-top: 0.3rem; }
+  .pilar .extra {
+    display: none;
+    border-top: 1px solid var(--line);
+    padding-top: 0.7rem;
+    font-size: 0.92em;
+  }
+  .pilar[aria-expanded="true"] .extra { display: block; }
+
+  /* normas */
+  .normas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    gap: 12px;
+    margin-bottom: 2.2rem;
+  }
+  .norma {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.92em;
+  }
+  .norma b { display: block; font-stretch: 115%; font-size: 1.15em; margin-bottom: 0.2rem; }
+  .norma.foco { box-shadow: inset 4px 0 0 var(--acc); }
+
+  .tabela-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 560px;
+    background: var(--surface);
+    font-size: 0.95em;
+  }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.75em 1em;
+    border-bottom: 1px solid var(--line);
+  }
+  tr:last-child td { border-bottom: 0; }
+  thead th { background: var(--soft); font-stretch: 108%; }
+  tbody th { font-weight: 600; }
+
+  .analogia { margin-top: 1.6rem; }
+
+  /* cláusulas */
+  .clausulas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+    gap: 8px;
+    margin: 0.6rem 0 2.2rem;
+  }
+  .cl {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--fase);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.85em;
+    line-height: 1.3;
+  }
+  .cl b { display: block; font-stretch: 120%; font-size: 1.5em; color: var(--p2); }
+  .cl .fase { display: block; margin-top: 0.35rem; color: var(--muted); font-size: 0.9em; }
+  .cl[data-fase="p"] { --fase: var(--p1); }
+  .cl[data-fase="f"] { --fase: var(--p2); }
+  .cl[data-fase="c"] { --fase: var(--mid); }
+  .cl[data-fase="a"] { --fase: var(--p3); }
+
+  /* barra do anexo A */
+  .barra-temas {
+    display: flex;
+    gap: 3px;
+    height: 72px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.8rem 0 1rem;
+  }
+  .tema {
+    flex: var(--n) 1 0;
+    min-width: 48px;
+    border: 0;
+    cursor: pointer;
+    background: var(--p2);
+    color: var(--on-acc);
+    opacity: 0.45;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 12px;
+    overflow: hidden;
+    transition: opacity 0.2s;
+    text-align: left;
+  }
+  .tema:hover { opacity: 0.75; }
+  .tema[aria-pressed="true"] { opacity: 1; }
+  .tema .q { font-stretch: 125%; font-weight: 800; font-size: 1.5em; line-height: 1; }
+  .tema .t { font-size: 0.75em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+
+  /* matriz de risco */
+  .formula {
+    font-stretch: 115%;
+    font-weight: 700;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    margin-bottom: 1.4rem;
+  }
+  .etapas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0 0 1.8rem;
+    list-style: none;
+    counter-reset: etapa;
+  }
+  .etapas li {
+    counter-increment: etapa;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35em 1em 0.35em 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.92em;
+  }
+  .etapas li::before {
+    content: counter(etapa);
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+    background: var(--acc);
+    color: var(--on-acc);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 0.85em;
+  }
+
+  .tratamentos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 2.6rem;
+  }
+  .tratamentos div {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.92em;
+  }
+  .tratamentos b { display: block; font-size: 1.1em; }
+
+  .risco-app {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(300px, 1.5fr);
+    gap: clamp(16px, 3vw, 36px);
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    .risco-app { grid-template-columns: 1fr; }
+  }
+  .ameacas { display: flex; flex-direction: column; gap: 8px; }
+  .ameaca {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-size: 0.92em;
+    line-height: 1.3;
+  }
+  .ameaca[aria-pressed="true"] { border-color: var(--acc); box-shadow: inset 4px 0 0 var(--acc); }
+  .ameaca .status {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .token {
+    flex-shrink: 0;
+    width: 1.7em;
+    height: 1.7em;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    background: var(--ink);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.8em;
+  }
+
+  .matriz-wrap { display: grid; grid-template-columns: auto 1fr; gap: 8px; }
+  .eixo-y {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .matriz {
+    display: grid;
+    grid-template-columns: 1.6em repeat(5, 1fr);
+    gap: 4px;
+  }
+  .matriz .rot {
+    font-size: 0.75em;
+    color: var(--muted);
+    display: grid;
+    place-items: center;
+  }
+  .cel {
+    aspect-ratio: 1.25;
+    min-height: 44px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    background: var(--soft);
+    background: color-mix(in srgb, var(--lvl) 26%, var(--surface));
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 3px;
+  }
+  .cel:hover { border-color: var(--lvl); }
+  .cel[data-n="baixo"] { --lvl: var(--low); }
+  .cel[data-n="medio"] { --lvl: var(--mid); }
+  .cel[data-n="alto"] { --lvl: var(--high); }
+  .cel[data-n="critico"] { --lvl: var(--crit); }
+  .eixo-x { text-align: center; font-size: 0.8em; color: var(--muted); font-weight: 600; margin-top: 4px; grid-column: 2; }
+
+  .legenda-risco {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 0.8em;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+  .legenda-risco span { display: inline-flex; align-items: center; gap: 0.4em; }
+  .legenda-risco i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; background: var(--c); }
+
+  .leitura {
+    margin-top: 1rem;
+    min-height: 4.5em;
+    font-size: 0.95em;
+  }
+  .leitura strong { display: block; }
+
+  .acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem; }
+  .btn {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 0.55em 1em;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9em;
+  }
+  .btn:hover { border-color: var(--acc, var(--p1)); }
+  .btn.cheio { background: var(--acc, var(--p1)); color: var(--on-acc); border-color: transparent; }
+
+  /* ativos */
+  .ciclo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+    margin-bottom: 2.2rem;
+  }
+  .ciclo div {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.92em;
+  }
+  .ciclo b { display: block; font-size: 1.1em; }
+  .selo {
+    display: inline-block;
+    padding: 0.1em 0.6em;
+    border-radius: 999px;
+    font-size: 0.85em;
+    font-weight: 600;
+    white-space: nowrap;
+    background: color-mix(in srgb, var(--c) 20%, var(--surface));
+    color: var(--ink);
+    border: 1px solid var(--c);
+  }
+
+  /* linha do tempo */
+  .linha-wrap { overflow-x: auto; padding-bottom: 6px; margin: 0.6rem 0 1.2rem; }
+  .linha {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(120px, 1fr));
+    min-width: 760px;
+    position: relative;
+  }
+  .linha::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    right: 0;
+    top: 9px;
+    height: 3px;
+    background: var(--line);
+  }
+  .marco {
+    position: relative;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 0 10px 6px 0;
+    text-align: left;
+    width: 100%;
+  }
+  .marco .ponto {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--p3);
+  }
+  .marco[aria-pressed="true"] .ponto { background: var(--p3); }
+  .marco .data { font-weight: 700; font-size: 0.9em; }
+  .marco .rot { font-size: 0.82em; color: var(--muted); }
+  .marco[aria-pressed="true"] .rot { color: var(--ink); }
+
+  .detalhe h3 { margin-bottom: 0.6rem; }
+  .fonte { color: var(--muted); font-size: 0.8em; margin: 0.8rem 0 0; }
+
+  .aviso {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-top: 1.6rem;
+    max-width: 72ch;
+  }
+
+  /* falhas x controles */
+  .mapa {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(300px, 1.6fr);
+    gap: clamp(16px, 3vw, 36px);
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    .mapa { grid-template-columns: 1fr; }
+  }
+  .falhas { display: flex; flex-direction: column; gap: 8px; }
+  .falha {
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95em;
+    line-height: 1.3;
+  }
+  .falha[aria-pressed="true"] { border-color: var(--p3); box-shadow: inset 4px 0 0 var(--p3); }
+  .controles { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .controles li {
+    display: grid;
+    grid-template-columns: 6.2em 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.93em;
+  }
+  .controles .cod { font-stretch: 112%; font-weight: 800; color: var(--p2); }
+  .controles b { display: block; }
+
+  /* aprendizados */
+  .achados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .achados .painel h3 { font-size: 1.15em; }
+
+  /* conclusão e quiz */
+  .fechamento {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 3rem;
+  }
+  .fechamento p { font-size: 1.05em; font-weight: 600; margin: 0; }
+
+  .quiz { max-width: 760px; }
+  .quiz .contagem { color: var(--muted); font-size: 0.85em; margin-bottom: 0.4rem; }
+  .quiz h3 { font-size: 1.3em; margin-bottom: 1rem; }
+  .opcoes { display: grid; gap: 8px; }
+  .opcao {
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    cursor: pointer;
+  }
+  .opcao:hover:not(:disabled) { border-color: var(--p3); }
+  .opcao:disabled { cursor: default; }
+  .opcao.certa { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 16%, var(--surface)); }
+  .opcao.errada { border-color: var(--erro); background: color-mix(in srgb, var(--erro) 14%, var(--surface)); }
+  .explica { margin-top: 1rem; min-height: 1.5em; }
+  .explica strong { margin-right: 0.3em; }
+  .placar { font-stretch: 125%; font-weight: 800; font-size: 3rem; line-height: 1; margin-bottom: 0.6rem; }
+
+  .refs { margin-top: 3rem; }
+  .refs ol { padding-left: 1.2em; font-size: 0.85em; color: var(--muted); }
+  .refs li { margin-bottom: 0.45rem; }
+
+  footer {
+    padding: 2.4rem 0 3rem;
+    color: var(--muted);
+    font-size: 0.8em;
+  }
+
+  /* índice lateral */
+  .indice {
+    display: none;
+    position: fixed;
+    top: 50%;
+    right: max(18px, env(safe-area-inset-right, 0px));
+    transform: translateY(-50%);
+    width: 215px;
+    font-size: 0.78rem;
+    line-height: 1.3;
+  }
+  @media (min-width: 1180px) {
+    .indice { display: block; }
+  }
+  .indice .grupo { margin-bottom: 1rem; }
+  .indice .quem {
+    border-left: 3px solid var(--acc);
+    padding-left: 8px;
+    margin-bottom: 0.3rem;
+    color: var(--muted);
+  }
+  .indice .quem b { color: var(--ink); display: block; }
+  .indice a {
+    display: flex;
+    gap: 0.5em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .indice a:hover { color: var(--ink); }
+  .indice a .n { width: 1.3em; flex-shrink: 0; color: var(--acc); font-weight: 700; }
+  .indice a.ativo { background: var(--soft); color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav class="indice" aria-label="Seções da apresentação"></nav>
+
+<main>
+
+  <!-- ============ PARTE 1 ============ -->
+
+  <section class="bloco" id="s1" data-parte="1" data-titulo="Capa">
+    <p class="parte-tag">Parte 1, com Integrante 1</p>
+    <h1>Governança de TI e segurança da informação</h1>
+    <p class="subtitulo">Normas ISO/IEC 27000, LGPD e o que o ataque ao ConecteSUS ensina sobre tudo isso</p>
+    <p class="gancho">Em 10 de dezembro de 2021, o ConecteSUS saiu do ar. Só voltou 13 dias depois.</p>
+    <div class="ficha">
+      <div><strong>Integrantes</strong>Integrante 1, Integrante 2 e Integrante 3</div>
+      <div><strong>Disciplina</strong>Nome da disciplina</div>
+      <div><strong>Professor(a)</strong>Nome do professor(a)</div>
+    </div>
+    <p class="dica">Role a página ou use <kbd>Page Down</kbd> e <kbd>Page Up</kbd> para ir de uma seção a outra.</p>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Apresentar o grupo e o tema. Ler a frase do ConecteSUS e avisar que a gente volta nesse caso no final: primeiro vem a teoria (governança, normas, LGPD, riscos) e depois a gente mostra como ela se aplica num incidente real que aconteceu no Brasil.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s2" data-parte="1" data-titulo="Governança e compliance">
+    <div class="bloco-topo"><span class="num">2</span><h2>Governança de TI e compliance</h2></div>
+    <div class="duas">
+      <div class="painel">
+        <h3>Governança de TI</h3>
+        <p>É a forma como a organização decide, controla e acompanha o uso da tecnologia, para que a TI trabalhe a favor dos objetivos do negócio.</p>
+        <ul class="pontos">
+          <li>Define quem decide o quê e quem responde por cada área</li>
+          <li>Alinha investimentos em TI à estratégia da empresa</li>
+          <li>Acompanha resultados e riscos com indicadores</li>
+        </ul>
+        <p class="suave pequeno" style="margin-top:1rem">Referências conhecidas: COBIT e ISO/IEC 38500.</p>
+      </div>
+      <div class="painel">
+        <h3>Compliance</h3>
+        <p>É estar em conformidade com leis, normas, contratos e políticas internas, e conseguir provar isso quando alguém pedir.</p>
+        <ul class="pontos">
+          <li>Leis, como a LGPD</li>
+          <li>Normas técnicas, como a ISO/IEC 27001</li>
+          <li>Contratos com clientes e políticas da própria empresa</li>
+        </ul>
+      </div>
+    </div>
+    <p class="frase-ponte">A governança define o rumo. O compliance confere se o caminho respeita as regras.</p>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Explicar que governança não é “o chefe da TI mandando”, é um sistema de decisão e acompanhamento. Compliance é a parte de cumprir regras e ter evidência disso. Dá pra dar o exemplo: uma empresa pode ter uma TI ótima e mesmo assim tomar multa se não cumprir a LGPD.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s3" data-parte="1" data-titulo="Por que é estratégica">
+    <div class="bloco-topo"><span class="num">3</span><h2>Por que segurança da informação é estratégica?</h2></div>
+    <p class="lead">Informação é um ativo. Se ela vaza, some ou fica errada, o negócio para, perde dinheiro e perde a confiança das pessoas. A segurança se apoia em três pilares.</p>
+    <div class="pilares">
+      <button class="pilar" aria-expanded="false">
+        <span class="letra">C</span>
+        <span class="nome">Confidencialidade</span>
+        <span>Só quem tem permissão acessa a informação.</span>
+        <span class="extra"><b>No ConecteSUS:</b> o grupo disse ter copiado 50 TB de dados. Essa parte nunca foi confirmada.</span>
+        <span class="abrir">Ver no caso ConecteSUS</span>
+      </button>
+      <button class="pilar" aria-expanded="false">
+        <span class="letra">I</span>
+        <span class="nome">Integridade</span>
+        <span>A informação está correta e não foi alterada ou apagada sem autorização.</span>
+        <span class="extra"><b>No ConecteSUS:</b> depois que o app voltou, usuários relataram vacinas que tinham sumido do histórico.</span>
+        <span class="abrir">Ver no caso ConecteSUS</span>
+      </button>
+      <button class="pilar" aria-expanded="false">
+        <span class="letra">D</span>
+        <span class="nome">Disponibilidade</span>
+        <span>A informação está acessível quando alguém precisa dela.</span>
+        <span class="extra"><b>No ConecteSUS:</b> 13 dias sem conseguir emitir o certificado de vacinação.</span>
+        <span class="abrir">Ver no caso ConecteSUS</span>
+      </button>
+    </div>
+    <div class="duas">
+      <div class="painel"><h3>Custo de parar</h3><p>Sistema fora do ar é venda perdida, atendimento parado e equipe sem trabalhar.</p></div>
+      <div class="painel"><h3>Confiança</h3><p>Clientes e cidadãos lembram de quem expôs os dados deles.</p></div>
+      <div class="painel"><h3>Obrigação legal</h3><p>A LGPD exige medidas de segurança e prevê sanções para quem não adota.</p></div>
+    </div>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Clicar em cada letra enquanto explica. A ideia é já plantar o caso: cada pilar tem um exemplo do ConecteSUS. Fechar dizendo que por isso segurança é assunto da diretoria, não só do pessoal de TI.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s4" data-parte="1" data-titulo="Família ISO/IEC 27000">
+    <div class="bloco-topo"><span class="num">4</span><h2>Família ISO/IEC 27000</h2></div>
+    <p class="lead">É um conjunto de normas internacionais sobre segurança da informação. Cada uma cuida de uma parte.</p>
+    <div class="normas">
+      <div class="norma"><b>27000</b>Visão geral e vocabulário da família</div>
+      <div class="norma foco"><b>27001</b>Requisitos do sistema de gestão (SGSI). É a que certifica</div>
+      <div class="norma foco"><b>27002</b>Guia prático de como aplicar os controles</div>
+      <div class="norma"><b>27005</b>Gestão de riscos de segurança da informação</div>
+      <div class="norma"><b>27701</b>Extensão para privacidade e dados pessoais</div>
+    </div>
+    <h3>27001 × 27002</h3>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th></th><th>ISO/IEC 27001</th><th>ISO/IEC 27002</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Função</th><td>Diz o que precisa existir</td><td>Explica como fazer</td></tr>
+          <tr><th>Certificação</th><td>Sim, por auditoria externa</td><td>Não certifica</td></tr>
+          <tr><th>Linguagem</th><td>Requisitos (“a organização deve…”)</td><td>Recomendações e boas práticas</td></tr>
+          <tr><th>Quem mais usa</th><td>Gestão e auditoria</td><td>Equipe que implementa os controles</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="frase-ponte analogia">A 27001 é a lista do que vai cair na prova. A 27002 é o material de estudo.</p>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Não precisa decorar todos os números, só mostrar que existe uma família e que a 27001 é a principal. Usar a analogia da prova pra deixar clara a diferença entre as duas. Terminar passando a palavra: “agora o Integrante 2 mostra como isso funciona na prática aqui no Brasil”.</p>
+    </details>
+  </section>
+
+  <!-- ============ PARTE 2 ============ -->
+
+  <section class="bloco" id="s5" data-parte="2" data-titulo="ABNT NBR ISO/IEC 27001">
+    <p class="parte-tag">Parte 2, com Integrante 2</p>
+    <div class="bloco-topo"><span class="num">5</span><h2>ABNT NBR ISO/IEC 27001</h2></div>
+    <p class="lead">A ABNT publica no Brasil a versão em português da norma, com o mesmo conteúdo da internacional. É ela que aparece em editais, contratos e auditorias no país.</p>
+
+    <h3>As cláusulas obrigatórias seguem o ciclo PDCA</h3>
+    <div class="clausulas">
+      <div class="cl" data-fase="p"><b>4</b>Contexto da organização<span class="fase">Planejar</span></div>
+      <div class="cl" data-fase="p"><b>5</b>Liderança<span class="fase">Planejar</span></div>
+      <div class="cl" data-fase="p"><b>6</b>Planejamento<span class="fase">Planejar</span></div>
+      <div class="cl" data-fase="p"><b>7</b>Apoio<span class="fase">Planejar</span></div>
+      <div class="cl" data-fase="f"><b>8</b>Operação<span class="fase">Fazer</span></div>
+      <div class="cl" data-fase="c"><b>9</b>Avaliação de desempenho<span class="fase">Checar</span></div>
+      <div class="cl" data-fase="a"><b>10</b>Melhoria<span class="fase">Agir</span></div>
+    </div>
+
+    <h3>Anexo A: 93 controles em 4 temas</h3>
+    <p class="suave pequeno">Clique em cada tema.</p>
+    <div class="barra-temas" role="group" aria-label="Temas do Anexo A"></div>
+    <div class="painel detalhe-tema" aria-live="polite"></div>
+
+    <p class="aviso">Não é obrigatório aplicar os 93. A organização escolhe os controles a partir da análise de riscos e justifica cada escolha num documento chamado Declaração de Aplicabilidade. A versão de 2022 trocou os antigos 114 controles em 14 domínios por essa estrutura mais enxuta.</p>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Explicar que a norma tem duas partes: as cláusulas 4 a 10, que são o “sistema de gestão” (e seguem o ciclo planejar, fazer, checar, agir), e o Anexo A, que é o cardápio de controles. Clicar nos temas e ler um ou dois exemplos de cada. Destacar que a empresa não precisa aplicar tudo, e sim o que faz sentido pros riscos dela.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s6" data-parte="2" data-titulo="ISO e LGPD">
+    <div class="bloco-topo"><span class="num">6</span><h2>ISO e LGPD no Brasil</h2></div>
+    <p class="lead">A LGPD (Lei nº 13.709/2018) vale para empresas e também para órgãos públicos. Ela e a ISO se completam.</p>
+    <div class="duas">
+      <div class="painel">
+        <h3>A LGPD diz o que é obrigatório</h3>
+        <ul class="pontos">
+          <li><b>Art. 46:</b> adotar medidas de segurança técnicas e administrativas para proteger dados pessoais</li>
+          <li><b>Art. 48:</b> comunicar à ANPD e aos titulares incidentes que possam causar risco ou dano relevante</li>
+          <li><b>Art. 5º, II:</b> dados de saúde são dados pessoais sensíveis e pedem cuidado maior</li>
+          <li><b>Resolução CD/ANPD nº 15/2024:</b> comunicação em até 3 dias úteis e registro de todo incidente por pelo menos 5 anos</li>
+        </ul>
+      </div>
+      <div class="painel">
+        <h3>A ISO mostra como organizar</h3>
+        <ul class="pontos">
+          <li>Os controles da 27001 viram evidência concreta de que as “medidas de segurança” do art. 46 existem</li>
+          <li>A gestão de incidentes da norma já prepara a organização para cumprir o prazo da ANPD</li>
+          <li>A ISO/IEC 27701 estende o sistema de gestão para privacidade</li>
+        </ul>
+      </div>
+    </div>
+    <p class="frase-ponte">Ter ISO 27001 não deixa ninguém automaticamente adequado à LGPD, mas ajuda muito a provar que a organização fez a parte dela.</p>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Frisar que a lei fala “adote medidas de segurança”, mas não diz quais. A ISO preenche esse espaço. Comentar que dados de vacinação são dados de saúde, ou seja, sensíveis, o que liga direto com o caso que vem depois. Obs.: a resolução dos 3 dias úteis é de 2024, depois do ataque ao ConecteSUS.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s7" data-parte="2" data-titulo="Gestão de riscos">
+    <div class="bloco-topo"><span class="num">7</span><h2>Gestão de riscos</h2></div>
+    <p class="formula">Risco = probabilidade × impacto</p>
+    <ol class="etapas">
+      <li>Identificar</li>
+      <li>Analisar</li>
+      <li>Avaliar</li>
+      <li>Tratar</li>
+      <li>Monitorar</li>
+    </ol>
+    <div class="tratamentos">
+      <div><b>Mitigar</b>Reduzir o risco com controles, como MFA ou backup</div>
+      <div><b>Transferir</b>Passar parte do prejuízo para outro, como um seguro</div>
+      <div><b>Evitar</b>Deixar de fazer a atividade que gera o risco</div>
+      <div><b>Aceitar</b>Conviver com o risco, de forma consciente e registrada</div>
+    </div>
+
+    <h3>Agora é com a turma</h3>
+    <p class="suave pequeno">Escolha uma ameaça e clique na célula da matriz onde a turma acha que ela fica.</p>
+    <div class="risco-app">
+      <div>
+        <div class="ameacas" role="group" aria-label="Ameaças"></div>
+        <div class="acoes">
+          <button class="btn cheio" id="risco-grupo">Mostrar a análise do grupo</button>
+          <button class="btn" id="risco-limpar">Limpar</button>
+        </div>
+      </div>
+      <div>
+        <div class="matriz-wrap">
+          <div class="eixo-y">Probabilidade</div>
+          <div>
+            <div class="matriz" role="grid" aria-label="Matriz de risco"></div>
+            <div class="eixo-x">Impacto</div>
+          </div>
+        </div>
+        <div class="legenda-risco">
+          <span><i style="--c:var(--low)"></i>Baixo (1 a 4)</span>
+          <span><i style="--c:var(--mid)"></i>Médio (5 a 9)</span>
+          <span><i style="--c:var(--high)"></i>Alto (10 a 16)</span>
+          <span><i style="--c:var(--crit)"></i>Crítico (20 a 25)</span>
+        </div>
+        <div class="leitura" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="aviso">Base: ISO/IEC 27005 (riscos de segurança da informação) e ISO 31000 (gestão de riscos em geral).</p>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Explicar a fórmula e as cinco etapas rapidinho. Depois chamar a turma: ler uma ameaça, perguntar “qual a chance disso acontecer?” e “se acontecer, o estrago é grande?”, e clicar onde a maioria disser. No fim, mostrar a análise do grupo e comparar. A senha roubada da nuvem é justamente o que aconteceu no caso da parte 3.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s8" data-parte="2" data-titulo="Gestão de ativos">
+    <div class="bloco-topo"><span class="num">8</span><h2>Gestão de ativos</h2></div>
+    <p class="lead">Não dá pra proteger o que você nem sabe que tem. Ativo é tudo que tem valor: dados, sistemas, equipamentos, contas de acesso e até pessoas.</p>
+    <div class="ciclo">
+      <div><b>Inventariar</b>Listar o que existe (controle 5.9)</div>
+      <div><b>Definir um dono</b>Alguém responde por cada ativo</div>
+      <div><b>Classificar</b>Pelo nível de sigilo e importância (5.12 e 5.13)</div>
+      <div><b>Regras de uso</b>Quem pode usar e como (5.10), até o descarte</div>
+    </div>
+    <h3>Exemplo: ativos de um sistema como o ConecteSUS</h3>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr><th>Ativo</th><th>Classificação</th><th>Por quê</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Credenciais de administrador da nuvem</td><td><span class="selo" style="--c:var(--crit)">Confidencial</span></td><td>Quem tem, controla o ambiente inteiro</td></tr>
+          <tr><td>Base de registros de vacinação</td><td><span class="selo" style="--c:var(--crit)">Confidencial</span></td><td>Dado de saúde, sensível pela LGPD</td></tr>
+          <tr><td>Logs de acesso aos sistemas</td><td><span class="selo" style="--c:var(--high)">Restrita</span></td><td>Mostram quem fez o quê, úteis para investigar</td></tr>
+          <tr><td>Código-fonte do aplicativo</td><td><span class="selo" style="--c:var(--mid)">Interna</span></td><td>Não é público, mas não tem dado de cidadão</td></tr>
+          <tr><td>Página de perguntas frequentes</td><td><span class="selo" style="--c:var(--low)">Pública</span></td><td>Feita para todo mundo ler</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Deixar claro que a tabela é um exemplo montado pelo grupo, não um documento oficial do ministério. O ponto principal: a credencial de administrador é tão valiosa quanto os próprios dados, porque dá acesso a tudo. Fechar passando para o Integrante 3: “e foi justamente uma credencial que abriu a porta no caso que a gente vai mostrar agora”.</p>
+    </details>
+  </section>
+
+  <!-- ============ PARTE 3 ============ -->
+
+  <section class="bloco" id="s9" data-parte="3" data-titulo="Caso ConecteSUS">
+    <p class="parte-tag">Parte 3, com Integrante 3</p>
+    <div class="bloco-topo"><span class="num">9</span><h2>O ataque ao ConecteSUS</h2></div>
+    <p class="lead">Em dezembro de 2021, sistemas do Ministério da Saúde, incluindo o app que emitia o certificado de vacinação contra a Covid-19, foram atacados e ficaram fora do ar. Clique nas datas.</p>
+    <div class="linha-wrap">
+      <ol class="linha" aria-label="Linha do tempo do incidente"></ol>
+    </div>
+    <div class="painel detalhe" aria-live="polite"></div>
+
+    <div class="duas" style="margin-top:1.6rem">
+      <div class="painel">
+        <h3>Onde falhou</h3>
+        <ul class="pontos">
+          <li>Acesso à nuvem com uma credencial válida, sem barreira extra aparente</li>
+          <li>Essa credencial permitia apagar instâncias e dados</li>
+          <li>Recuperação lenta, mesmo com backup</li>
+        </ul>
+      </div>
+      <div class="painel">
+        <h3>Impacto</h3>
+        <ul class="pontos">
+          <li>Certificado de vacinação indisponível justo quando era exigido em viagens</li>
+          <li>Governo adiou a portaria sobre entrada de viajantes no país</li>
+          <li>Notificação de casos de Covid e sistema de imunização afetados</li>
+          <li>Golpes por e-mail usando o nome do ministério</li>
+        </ul>
+      </div>
+    </div>
+    <p class="aviso">O relatório completo da investigação não foi divulgado. Tudo aqui vem de comunicados oficiais e reportagens da época. A cópia de 50 TB foi uma alegação dos criminosos e não foi confirmada.</p>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Contar a história seguindo as datas: o que aconteceu, como descobriram a porta de entrada e quanto tempo levou pra voltar. Depois ler “onde falhou” e “impacto”. Tomar cuidado pra não afirmar o que não foi confirmado, como o vazamento dos 50 TB.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s10" data-parte="3" data-titulo="Como as normas ajudariam">
+    <div class="bloco-topo"><span class="num">10</span><h2>Como as normas poderiam ter ajudado</h2></div>
+    <p class="lead">Para cada falha, os controles do Anexo A da ISO/IEC 27001:2022 que reduziriam o risco. Clique em uma falha.</p>
+    <div class="mapa">
+      <div class="falhas" role="group" aria-label="Falhas"></div>
+      <div class="painel detalhe-falha" aria-live="polite"></div>
+    </div>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Passar pelas falhas uma a uma. O ponto que mais chama atenção é o primeiro: com autenticação multifator, a senha sozinha não bastaria. Lembrar que nenhum controle garante 100%, mas juntos eles diminuem muito a chance e o tamanho do estrago.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s11" data-parte="3" data-titulo="O que chamou atenção">
+    <div class="bloco-topo"><span class="num">11</span><h2>O que mais chamou a atenção do grupo</h2></div>
+    <div class="achados">
+      <div class="painel">
+        <h3>Não precisou de ataque sofisticado</h3>
+        <p>Pelo que foi divulgado, a entrada foi com uma credencial válida. Um controle simples, como MFA, poderia ter mudado a história.</p>
+      </div>
+      <div class="painel">
+        <h3>Ter backup não é o mesmo que voltar rápido</h3>
+        <p>O ministério tinha cópias dos dados, mas o serviço ficou 13 dias fora. Recuperação também precisa ser planejada e testada.</p>
+      </div>
+      <div class="painel">
+        <h3>Dado de saúde é dado sensível</h3>
+        <p>A LGPD dá proteção maior justamente a esse tipo de informação, e o setor público também precisa cumprir a lei.</p>
+      </div>
+      <div class="painel">
+        <h3>O problema saiu da TI</h3>
+        <p>Viagens, notificação de casos de Covid e até golpes por e-mail: um incidente técnico virou problema para a população.</p>
+      </div>
+    </div>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Esses quatro pontos são sugestões. Vale cada um do grupo trocar ou comentar com a própria opinião, porque o professor pediu o que chamou a atenção de vocês.</p>
+    </details>
+  </section>
+
+  <section class="bloco" id="s12" data-parte="3" data-titulo="Conclusão e referências">
+    <div class="bloco-topo"><span class="num">12</span><h2>Conclusão</h2></div>
+    <div class="fechamento">
+      <div class="painel"><p>Segurança é gestão contínua, não um produto que se compra uma vez.</p></div>
+      <div class="painel"><p>A lei cria a obrigação. As normas dão o método para cumprir.</p></div>
+      <div class="painel"><p>Poucos controles bem aplicados mudam o tamanho de um incidente.</p></div>
+    </div>
+
+    <h3>Quiz rápido</h3>
+    <div class="painel quiz" aria-live="polite"></div>
+
+    <div class="refs">
+      <h3>Referências</h3>
+      <ol>
+        <li>ABNT. <i>ABNT NBR ISO/IEC 27001:2022: Segurança da informação, segurança cibernética e proteção à privacidade. Sistemas de gestão da segurança da informação. Requisitos</i>. Rio de Janeiro: ABNT, 2022.</li>
+        <li>ABNT. <i>ABNT NBR ISO/IEC 27002:2022: Segurança da informação, segurança cibernética e proteção à privacidade. Controles de segurança da informação</i>. Rio de Janeiro: ABNT, 2022.</li>
+        <li>ISO; IEC. <i>ISO/IEC 27005:2022: Guidance on managing information security risks</i>. Genebra: ISO, 2022.</li>
+        <li>BRASIL. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais. Disponível em: <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm">planalto.gov.br</a>.</li>
+        <li>ANPD. Resolução CD/ANPD nº 15, de 24 de abril de 2024. Regulamento de Comunicação de Incidente de Segurança. Disponível em: <a href="https://www.legisweb.com.br/legislacao/?id=458235">legisweb.com.br</a>.</li>
+        <li>POLÍCIA FEDERAL. Atuação da PF no ataque hacker ao Ministério da Saúde. 10 dez. 2021. Disponível em: <a href="https://www.gov.br/pf/pt-br/assuntos/noticias/2021/12/atuacao-da-pf-no-ataque-hacker-ao-ministerio-da-saude">gov.br/pf</a>.</li>
+        <li>AGÊNCIA BRASIL. Sites e aplicativo do Ministério da Saúde sofrem ataque cibernético. 10 dez. 2021. Disponível em: <a href="https://agenciabrasil.ebc.com.br/saude/noticia/2021-12/sites-e-aplicativo-do-ministerio-da-saude-sofrem-ataque-cibernetico">agenciabrasil.ebc.com.br</a>.</li>
+        <li>PODER360. Sites do Ministério da Saúde sofrem ataque hacker e estão fora do ar. 10 dez. 2021. Disponível em: <a href="https://www.poder360.com.br/governo/sites-do-ministerio-da-saude-sofrem-ataque-hacker-e-estao-fora-do-ar/">poder360.com.br</a>.</li>
+        <li>ISTOÉ DINHEIRO. Entenda por que tantos sites do governo sofreram ataques cibernéticos. 16 dez. 2021. Disponível em: <a href="https://istoedinheiro.com.br/entenda-por-que-tantos-sites-do-governo-sofreram-ataques-ciberneticos">istoedinheiro.com.br</a>.</li>
+        <li>ESCOLA POLITÉCNICA DA USP. Hackers acessaram nuvem do Ministério da Saúde com senha; entenda o ataque. Disponível em: <a href="https://www.poli.usp.br/noticias/polinamidia/hackers-acessaram-nuvem-do-ministerio-da-saude-com-senha-entenda-o-ataque/">poli.usp.br</a>.</li>
+        <li>NSC TOTAL. ConecteSUS volta a funcionar 13 dias após ataque, diz Ministério da Saúde. 23 dez. 2021. Disponível em: <a href="https://www.nsctotal.com.br/noticias/conectesus-volta-a-funcionar-13-dias-apos-ataque-diz-ministerio-da-saude">nsctotal.com.br</a>.</li>
+        <li>TECNOBLOG. ConecteSUS: ainda há dados faltando e pouca explicação sobre ataques. 30 dez. 2021. Disponível em: <a href="https://tecnoblog.net/noticias/2021/12/30/conectesus-ainda-ha-dados-faltando-e-pouca-explicacao-sobre-ataques/">tecnoblog.net</a>.</li>
+        <li>MUNDO CONECTADO. Certificado de vacinação: ConecteSUS volta a funcionar depois de 13 dias. 25 dez. 2021. Disponível em: <a href="https://mundoconectado.com.br/noticias/v/22310/certificado-de-vacinacao-conectesus-volta-a-funcionar-depois-de-13-dias">mundoconectado.com.br</a>.</li>
+        <li>CNN BRASIL. PF faz operação contra suspeitos de ataque hacker no Ministério da Saúde em 2021. 16 ago. 2022. Disponível em: <a href="https://www.cnnbrasil.com.br/nacional/pf-faz-operacao-contra-suspeitos-de-ataque-hacker-no-ministerio-da-saude-em-2021/">cnnbrasil.com.br</a>.</li>
+      </ol>
+      <p class="suave pequeno">Acessos em: 24 set. 2026.</p>
+    </div>
+    <details class="roteiro">
+      <summary>Roteiro de fala</summary>
+      <p>Ler as três frases da conclusão e chamar a turma para o quiz: ler a pergunta, deixar alguém responder e clicar. As referências ficam na tela no final, se o professor quiser conferir.</p>
+    </details>
+  </section>
+
+  <footer>Trabalho acadêmico. As informações sobre o caso vêm de comunicados oficiais e reportagens públicas.</footer>
+</main>
+
+<script>
+  const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const secoes = Array.from(document.querySelectorAll(".bloco"));
+
+  // ---------- índice lateral ----------
+  const partes = [
+    { n: "1", quem: "Integrante 1", tema: "Governança e ISO" },
+    { n: "2", quem: "Integrante 2", tema: "ABNT e riscos" },
+    { n: "3", quem: "Integrante 3", tema: "Caso e conclusão" }
+  ];
+  const indice = document.querySelector(".indice");
+  partes.forEach(p => {
+    const g = document.createElement("div");
+    g.className = "grupo";
+    g.dataset.parte = p.n;
+    g.innerHTML = `<div class="quem"><b>${p.quem}</b>${p.tema}</div>`;
+    secoes.filter(s => s.dataset.parte === p.n).forEach(s => {
+      const a = document.createElement("a");
+      a.href = "#" + s.id;
+      a.innerHTML = `<span class="n">${s.id.slice(1)}</span>${s.dataset.titulo}`;
+      g.appendChild(a);
+    });
+    indice.appendChild(g);
+  });
+  const linksIndice = indice.querySelectorAll("a");
+
+  function secaoAtual() {
+    let idx = 0;
+    secoes.forEach((s, i) => {
+      if (s.getBoundingClientRect().top <= window.innerHeight * 0.35) idx = i;
+    });
+    return idx;
+  }
+
+  let agendado = false;
+  window.addEventListener("scroll", () => {
+    if (agendado) return;
+    agendado = true;
+    requestAnimationFrame(() => {
+      const i = secaoAtual();
+      linksIndice.forEach((a, j) => a.classList.toggle("ativo", i === j));
+      agendado = false;
+    });
+  }, { passive: true });
+  linksIndice[0].classList.add("ativo");
+
+  // Page Up / Page Down (e setas laterais) pulam de seção em seção
+  document.addEventListener("keydown", e => {
+    if (e.target.closest("input, textarea, select, [contenteditable]")) return;
+    const prox = ["PageDown", "ArrowRight"].includes(e.key);
+    const ant = ["PageUp", "ArrowLeft"].includes(e.key);
+    if (!prox && !ant) return;
+    e.preventDefault();
+    const i = secaoAtual();
+    let alvo;
+    if (prox) {
+      alvo = secoes[Math.min(i + 1, secoes.length - 1)];
+    } else {
+      const topo = secoes[i].getBoundingClientRect().top;
+      alvo = topo < -10 ? secoes[i] : secoes[Math.max(i - 1, 0)];
+    }
+    alvo.scrollIntoView({ behavior: reduzir ? "auto" : "smooth" });
+  });
+
+  // ---------- pilares CID ----------
+  document.querySelectorAll(".pilar").forEach(b => {
+    b.addEventListener("click", () => {
+      const aberto = b.getAttribute("aria-expanded") === "true";
+      b.setAttribute("aria-expanded", String(!aberto));
+      b.querySelector(".abrir").textContent = aberto ? "Ver no caso ConecteSUS" : "Esconder";
+    });
+  });
+
+  // ---------- temas do Anexo A ----------
+  const temas = [
+    { nome: "Organizacionais", qtd: 37, ex: "Políticas de segurança, papéis e responsabilidades, relação com fornecedores, uso de serviços em nuvem, gestão de incidentes e continuidade do negócio." },
+    { nome: "Pessoas", qtd: 8, ex: "Checagem de antecedentes na contratação, termos de confidencialidade, conscientização e treinamento, regras para trabalho remoto." },
+    { nome: "Físicos", qtd: 14, ex: "Perímetro e controle de entrada em salas, proteção de equipamentos, mesa limpa e tela limpa, descarte seguro de mídias." },
+    { nome: "Tecnológicos", qtd: 34, ex: "Autenticação segura, controle de acesso privilegiado, backup, registros de log, proteção contra malware, criptografia." }
+  ];
+  const barra = document.querySelector(".barra-temas");
+  const detTema = document.querySelector(".detalhe-tema");
+  temas.forEach((t, i) => {
+    const b = document.createElement("button");
+    b.className = "tema";
+    b.style.setProperty("--n", t.qtd);
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = `<span class="q">${t.qtd}</span><span class="t">${t.nome}</span>`;
+    b.addEventListener("click", () => mostrarTema(i));
+    barra.appendChild(b);
+  });
+  function mostrarTema(i) {
+    barra.querySelectorAll(".tema").forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+    const t = temas[i];
+    detTema.innerHTML = `<h3>${t.nome}: ${t.qtd} controles</h3><p>${t.ex}</p>`;
+  }
+  mostrarTema(0);
+
+  // ---------- matriz de risco ----------
+  const ameacas = [
+    { nome: "Senha de administrador da nuvem é roubada", p: 4, i: 5, trat: "Mitigar: autenticação multifator, poucas contas com poder total e alerta para login estranho." },
+    { nome: "Ransomware apaga ou trava os servidores", p: 3, i: 5, trat: "Mitigar: backup isolado e testado, plano de recuperação ensaiado." },
+    { nome: "Funcionário clica em link de phishing", p: 4, i: 3, trat: "Mitigar: treinamento, filtro de e-mail e MFA." },
+    { nome: "Notebook com planilha de pacientes é perdido", p: 2, i: 4, trat: "Mitigar: criptografia de disco e bloqueio remoto." },
+    { nome: "Queda de energia no data center", p: 2, i: 3, trat: "Transferir ou mitigar: contrato com garantia de disponibilidade, nobreak e gerador." },
+    { nome: "Página de notícias fica lenta no horário de pico", p: 3, i: 1, trat: "Aceitar: impacto baixo. Só monitorar e rever se piorar." }
+  ];
+  const posicoes = ameacas.map(() => null);
+  let selecionada = 0;
+
+  function nivel(s) {
+    if (s <= 4) return { id: "baixo", nome: "baixo" };
+    if (s <= 9) return { id: "medio", nome: "médio" };
+    if (s <= 16) return { id: "alto", nome: "alto" };
+    return { id: "critico", nome: "crítico" };
+  }
+
+  const listaAmeacas = document.querySelector(".ameacas");
+  ameacas.forEach((a, k) => {
+    const b = document.createElement("button");
+    b.className = "ameaca";
+    b.innerHTML = `<span class="token">${k + 1}</span><span>${a.nome}</span><span class="status"></span>`;
+    b.addEventListener("click", () => { selecionada = k; atualizarRisco(); });
+    listaAmeacas.appendChild(b);
+  });
+
+  const matriz = document.querySelector(".matriz");
+  const celulas = {};
+  for (let p = 5; p >= 1; p--) {
+    const r = document.createElement("div");
+    r.className = "rot";
+    r.textContent = p;
+    matriz.appendChild(r);
+    for (let i = 1; i <= 5; i++) {
+      const c = document.createElement("button");
+      c.className = "cel";
+      c.dataset.n = nivel(p * i).id;
+      c.setAttribute("aria-label", `Probabilidade ${p}, impacto ${i}`);
+      c.addEventListener("click", () => {
+        posicoes[selecionada] = { p, i };
+        atualizarRisco(true);
+      });
+      celulas[p + "-" + i] = c;
+      matriz.appendChild(c);
+    }
+  }
+  matriz.appendChild(document.createElement("div"));
+  for (let i = 1; i <= 5; i++) {
+    const r = document.createElement("div");
+    r.className = "rot";
+    r.textContent = i;
+    matriz.appendChild(r);
+  }
+
+  const leitura = document.querySelector(".leitura");
+  function atualizarRisco(acabouDeMarcar) {
+    Object.values(celulas).forEach(c => (c.innerHTML = ""));
+    posicoes.forEach((pos, k) => {
+      if (!pos) return;
+      const t = document.createElement("span");
+      t.className = "token";
+      t.textContent = k + 1;
+      celulas[pos.p + "-" + pos.i].appendChild(t);
+    });
+    listaAmeacas.querySelectorAll(".ameaca").forEach((b, k) => {
+      b.setAttribute("aria-pressed", String(k === selecionada));
+      const pos = posicoes[k];
+      b.querySelector(".status").textContent = pos ? nivel(pos.p * pos.i).nome : "";
+    });
+
+    const a = ameacas[selecionada];
+    const pos = posicoes[selecionada];
+    if (!pos) {
+      leitura.innerHTML = `<strong>${selecionada + 1}. ${a.nome}</strong>Clique numa célula da matriz para posicionar.`;
+      return;
+    }
+    const s = pos.p * pos.i;
+    leitura.innerHTML = `<strong>${selecionada + 1}. ${a.nome}</strong>Probabilidade ${pos.p} × impacto ${pos.i} = ${s}, risco ${nivel(s).nome}.<br><span class="suave">${a.trat}</span>`;
+
+    // depois de marcar, pula pra próxima ameaça que ainda não foi posicionada
+    if (acabouDeMarcar) {
+      const prox = posicoes.findIndex(x => x === null);
+      if (prox !== -1) {
+        setTimeout(() => {
+          selecionada = prox;
+          listaAmeacas.querySelectorAll(".ameaca").forEach((b, k) => b.setAttribute("aria-pressed", String(k === selecionada)));
+        }, 0);
+      }
+    }
+  }
+
+  document.getElementById("risco-grupo").addEventListener("click", () => {
+    ameacas.forEach((a, k) => (posicoes[k] = { p: a.p, i: a.i }));
+    selecionada = 0;
+    atualizarRisco();
+  });
+  document.getElementById("risco-limpar").addEventListener("click", () => {
+    posicoes.fill(null);
+    selecionada = 0;
+    atualizarRisco();
+  });
+  atualizarRisco();
+
+  // ---------- linha do tempo ----------
+  const marcos = [
+    {
+      data: "10 dez 2021", rot: "Invasão",
+      titulo: "Madrugada: sites fora do ar e pedido de resgate",
+      texto: "As páginas do Ministério da Saúde passam a mostrar uma mensagem do grupo Lapsus$. O texto diz que os dados internos foram copiados e excluídos, fala em 50 TB e pede contato para devolvê-los. Saem do ar o portal saude.gov.br, o ConecteSUS, o e-SUS Notifica e o SI-PNI, do Programa Nacional de Imunizações.",
+      fonte: "Poder360; Agência Brasil"
+    },
+    {
+      data: "10 dez", rot: "Investigação",
+      titulo: "Polícia Federal e GSI entram no caso",
+      texto: "A PF é acionada e registra um incidente no ambiente de nuvem pública (AWS) usado pelo ministério. Na perícia inicial, constata que os bancos de dados não foram criptografados pelos invasores. O ministro da Saúde afirma que existe backup e que os dados não serão perdidos.",
+      fonte: "Polícia Federal; TechTudo"
+    },
+    {
+      data: "Dias seguintes", rot: "Novas tentativas",
+      titulo: "Novos ataques e golpes aproveitando a confusão",
+      texto: "O ministério relata novas tentativas de invasão. Ao mesmo tempo, golpistas passam a mandar e-mails se passando pelo Ministério da Saúde, com links maliciosos disfarçados de certificado de vacinação.",
+      fonte: "Agência Lupa; Mundo Conectado"
+    },
+    {
+      data: "14 dez", rot: "Porta de entrada",
+      titulo: "Indício: credencial de um funcionário",
+      texto: "O Gabinete de Segurança Institucional informa que há indícios de que a invasão usou as credenciais de um funcionário do governo, o que daria acesso ao ambiente de nuvem onde ficavam os sites. Depois, o ministério confirmou que os invasores entraram usando uma credencial, ou seja, uma senha.",
+      fonte: "IstoÉ Dinheiro (a partir de O Globo); Escola Politécnica da USP"
+    },
+    {
+      data: "23 dez", rot: "Retorno",
+      titulo: "ConecteSUS volta depois de 13 dias",
+      texto: "O aplicativo volta a funcionar na véspera do Natal, ainda instável. Uma semana depois, usuários seguem relatando vacinas que sumiram do histórico, e outras bases, como o Open DataSUS, continuam fora do ar.",
+      fonte: "CNN Brasil; Tecnoblog"
+    },
+    {
+      data: "Ago 2022", rot: "Desdobramento",
+      titulo: "Operação da PF contra suspeitos",
+      texto: "A Polícia Federal faz uma operação contra suspeitos do ataque. Segundo a PF, os invasores apagaram arquivos, dados e instâncias do ministério.",
+      fonte: "CNN Brasil"
+    }
+  ];
+  const linha = document.querySelector(".linha");
+  const detalhe = document.querySelector(".detalhe");
+  marcos.forEach((m, k) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.className = "marco";
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = `<span class="ponto"></span><span class="data">${m.data}</span><span class="rot">${m.rot}</span>`;
+    b.addEventListener("click", () => mostrarMarco(k));
+    li.appendChild(b);
+    linha.appendChild(li);
+  });
+  function mostrarMarco(k) {
+    linha.querySelectorAll(".marco").forEach((b, j) => b.setAttribute("aria-pressed", String(j === k)));
+    const m = marcos[k];
+    detalhe.innerHTML = `<h3>${m.titulo}</h3><p>${m.texto}</p><p class="fonte">Fonte: ${m.fonte}</p>`;
+  }
+  mostrarMarco(0);
+
+  // ---------- falhas x controles ----------
+  const falhas = [
+    {
+      titulo: "Uma senha abriu a porta da nuvem",
+      resumo: "Os invasores entraram com uma credencial válida e, com ela, tinham poder sobre boa parte do ambiente.",
+      controles: [
+        ["8.5", "Autenticação segura", "Com autenticação multifator, só a senha não bastaria para entrar."],
+        ["8.2", "Direitos de acesso privilegiado", "Contas de administrador restritas, monitoradas e usadas só quando necessário."],
+        ["5.15 e 5.18", "Controle e revisão de acessos", "Cada pessoa recebe só o acesso de que precisa, e isso é revisto de tempos em tempos."],
+        ["5.23", "Segurança no uso de nuvem", "Configuração e responsabilidades da nuvem definidas e verificadas pela própria organização."]
+      ]
+    },
+    {
+      titulo: "Sistemas e dados puderam ser apagados",
+      resumo: "Com o acesso obtido, foi possível excluir instâncias e dados hospedados na nuvem.",
+      controles: [
+        ["8.13", "Backup das informações", "Cópias guardadas fora do alcance da mesma conta, que ela não consegue apagar, e com restauração testada."],
+        ["8.2", "Direitos de acesso privilegiado", "Separar quem pode apagar recursos de quem só opera o dia a dia."]
+      ]
+    },
+    {
+      titulo: "13 dias para voltar",
+      resumo: "Mesmo com backup, o principal serviço ficou quase duas semanas fora do ar.",
+      controles: [
+        ["5.30", "Prontidão de TIC para continuidade", "Plano com tempo máximo de recuperação definido e ensaiado antes da crise."],
+        ["5.29", "Segurança durante uma disrupção", "Manter o essencial funcionando, como a emissão do certificado, enquanto o resto é restaurado."]
+      ]
+    },
+    {
+      titulo: "Invasão não percebida a tempo",
+      resumo: "O grupo afirmou ter copiado dados durante semanas antes do ataque. A alegação não foi confirmada, mas se for verdade, a movimentação passou despercebida.",
+      controles: [
+        ["8.15 e 8.16", "Registros e monitoramento", "Logs e alertas para ações fora do comum, como exclusão em massa ou login de lugar estranho."],
+        ["5.24 a 5.26", "Gestão de incidentes", "Plano de resposta com papéis definidos, para agir rápido e de forma coordenada."]
+      ]
+    },
+    {
+      titulo: "Golpes em cima da confusão",
+      resumo: "Criminosos mandaram e-mails falsos de certificado de vacinação enquanto o app estava fora.",
+      controles: [
+        ["6.3", "Conscientização e treinamento", "Servidores preparados para reconhecer phishing e orientar o público."],
+        ["LGPD art. 48", "Comunicação aos titulares", "Avisar a população com clareza e rapidez tira espaço dos golpistas."]
+      ]
+    }
+  ];
+  const listaFalhas = document.querySelector(".falhas");
+  const detFalha = document.querySelector(".detalhe-falha");
+  falhas.forEach((f, k) => {
+    const b = document.createElement("button");
+    b.className = "falha";
+    b.setAttribute("aria-pressed", "false");
+    b.textContent = f.titulo;
+    b.addEventListener("click", () => mostrarFalha(k));
+    listaFalhas.appendChild(b);
+  });
+  function mostrarFalha(k) {
+    listaFalhas.querySelectorAll(".falha").forEach((b, j) => b.setAttribute("aria-pressed", String(j === k)));
+    const f = falhas[k];
+    const itens = f.controles.map(c =>
+      `<li><span class="cod">${c[0]}</span><span><b>${c[1]}</b>${c[2]}</span></li>`
+    ).join("");
+    detFalha.innerHTML = `<h3>${f.titulo}</h3><p class="suave">${f.resumo}</p><ul class="controles">${itens}</ul>`;
+  }
+  mostrarFalha(0);
+
+  // ---------- quiz ----------
+  const perguntas = [
+    {
+      q: "Qual destas normas é usada para certificar uma organização?",
+      ops: ["ISO/IEC 27002", "ISO/IEC 27001", "ISO/IEC 27005", "ISO/IEC 27000"], c: 1,
+      exp: "A 27001 traz os requisitos do sistema de gestão e é a base da certificação. A 27002 é um guia de como aplicar os controles."
+    },
+    {
+      q: "No ataque ao ConecteSUS, qual pilar da segurança foi o mais atingido?",
+      ops: ["Confidencialidade", "Integridade", "Disponibilidade", "Nenhum deles"], c: 2,
+      exp: "O serviço ficou 13 dias fora do ar. O vazamento de dados foi alegado pelo grupo, mas não foi confirmado."
+    },
+    {
+      q: "Quantos controles tem o Anexo A da ISO/IEC 27001:2022?",
+      ops: ["14", "37", "93", "114"], c: 2,
+      exp: "São 93 controles em 4 temas. Os 114 controles em 14 domínios eram da versão de 2013."
+    },
+    {
+      q: "Pela Resolução 15/2024 da ANPD, qual o prazo para comunicar um incidente relevante com dados pessoais?",
+      ops: ["24 horas", "3 dias úteis", "30 dias", "Não existe prazo"], c: 1,
+      exp: "São 3 dias úteis a partir do momento em que a organização sabe que o incidente afetou dados pessoais."
+    },
+    {
+      q: "Contratar um seguro contra ataques cibernéticos é um exemplo de qual tratamento de risco?",
+      ops: ["Evitar", "Aceitar", "Mitigar", "Transferir"], c: 3,
+      exp: "O risco continua existindo, mas parte do prejuízo financeiro passa para a seguradora."
+    }
+  ];
+  const quiz = document.querySelector(".quiz");
+  let atualQ = 0;
+  let acertos = 0;
+
+  function renderPergunta() {
+    const p = perguntas[atualQ];
+    quiz.innerHTML = `
+      <p class="contagem">Pergunta ${atualQ + 1} de ${perguntas.length}</p>
+      <h3>${p.q}</h3>
+      <div class="opcoes">${p.ops.map((o, k) => `<button class="opcao" data-k="${k}">${o}</button>`).join("")}</div>
+      <div class="explica"></div>`;
+    quiz.querySelectorAll(".opcao").forEach(b => b.addEventListener("click", () => responder(Number(b.dataset.k))));
+  }
+
+  function responder(k) {
+    const p = perguntas[atualQ];
+    const botoes = quiz.querySelectorAll(".opcao");
+    botoes.forEach(b => (b.disabled = true));
+    botoes[p.c].classList.add("certa");
+    const acertou = k === p.c;
+    if (acertou) acertos++;
+    else botoes[k].classList.add("errada");
+    const ultima = atualQ === perguntas.length - 1;
+    quiz.querySelector(".explica").innerHTML = `
+      <p><strong>${acertou ? "Isso aí." : "Não foi dessa vez."}</strong>${p.exp}</p>
+      <button class="btn cheio" id="quiz-prox">${ultima ? "Ver resultado" : "Próxima pergunta"}</button>`;
+    document.getElementById("quiz-prox").addEventListener("click", () => {
+      if (ultima) renderFim();
+      else { atualQ++; renderPergunta(); }
+    });
+  }
+
+  function renderFim() {
+    quiz.innerHTML = `
+      <p class="placar">${acertos}/${perguntas.length}</p>
+      <p>${acertos === perguntas.length ? "A turma acertou todas." : "Acertos da turma."}</p>
+      <button class="btn" id="quiz-refazer">Refazer o quiz</button>`;
+    document.getElementById("quiz-refazer").addEventListener("click", () => {
+      atualQ = 0; acertos = 0; renderPergunta();
+    });
+  }
+  renderPergunta();
+</script>
+</body>
+</html>
