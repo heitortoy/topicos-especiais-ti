@@ -81,7 +81,6 @@
 
   *, *::before, *::after { box-sizing: inherit; }
   html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   body {
     margin: 0;
@@ -120,9 +119,6 @@
     transition-delay: calc(var(--d, 0) * 90ms);
   }
   .js .rv.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .js .rv { opacity: 1; transform: none; transition: none; }
-  }
 
   /* ---------- barra de progresso e botões fixos ---------- */
   .progresso {
@@ -482,9 +478,6 @@
     animation: quica 2s ease-in-out infinite;
   }
   @keyframes quica { 50% { transform: translate(-50%, 8px); } }
-  @media (prefers-reduced-motion: reduce) {
-    .rolar, .cursor { animation: none; }
-  }
 
   /* ---------- seção 2: jogo governança x compliance ---------- */
   .jogo-gc { margin-top: 2.6rem; }
@@ -996,9 +989,6 @@
   .ok-verde { color: #1f8a55; }
   .instavel { font-size: 0.8em; background: #fff3cd; color: #7a5a00; padding: 0.3em 0.8em; border-radius: 8px; }
   .selo-pf { font-size: 0.8em; background: #16213a; color: #fff; padding: 0.35em 0.9em; border-radius: 8px; }
-  @media (prefers-reduced-motion: reduce) {
-    .tela.ataque .corpo, .spinner { animation: none; }
-  }
 
   .marcos { list-style: none; padding: 0; margin: 0 0 1rem; position: relative; }
   .marcos::before { content: ""; position: absolute; left: 11px; top: 12px; bottom: 12px; width: 3px; background: var(--line); border-radius: 2px; }
@@ -1132,7 +1122,8 @@
   .barra-lin b { font-stretch: 115%; min-width: 4.5em; text-align: right; }
 
   /* ---------- seção 11 ---------- */
-  .achados { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .achados { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 640px) { .achados { grid-template-columns: 1fr; } }
   .achados .card { transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid var(--acc); }
   .achados .card:hover { transform: translateY(-6px) rotate(-0.4deg); }
   .achados .grande-num { font-stretch: 125%; font-weight: 800; font-size: 2.6rem; line-height: 1; color: var(--acc); margin-bottom: 0.6rem; }
@@ -1224,9 +1215,9 @@
 <header class="hero bloco" id="s1" data-parte="1" data-titulo="Capa">
   <canvas class="rede" aria-hidden="true"></canvas>
   <div class="hero-in">
-    <p class="parte-tag"><span class="avatar">HM</span>Parte 1 com Heitor</p>
+    <p class="parte-tag" style="padding-left:16px">Tópicos Especiais em Tecnologia da Informação</p>
     <h1 class="titulo-anim">Governança de TI e segurança da informação</h1>
-    <p class="subtitulo">Normas ISO/IEC 27000, LGPD e o que o ataque ao ConecteSUS ensina sobre tudo isso</p>
+    <p class="subtitulo">Normas ISO/IEC 27000, LGPD e o caso ConecteSUS</p>
     <p class="gancho"><span class="digita" data-texto="Em 10 de dezembro de 2021, o ConecteSUS saiu do ar."></span><span class="cursor"></span></p>
     <p class="gancho-2">Só voltou <span class="cont" data-ate="13" data-manual>0</span> dias depois.</p>
     <div class="ficha">
@@ -1252,6 +1243,7 @@
   <!-- ================= 2 ================= -->
   <section class="bloco" id="s2" data-parte="1" data-titulo="Governança e compliance">
     <span class="num-bg" aria-hidden="true">02</span>
+    <p class="parte-tag rv"><span class="avatar">HM</span>Heitor Saravy de Menezes</p>
     <div class="topo rv"><span class="num">2</span><h2>Governança de TI e compliance</h2></div>
     <span class="traco"></span>
     <div class="duas">
@@ -1264,12 +1256,12 @@
           <li>Alinha investimentos em TI à estratégia da empresa</li>
           <li>Acompanha resultados e riscos com indicadores</li>
         </ul>
-        <p class="suave pequeno" style="margin-top:1rem">Referências conhecidas: COBIT e ISO/IEC 38500.</p>
+        <p class="suave pequeno" style="margin-top:1rem">Frameworks de referência: COBIT e ISO/IEC 38500.</p>
       </article>
       <article class="card rv" style="--d:2">
         <div class="icone-bola"><svg class="ic"><use href="#i-check"/></svg></div>
         <h3>Compliance</h3>
-        <p>É estar em conformidade com leis, normas, contratos e políticas internas, e conseguir provar isso quando alguém pedir.</p>
+        <p>É estar em conformidade com leis, normas, contratos e políticas internas, e ser capaz de comprovar essa conformidade.</p>
         <ul class="pontos">
           <li>Leis, como a LGPD</li>
           <li>Normas técnicas, como a ISO/IEC 27001</li>
@@ -1280,12 +1272,10 @@
 
     <div class="card jogo-gc rv">
       <h3>É governança ou compliance?</h3>
-      <p class="suave pequeno">Vote com a turma e clique na resposta.</p>
       <div class="lista-gc"></div>
       <p class="pequeno placar-gc" style="margin:0.8rem 0 0"></p>
     </div>
 
-    <p class="frase-ponte rv">A governança define o rumo. O compliance confere se o caminho respeita as regras.</p>
   </section>
 
   <!-- ================= 3 ================= -->
@@ -1293,7 +1283,7 @@
     <span class="num-bg" aria-hidden="true">03</span>
     <div class="topo rv"><span class="num">3</span><h2>Por que segurança da informação é estratégica?</h2></div>
     <span class="traco"></span>
-    <p class="lead rv">Informação é um ativo. Se ela vaza, some ou fica errada, o negócio para, perde dinheiro e perde a confiança das pessoas. A segurança se apoia em três pilares. Clique nas cartas.</p>
+    <p class="lead rv">A segurança da informação se baseia em três pilares, conhecidos como tríade CID.</p>
     <div class="pilares">
       <button class="flip rv" style="--d:1" aria-pressed="false" type="button">
         <span class="flip-in">
@@ -1345,9 +1335,9 @@
       </button>
     </div>
     <div class="tres porques">
-      <div class="card rv" style="--d:1"><div class="icone-bola"><svg class="ic"><use href="#i-queda"/></svg></div><div><h3>Custo de parar</h3><p>Sistema fora do ar é venda perdida, atendimento parado e equipe sem trabalhar.</p></div></div>
-      <div class="card rv" style="--d:2"><div class="icone-bola"><svg class="ic"><use href="#i-coracao"/></svg></div><div><h3>Confiança</h3><p>Clientes e cidadãos lembram de quem expôs os dados deles.</p></div></div>
-      <div class="card rv" style="--d:3"><div class="icone-bola"><svg class="ic"><use href="#i-balanca"/></svg></div><div><h3>Obrigação legal</h3><p>A LGPD exige medidas de segurança e prevê sanções para quem não adota.</p></div></div>
+      <div class="card rv" style="--d:1"><div class="icone-bola"><svg class="ic"><use href="#i-queda"/></svg></div><div><h3>Custo de parar</h3><p>A indisponibilidade de sistemas gera prejuízo financeiro e interrompe serviços.</p></div></div>
+      <div class="card rv" style="--d:2"><div class="icone-bola"><svg class="ic"><use href="#i-coracao"/></svg></div><div><h3>Confiança</h3><p>Incidentes afetam a imagem da organização diante de clientes e cidadãos.</p></div></div>
+      <div class="card rv" style="--d:3"><div class="icone-bola"><svg class="ic"><use href="#i-balanca"/></svg></div><div><h3>Obrigação legal</h3><p>A LGPD exige medidas de segurança e prevê sanções em caso de descumprimento.</p></div></div>
     </div>
   </section>
 
@@ -1356,7 +1346,7 @@
     <span class="num-bg" aria-hidden="true">04</span>
     <div class="topo rv"><span class="num">4</span><h2>Família ISO/IEC 27000</h2></div>
     <span class="traco"></span>
-    <p class="lead rv">É um conjunto de normas internacionais sobre segurança da informação. Cada uma cuida de uma parte. Clique em cada norma.</p>
+    <p class="lead rv">Conjunto de normas internacionais sobre segurança da informação. As principais são:</p>
     <div class="normas rv"></div>
     <div class="card painel-norma rv" aria-live="polite"></div>
 
@@ -1374,16 +1364,15 @@
         </tbody>
       </table>
     </div>
-    <p class="frase-ponte rv">A 27001 é a lista do que vai cair na prova. A 27002 é o material de estudo.</p>
   </section>
 
   <!-- ================= 5 ================= -->
   <section class="bloco" id="s5" data-parte="2" data-titulo="ABNT NBR ISO/IEC 27001">
     <span class="num-bg" aria-hidden="true">05</span>
-    <p class="parte-tag rv"><span class="avatar">PC</span>Parte 2 com Pedro Henrique</p>
+    <p class="parte-tag rv"><span class="avatar">PC</span>Pedro Henrique de Paula Cruz</p>
     <div class="topo rv"><span class="num">5</span><h2>ABNT NBR ISO/IEC 27001</h2></div>
     <span class="traco"></span>
-    <p class="lead rv">A ABNT publica no Brasil a versão em português da norma, com o mesmo conteúdo da internacional. É ela que aparece em editais, contratos e auditorias no país.</p>
+    <p class="lead rv">Versão brasileira da ISO/IEC 27001, publicada pela ABNT, com o mesmo conteúdo da norma internacional.</p>
 
     <h3 class="rv">As cláusulas 4 a 10 seguem o ciclo PDCA</h3>
     <div class="par-vis rv">
@@ -1410,7 +1399,7 @@
     <span class="num-bg" aria-hidden="true">06</span>
     <div class="topo rv"><span class="num">6</span><h2>ISO e LGPD no Brasil</h2></div>
     <span class="traco"></span>
-    <p class="lead rv">A LGPD (Lei nº 13.709/2018) vale para empresas e também para órgãos públicos. Ela e a ISO se completam.</p>
+    <p class="lead rv">A LGPD (Lei nº 13.709/2018) se aplica a empresas e também a órgãos públicos.</p>
     <div class="duas">
       <article class="card rv" style="--d:1">
         <div class="icone-bola"><svg class="ic"><use href="#i-balanca"/></svg></div>
@@ -1442,7 +1431,7 @@
       <p class="suave pequeno" style="margin:0">Sem contar feriados. Agentes de pequeno porte têm o prazo em dobro.</p>
     </div>
 
-    <p class="frase-ponte rv">Ter ISO 27001 não deixa ninguém automaticamente adequado à LGPD, mas ajuda muito a provar que a organização fez a parte dela.</p>
+    <p class="aviso rv">A certificação ISO/IEC 27001 não garante, sozinha, a adequação à LGPD, mas ajuda a comprovar as medidas de segurança adotadas.</p>
   </section>
 
   <!-- ================= 7 ================= -->
@@ -1475,11 +1464,11 @@
       <div class="card rv" style="--d:2">
         <h3>Etapas</h3>
         <ol class="etapas">
-          <li>Identificar <span>o que pode dar errado</span></li>
-          <li>Analisar <span>chance e estrago</span></li>
-          <li>Avaliar <span>o que é prioridade</span></li>
-          <li>Tratar <span>escolher o que fazer</span></li>
-          <li>Monitorar <span>e revisar sempre</span></li>
+          <li>Identificar <span>ameaças e vulnerabilidades</span></li>
+          <li>Analisar <span>probabilidade e impacto</span></li>
+          <li>Avaliar <span>definir prioridades</span></li>
+          <li>Tratar <span>escolher a resposta</span></li>
+          <li>Monitorar <span>acompanhar e revisar</span></li>
         </ol>
       </div>
     </div>
@@ -1491,13 +1480,13 @@
       <div class="card rv" style="--d:4"><div class="icone-bola"><svg class="ic"><use href="#i-check"/></svg></div><b>Aceitar</b><span>Conviver com o risco, de forma consciente e registrada</span></div>
     </div>
 
-    <h3 class="rv">Agora é com a turma</h3>
-    <p class="suave pequeno rv">Arraste cada ameaça para a célula da matriz onde a turma acha que ela fica. Também dá pra clicar na ameaça e depois na célula.</p>
+    <h3 class="rv">Matriz de risco</h3>
+    <p class="suave pequeno rv">Arraste cada ameaça para a matriz, ou clique na ameaça e depois na célula.</p>
     <div class="risco-app rv">
       <div>
         <div class="ameacas"></div>
         <div class="acoes">
-          <button class="btn cheio" id="risco-grupo" type="button">Mostrar a análise do grupo</button>
+          <button class="btn cheio" id="risco-grupo" type="button">Mostrar exemplo</button>
           <button class="btn" id="risco-limpar" type="button">Limpar</button>
         </div>
       </div>
@@ -1526,7 +1515,7 @@
     <span class="num-bg" aria-hidden="true">08</span>
     <div class="topo rv"><span class="num">8</span><h2>Gestão de ativos</h2></div>
     <span class="traco"></span>
-    <p class="lead rv">Não dá pra proteger o que você nem sabe que tem. Ativo é tudo que tem valor: dados, sistemas, equipamentos, contas de acesso e até pessoas.</p>
+    <p class="lead rv">Consiste em identificar, classificar e definir responsáveis pelos ativos da organização, como dados, sistemas, equipamentos, contas de acesso e pessoas.</p>
     <div class="ciclo">
       <div class="card rv" style="--d:1"><b>Inventariar</b><span>Listar o que existe (controle 5.9)</span></div>
       <div class="card rv" style="--d:2"><b>Definir um dono</b><span>Alguém responde por cada ativo</span></div>
@@ -1536,7 +1525,7 @@
 
     <div class="card jogo-ativos rv">
       <h3>Classifique os ativos de um sistema como o ConecteSUS</h3>
-      <p class="suave pequeno">Arraste cada ativo para o nível de classificação certo, ou clique no ativo e depois no nível.</p>
+      <p class="suave pequeno">Arraste cada ativo para o nível correto, ou clique no ativo e depois no nível.</p>
       <div class="banco"></div>
       <div class="baldes"></div>
       <div class="acoes">
@@ -1546,16 +1535,16 @@
       </div>
       <ul class="explicacoes pontos" aria-live="polite"></ul>
     </div>
-    <p class="aviso rv">Exemplo montado pelo grupo para fins didáticos, não um documento oficial do ministério.</p>
+    <p class="aviso rv">Exemplo hipotético, para fins didáticos.</p>
   </section>
 
   <!-- ================= 9 ================= -->
   <section class="bloco" id="s9" data-parte="3" data-titulo="Caso ConecteSUS">
     <span class="num-bg" aria-hidden="true">09</span>
-    <p class="parte-tag rv"><span class="avatar">LI</span>Parte 3 com Lucas</p>
+    <p class="parte-tag rv"><span class="avatar">LI</span>Lucas Farias Izidoro</p>
     <div class="topo rv"><span class="num">9</span><h2>O ataque ao ConecteSUS</h2></div>
     <span class="traco"></span>
-    <p class="lead rv">Em dezembro de 2021, sistemas do Ministério da Saúde, incluindo o app que emitia o certificado de vacinação contra a Covid-19, foram atacados e ficaram fora do ar. Aperte o play ou clique nas datas.</p>
+    <p class="lead rv">Em dezembro de 2021, sistemas do Ministério da Saúde, incluindo o app que emitia o certificado de vacinação contra a Covid-19, foram atacados e ficaram fora do ar.</p>
 
     <div class="caso rv">
       <div class="celular"><div class="tela"></div></div>
@@ -1593,7 +1582,7 @@
         </ul>
       </div>
     </div>
-    <p class="aviso rv">O relatório completo da investigação não foi divulgado. Tudo aqui vem de comunicados oficiais e reportagens da época.</p>
+    <p class="aviso rv">Informações baseadas em comunicados oficiais e reportagens da época. O relatório completo da investigação não foi divulgado.</p>
   </section>
 
   <!-- ================= 10 ================= -->
@@ -1601,7 +1590,7 @@
     <span class="num-bg" aria-hidden="true">10</span>
     <div class="topo rv"><span class="num">10</span><h2>Como as normas poderiam ter ajudado</h2></div>
     <span class="traco"></span>
-    <p class="lead rv">Ligue controles do Anexo A da ISO/IEC 27001:2022 e simule o ataque de novo para ver até onde o invasor chegaria.</p>
+    <p class="lead rv">Simulação do ataque com controles do Anexo A da ISO/IEC 27001:2022 aplicados.</p>
 
     <div class="cadeia rv"></div>
 
@@ -1616,34 +1605,30 @@
       </div>
       <div class="card resultado-sim" aria-live="polite"></div>
     </div>
-    <p class="aviso rv">Os tempos com controles são uma estimativa ilustrativa do grupo, só para comparar. Nenhum controle garante 100%, mas juntos eles diminuem muito a chance e o tamanho do estrago.</p>
+    <p class="aviso rv">Os tempos com controles são estimativas hipotéticas, usadas apenas para comparação.</p>
   </section>
 
   <!-- ================= 11 ================= -->
   <section class="bloco" id="s11" data-parte="3" data-titulo="O que chamou atenção">
     <span class="num-bg" aria-hidden="true">11</span>
-    <div class="topo rv"><span class="num">11</span><h2>O que mais chamou a atenção do grupo</h2></div>
+    <div class="topo rv"><span class="num">11</span><h2>O que mais chamou nossa atenção</h2></div>
     <span class="traco"></span>
     <div class="achados">
       <div class="card rv" style="--d:1">
-        <div class="grande-num">1 senha</div>
-        <h3>Não precisou de ataque sofisticado</h3>
-        <p>Pelo que foi divulgado, a entrada foi com uma credencial válida. Um controle simples, como MFA, poderia ter mudado a história.</p>
+        <h3>A porta de entrada foi uma senha</h3>
+        <p>Pelo que foi divulgado, os invasores usaram uma credencial válida. Com autenticação multifator, esse acesso provavelmente teria sido bloqueado.</p>
       </div>
       <div class="card rv" style="--d:2">
-        <div class="grande-num">13 dias</div>
-        <h3>Ter backup não é o mesmo que voltar rápido</h3>
-        <p>O ministério tinha cópias dos dados, mas o serviço ficou quase duas semanas fora. Recuperação também precisa ser planejada e testada.</p>
+        <h3>Backup não garante recuperação rápida</h3>
+        <p>Mesmo com backup, o ConecteSUS ficou 13 dias fora do ar. A recuperação também precisa ser planejada e testada.</p>
       </div>
       <div class="card rv" style="--d:3">
-        <div class="grande-num">Dado sensível</div>
-        <h3>Saúde pede cuidado maior</h3>
-        <p>A LGPD dá proteção maior justamente a esse tipo de informação, e o setor público também precisa cumprir a lei.</p>
+        <h3>Dados de saúde são sensíveis</h3>
+        <p>A LGPD dá proteção maior a esse tipo de dado, e órgãos públicos também precisam cumprir a lei.</p>
       </div>
       <div class="card rv" style="--d:4">
-        <div class="grande-num">Além da TI</div>
-        <h3>O problema chegou na população</h3>
-        <p>Viagens, notificação de casos de Covid e até golpes por e-mail: um incidente técnico virou problema para muita gente.</p>
+        <h3>O impacto chegou à população</h3>
+        <p>O incidente afetou viagens, a notificação de casos de Covid e ainda abriu espaço para golpes por e-mail.</p>
       </div>
     </div>
   </section>
@@ -1654,12 +1639,12 @@
     <div class="topo rv"><span class="num">12</span><h2>Conclusão</h2></div>
     <span class="traco"></span>
     <div class="fechamento">
-      <div class="card rv" style="--d:1"><div class="icone-bola"><svg class="ic"><use href="#i-ciclo"/></svg></div><p>Segurança é gestão contínua, não um produto que se compra uma vez.</p></div>
-      <div class="card rv" style="--d:2"><div class="icone-bola"><svg class="ic"><use href="#i-balanca"/></svg></div><p>A lei cria a obrigação. As normas dão o método para cumprir.</p></div>
-      <div class="card rv" style="--d:3"><div class="icone-bola"><svg class="ic"><use href="#i-escudo"/></svg></div><p>Poucos controles bem aplicados mudam o tamanho de um incidente.</p></div>
+      <div class="card rv" style="--d:1"><div class="icone-bola"><svg class="ic"><use href="#i-ciclo"/></svg></div><p>A segurança da informação deve ser tratada como um processo contínuo de gestão.</p></div>
+      <div class="card rv" style="--d:2"><div class="icone-bola"><svg class="ic"><use href="#i-balanca"/></svg></div><p>A LGPD define as obrigações, e as normas ISO/IEC 27001 e 27002 ajudam a cumpri-las na prática.</p></div>
+      <div class="card rv" style="--d:3"><div class="icone-bola"><svg class="ic"><use href="#i-escudo"/></svg></div><p>No caso ConecteSUS, controles como MFA e backup isolado poderiam ter reduzido o impacto do ataque.</p></div>
     </div>
 
-    <h3 class="rv">Quiz com a turma</h3>
+    <h3 class="rv">Quiz</h3>
     <div class="card quiz rv" aria-live="polite"></div>
 
     <details class="refs rv" open>
@@ -1691,7 +1676,7 @@
 
 <script>
 (function () {
-  const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduzir = false; // animações sempre ligadas, mesmo com o Windows em "reduzir movimento"
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const ic = nome => `<svg class="ic"><use href="#i-${nome}"/></svg>`;
